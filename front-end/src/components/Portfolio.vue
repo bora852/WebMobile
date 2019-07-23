@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card @click="sendPortfolioData" hover>
     <v-img :src="imgSrc" height="200px"> </v-img>
     <v-card-title primary-title>
       <div>
@@ -7,7 +7,6 @@
           <p class=" text_font">{{ thisTitle }}</p>
         </div>
         <span class="grey--text body_overflow text_font">{{ thisBody }}</span>
-        <!-- <v-btn @click="translate">번역</v-btn> -->
       </div>
     </v-card-title>
   </v-card>
@@ -43,6 +42,22 @@ export default {
   mounted() {
     this.thisTitle = this.title;
     this.thisBody = this.body;
+  },
+  methods: {
+    sendPortfolioData: function() {
+      this.$store.state.portfolioData = this.date;
+      this.$store.state.portfolioTitle = this.thisTitle;
+      this.$store.state.portfolioBody = this.thisBody;
+      this.$store.state.portfolioImgSrc = this.imgSrc;
+
+      this.$router.push("/portfolioDetail");
+      // eventBus.$emit("sendPortfolioData", {
+      //   data: this.date,
+      //   title: this.thisTitle,
+      //   body: this.thisBody,
+      //   imgSrc: this.imgSrc
+      // });
+    }
   },
   created() {
     eventBus.$on("click-icon", async () => {
