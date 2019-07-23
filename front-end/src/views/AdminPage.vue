@@ -7,17 +7,22 @@
 <script>
 import UserList from "../components/UserList";
 import { eventBus } from "../main.js";
+import AuthService from "../services/AuthService";
+import SwalAlert from "../services/SwalAlert";
 
 export default {
-  name: "signuppage",
+  name: "adminpage",
   components: {
     UserList
   },
-  created() {
+  created: async function() {
     eventBus.$emit("sendTitle", "Admin");
+    if ((await AuthService.authChk()) != "admin") {
+      SwalAlert.swatAlert("Error", "잘못된 접근입니다.", "error", "OK!");
+      this.$router.push("/");
+    }
   }
 };
 </script>
 
-<style>
-</style>
+<style></style>

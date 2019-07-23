@@ -1,12 +1,28 @@
 export default {
   // 권한 확인 함수
   authChk() {
+    var result = "admin";
     // this.$store.state.userAuth = result;
-    return true;
+    return result;
   },
   // 유저리스트 가져오는 함수
   getUserList() {
-    return true;
+    var tmpDate = "2019/07/23 18:00:00";
+    var result = [
+      { email: "admin@ssafy.com", authority: "admin", date: tmpDate },
+      { email: "test000@ssafy.com", authority: "team", date: tmpDate },
+      { email: "test000@ssafy.com", authority: "guest", date: tmpDate },
+      { email: "test000@ssafy.com", authority: "team", date: tmpDate },
+      { email: "test000@ssafy.com", authority: "guest", date: tmpDate },
+      { email: "test000@ssafy.com", authority: "team", date: tmpDate },
+      { email: "test000@ssafy.com", authority: "guest", date: tmpDate },
+      { email: "test000@ssafy.com", authority: "team", date: tmpDate },
+      { email: "test000@ssafy.com", authority: "guest", date: tmpDate },
+      { email: "test000@ssafy.com", authority: "team", date: tmpDate },
+      { email: "test000@ssafy.com", authority: "guest", date: tmpDate },
+      { email: "test000@ssafy.com", authority: "team", date: tmpDate }
+    ];
+    return result;
   },
   // 유저 권한 업데이트 함수
   userAuthUpdate() {
