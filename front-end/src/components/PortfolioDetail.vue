@@ -1,14 +1,13 @@
 <template>
-  <v-layout mt-5 wrap row>
-    <div>
-      {{ this.datas }}
-    </div>
-  </v-layout>
+  <div>
+    {{ this.datas }}
+    <Comments></Comments>
+  </div>
 </template>
 
 <script>
+import Comments from "@/components/Comments";
 import FirebaseService from "@/services/FirebaseService";
-import { eventBus } from "../main.js";
 
 export default {
   name: "PortfolioDetail",
@@ -19,19 +18,21 @@ export default {
     };
   },
   components: {
+    Comments
   },
   mounted() {
+    this.getPortfolioById();
   },
   methods: {
+    async getPortfolioById(){
+      this.portfolio = await FirebaseService.getPortfolioById(this.$route.query.id);
+      console.log("포토폴리오",this.portfolio);
+    }
   },
   created(){
-    console.log(this.$store.state.portfolioData);
-    // eventBus.$on("sendPortfolioData", data => {
-    //   console.log(data);
-    //   this.datas = data;
-    //   eventBus.$off("sendPortfolioData");
-    // });
-    // eventBus.$off("sendPortfolioData");
+     this.datas = this.$store.state.portfolioData;
+     console.log("가져왔니?",this.$route.query.id);
+
   }
 };
 </script>

@@ -29,6 +29,9 @@ export default {
     },
     imgSrc: {
       type: String
+    },
+    id: {
+      type: String
     }
   },
   data() {
@@ -49,14 +52,7 @@ export default {
       this.$store.state.portfolioTitle = this.thisTitle;
       this.$store.state.portfolioBody = this.thisBody;
       this.$store.state.portfolioImgSrc = this.imgSrc;
-
-      this.$router.push("/portfolioDetail");
-      // eventBus.$emit("sendPortfolioData", {
-      //   data: this.date,
-      //   title: this.thisTitle,
-      //   body: this.thisBody,
-      //   imgSrc: this.imgSrc
-      // });
+      this.$router.push("/portfolioDetail?id="+this.id);
     }
   },
   created() {
