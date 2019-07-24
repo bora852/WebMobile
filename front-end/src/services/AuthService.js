@@ -1,3 +1,4 @@
+import SwalAlert from "../services/SwalAlert";
 
 export default {
   // 권한 확인 함수
@@ -21,12 +22,25 @@ export default {
       { email: "test007@ssafy.com", authority: "guest", date: tmpDate },
       { email: "test008@ssafy.com", authority: "team", date: tmpDate },
       { email: "test009@ssafy.com", authority: "guest", date: tmpDate },
-      { email: "test010@ssafy.com", authority: "team", date: tmpDate }
+      { email: "test010@ssafy.com", authority: "team", date: tmpDate },
+      { email: "test011@ssafy.com", authority: "team", date: tmpDate },
+      { email: "test012@ssafy.com", authority: "guest", date: tmpDate },
+      { email: "test013@ssafy.com", authority: "team", date: tmpDate },
+      { email: "test014@ssafy.com", authority: "guest", date: tmpDate },
+      { email: "test015@ssafy.com", authority: "team", date: tmpDate },
+      { email: "test016@ssafy.com", authority: "guest", date: tmpDate },
+      { email: "test017@ssafy.com", authority: "team", date: tmpDate },
+      { email: "test018@ssafy.com", authority: "guest", date: tmpDate },
+      { email: "test019@ssafy.com", authority: "team", date: tmpDate },
+      { email: "test020@ssafy.com", authority: "guest", date: tmpDate },
+      { email: "test021@ssafy.com", authority: "team", date: tmpDate }
     ];
     return result;
   },
   // 유저 권한 업데이트 함수
-  userAuthUpdate() {
+  userAuthUpdate(email, auth) {
+
+    SwalAlert.swatAlert("Success", "변경되었습니다.", "success","OK!");
     return true;
   },
   // 유저 탈퇴 함수
