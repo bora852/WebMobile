@@ -10,7 +10,6 @@ import router from "./router";
 import store from "./store";
 import "./registerServiceWorker";
 import VueResource from "vue-resource";
-import GitLabAPI from "vue-gitlab-api";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -31,13 +30,9 @@ Vue.use(Vuetify, {
     error: "#b71c1c"
   }
 });
-
 Vue.use(VueSimplemde);
 Vue.use(VueResource);
-Vue.use(GitLabAPI, {
-  url: "https://lab.ssafy.com",
-  token: "x8dwcM6_CRzxd4jVY6s3"
-});
+
 
 new Vue({
   router,

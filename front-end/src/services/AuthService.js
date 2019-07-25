@@ -43,7 +43,6 @@ export default {
     if (store.state.userAuth == "admin")
       SwalAlert.swatAlert("Success", "변경되었습니다.", "success", "OK!");
     else {
-      console.log(store.state.userAuth)
       SwalAlert.swatAlert("Error", "권한이 없습니다.", "error", "OK!");
     }
     // if(result == null)
@@ -53,5 +52,9 @@ export default {
   // 유저 탈퇴 함수
   userDelete() {
     return true;
+  },
+  getCounts(){
+    var result = { postCount: 100, portfolioCount: 5 };
+    return result;
   }
 };

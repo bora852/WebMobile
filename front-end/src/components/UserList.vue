@@ -1,5 +1,4 @@
 <template>
-
   <div>
     <v-progress-circular
       :size="50"
@@ -55,7 +54,6 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -133,7 +131,6 @@ export default {
     }
   }
 };
-
 </script>
 
 <style>
@@ -155,7 +152,6 @@ table.list-table thead th {
   font-weight: bold;
   vertical-align: top;
   color: #369;
-
   border-bottom: 3px solid #036;
 }
 table.list-table tbody th {
