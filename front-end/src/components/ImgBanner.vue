@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-img :src="imgSrc" aspect-ratio="1">
+    <v-img :src="imgSrc" aspect-ratio="3">
       <v-layout align-center justify-center row fill-height>
         <v-flex text-xs-center>
           <span class="text-shadow display-2 font-weight-light title_font">

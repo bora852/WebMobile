@@ -1,11 +1,10 @@
 <template>
   <div>
     <h1>{{ portfolio.title }}</h1><!--display-3 font-weight-bold mb-4-->
-    <v-icon class="mr-1">date_range</v-icon>{{ formatedDate }}
+    <!-- <v-icon class="mr-1">date_range</v-icon>{{ formatedDate }} -->
     <v-icon class="mr-1">person</v-icon> 작성자
     <v-img :src="portfolio.img" aspect-ratio="1.4" contain></v-img>
-    <h3>{{ portfolio.body }}</h3>
-
+    <Viewer :value="portfolio.body" />
     <Comments></Comments>
   </div>
 </template>
@@ -13,6 +12,10 @@
 <script>
 import Comments from "@/components/Comments";
 import FirebaseService from "@/services/FirebaseService";
+import 'tui-editor/dist/tui-editor.css'
+import 'tui-editor/dist/tui-editor-contents.css'
+import 'codemirror/lib/codemirror.css'
+import { Viewer } from '@toast-ui/vue-editor'
 
 export default {
   name: "PortfolioDetail",
@@ -22,12 +25,13 @@ export default {
     };
   },
   components: {
-    Comments
+    Comments,
+    Viewer
   },
   computed: {
-    formatedDate() {
-      return `${this.portfolio.created_at.getFullYear()}년 ${this.portfolio.created_at.getMonth()}월 ${this.portfolio.created_at.getDate()}일 ${this.portfolio.created_at.getHours()}:${this.portfolio.created_at.getMinutes()}`;
-    }
+    // formatedDate() {
+    //   return `${this.portfolio.created_at.getFullYear()}년 ${this.portfolio.created_at.getMonth()}월 ${this.portfolio.created_at.getDate()}일 ${this.portfolio.created_at.getHours()}:${this.portfolio.created_at.getMinutes()}`;
+    // }
   },
   mounted() {
     this.getPortfolioById();
