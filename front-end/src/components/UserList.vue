@@ -34,22 +34,25 @@
         </tbody>
       </table>
     </div>
-    <div class="text-center text-align" v-show="!listLoding">
-      <v-container>
-        <v-layout justify-center>
-          <v-flex xs8>
-            <v-container max-width="300">
-              <v-pagination
-                v-model="page"
-                class="my-4"
-                :length="pageMax"
-                :total-visible="5"
-              ></v-pagination>
-            </v-container>
-          </v-flex>
-        </v-layout>
-      </v-container>
-
+    <div class="text-align" v-show="!listLoding">
+      <div max-width="300">
+        <v-pagination
+          v-model="page"
+          class="my-4"
+          :length="pageMax"
+          :total-visible="5"
+        ></v-pagination>
+      </div>
+      <div class="searchInput">
+        <v-text-field
+          v-model="searchEmail"
+          flat
+          hide-details
+          label="아이디 검색"
+          prepend-inner-icon="search"
+          solo-inverted
+        ></v-text-field>
+      </div>
     </div>
   </div>
 
@@ -62,6 +65,7 @@ export default {
   name: "UserList",
   data: function() {
     return {
+      searchEmail: "",
       pageMax: null,
       page: 1,
       listLength: 10,
@@ -83,7 +87,7 @@ export default {
           return [
             { text: "team", value: "team", disabled: false },
             { text: "guest", value: "guest", disabled: false },
-            { text: "admin", value: "admin", disabled: true }
+            { text: "admin", value: "admin", disabled: false }
           ];
         }
       };
@@ -114,6 +118,18 @@ export default {
         (this.page - 1) * 10,
         (this.page - 1) * 10 + 10
       );
+    },
+    searchEmail: function() {
+      if (this.searchEmail != "") {
+        var searchList = [];
+        this.userList.forEach(element => {
+          if (element.email.includes(this.searchEmail)) {
+            searchList.push(element);
+          }
+        });
+        this.showList = searchList;
+      }
+      this.page = 1;
     }
   }
 };
@@ -121,13 +137,13 @@ export default {
 </script>
 
 <style>
-.text-align {
-  text-align: center;
-}
 @media screen and (min-width: 768px) {
   table.list-table {
     width: 700px;
   }
+}
+.text-align {
+  text-align: center;
 }
 table.list-table {
   border-collapse: collapse;
@@ -155,5 +171,9 @@ table.list-table td {
   padding: 3px;
   vertical-align: center;
   border-bottom: 1px solid #ccc;
+}
+.searchInput {
+  margin: 0 auto;
+  width: 300px;
 }
 </style>

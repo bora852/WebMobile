@@ -1,10 +1,11 @@
+import store from "../store";
 import SwalAlert from "../services/SwalAlert";
 
 export default {
   // 권한 확인 함수
   authChk() {
     var result = "admin";
-    // this.$store.state.userAuth = result;
+    store.state.userAuth = result;
     return result;
   },
   // 유저리스트 가져오는 함수
@@ -39,8 +40,14 @@ export default {
   },
   // 유저 권한 업데이트 함수
   userAuthUpdate(email, auth) {
-
-    SwalAlert.swatAlert("Success", "변경되었습니다.", "success","OK!");
+    if (store.state.userAuth == "admin")
+      SwalAlert.swatAlert("Success", "변경되었습니다.", "success", "OK!");
+    else {
+      console.log(store.state.userAuth)
+      SwalAlert.swatAlert("Error", "권한이 없습니다.", "error", "OK!");
+    }
+    // if(result == null)
+    // alert 실패
     return true;
   },
   // 유저 탈퇴 함수

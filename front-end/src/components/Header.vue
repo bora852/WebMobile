@@ -297,10 +297,22 @@ export default {
   cursor: pointer;
   color: orange;
 }
+.container{
+  padding-top: 41px;
+}
+
 
 @media (max-width: 960px) {
   .mobile_login {
     display: none;
+  }
+  .container{
+    padding-top: 24px;
+  }
+}
+@media only screen and (max-width: 747px) {
+  .container{
+    padding-top: 40px;
   }
 }
 </style>
