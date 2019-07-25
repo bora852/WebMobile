@@ -7,6 +7,16 @@
     ></v-progress-circular>
 
     <div v-show="!listLoding">
+      <div class="searchInput">
+        <v-text-field
+          v-model="searchEmail"
+          flat
+          hide-details
+          label="아이디 검색"
+          prepend-inner-icon="search"
+          solo-inverted
+        ></v-text-field>
+      </div>
       <table class="list-table text-align">
         <thead>
           <tr>
@@ -42,16 +52,7 @@
           :total-visible="5"
         ></v-pagination>
       </div>
-      <div class="searchInput">
-        <v-text-field
-          v-model="searchEmail"
-          flat
-          hide-details
-          label="아이디 검색"
-          prepend-inner-icon="search"
-          solo-inverted
-        ></v-text-field>
-      </div>
+
     </div>
   </div>
 </template>
@@ -63,6 +64,7 @@ export default {
   name: "UserList",
   data: function() {
     return {
+      pageLength: 5,
       searchEmail: "",
       pageMax: null,
       page: 1,
@@ -99,10 +101,10 @@ export default {
       this.listLoding = true;
       this.userList = await AuthService.getUserList();
       this.showList = this.userList.slice(
-        (this.page - 1) * 10,
-        (this.page - 1) * 10 + 10
+        (this.page - 1) * this.pageLength,
+        (this.page - 1) * this.pageLength + this.pageLength
       );
-      this.pageMax = Math.floor(this.userList.length / 10) + 1;
+      this.pageMax = Math.floor(this.userList.length / this.pageLength) + 1;
 
       this.listLoding = false;
     },
@@ -113,8 +115,8 @@ export default {
   watch: {
     page: function() {
       this.showList = this.userList.slice(
-        (this.page - 1) * 10,
-        (this.page - 1) * 10 + 10
+        (this.page - 1) * this.pageLength,
+        (this.page - 1) * this.pageLength + this.pageLength
       );
     },
     searchEmail: function() {
@@ -125,7 +127,17 @@ export default {
             searchList.push(element);
           }
         });
-        this.showList = searchList;
+        this.showList = searchList.slice(
+          (this.page - 1) * this.pageLength,
+          (this.page - 1) * this.pageLength + this.pageLength
+        );
+        this.pageMax = Math.floor(searchList.length / this.pageLength) + 1;
+      } else {
+        this.showList = this.userList.slice(
+          (this.page - 1) * this.pageLength,
+          (this.page - 1) * this.pageLength + this.pageLength
+        );
+        this.pageMax = Math.floor(this.userList.length / this.pageLength) + 1;
       }
       this.page = 1;
     }
@@ -169,7 +181,7 @@ table.list-table td {
   border-bottom: 1px solid #ccc;
 }
 .searchInput {
-  margin: 0 auto;
+  margin: 10px auto;
   width: 300px;
 }
 </style>
