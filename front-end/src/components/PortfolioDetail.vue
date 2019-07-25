@@ -1,6 +1,11 @@
 <template>
   <div>
-    {{ this.datas }}
+    <h1>{{ portfolio.title }}</h1><!--display-3 font-weight-bold mb-4-->
+    <v-icon class="mr-1">date_range</v-icon>{{ formatedDate }}
+    <v-icon class="mr-1">person</v-icon> 작성자
+    <v-img :src="portfolio.img" aspect-ratio="1.4" contain></v-img>
+    <h3>{{ portfolio.body }}</h3>
+
     <Comments></Comments>
   </div>
 </template>
@@ -13,12 +18,16 @@ export default {
   name: "PortfolioDetail",
   data() {
     return {
-      count: this.limits,
-      datas: ""
+      portfolio: []
     };
   },
   components: {
     Comments
+  },
+  computed: {
+    formatedDate() {
+      return `${this.portfolio.created_at.getFullYear()}년 ${this.portfolio.created_at.getMonth()}월 ${this.portfolio.created_at.getDate()}일 ${this.portfolio.created_at.getHours()}:${this.portfolio.created_at.getMinutes()}`;
+    }
   },
   mounted() {
     this.getPortfolioById();
@@ -30,8 +39,8 @@ export default {
     }
   },
   created(){
-     this.datas = this.$store.state.portfolioData;
-     console.log("가져왔니?",this.$route.query.id);
+     // this.datas = this.$store.state.portfolioData;
+     // console.log("가져왔니?",this.$route.query.id);
 
   }
 };

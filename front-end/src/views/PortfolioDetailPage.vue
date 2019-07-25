@@ -4,9 +4,7 @@
       <!-- PortfolioDetail -->
       <v-layout>
         <v-flex xs12 data-aos="fade-right">
-          <h1>detail</h1>
           <PortfolioDetail></PortfolioDetail>
-          <!-- <PortfolioList :limits="6" :load-more="true"></PortfolioList> -->
         </v-flex>
       </v-layout>
     </v-container>
