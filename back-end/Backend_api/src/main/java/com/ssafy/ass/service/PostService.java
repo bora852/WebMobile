@@ -16,4 +16,20 @@ public class PostService {
 	public List<PostDto> findAllPosts(){
 		return postMapper.findAllPost();
 	}
+	
+	public int addPost(PostDto post) {
+		return postMapper.addPost(post);
+	}
+	
+	public PostDto serchPost(int num) {
+		return postMapper.searchPost(num);
+	}
+	
+	public int deletePost(int num) {
+		return postMapper.deletePost(num);
+	}
+	
+	public int updatePost(PostDto post) {
+		return postMapper.updatePost(post);
+	}
 }
