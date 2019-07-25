@@ -4,8 +4,11 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.ssafy.ass.dto.PostDto" alias="post" />
+		<typeAlias type="com.ssafy.ass.dto.PortFolioDto" alias="portFolio"/>
 	</typeAliases>
+	
 	<mappers>
 		<mapper resource="mapper/assMapper.xml" />
+		<mapper resource="mapper/portFoiloMapper.xml"/>
 	</mappers>
 </configuration>
