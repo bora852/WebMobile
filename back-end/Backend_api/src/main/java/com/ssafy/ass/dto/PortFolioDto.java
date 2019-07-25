@@ -3,13 +3,14 @@ package com.ssafy.ass.dto;
 import java.util.Date;
 
 public class PortFolioDto {
+	
 	String title;
 	String body;
-	Date date;
+	Date created_at;
 	String authority;
-	String img_adderss;
-	String user_id;
-	int num;
+	String img;
+	String email;
+	int idx;
 	
 	public String getTitle() {
 		return title;
@@ -23,11 +24,11 @@ public class PortFolioDto {
 	public void setBody(String body) {
 		this.body = body;
 	}
-	public Date getDate() {
-		return date;
+	public Date getCreated_at() {
+		return created_at;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setCreated_at(Date created_at) {
+		this.created_at = created_at;
 	}
 	public String getAuthority() {
 		return authority;
@@ -35,30 +36,27 @@ public class PortFolioDto {
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
-	public String getImg_adderss() {
-		return img_adderss;
+	public String getImg() {
+		return img;
 	}
-	public void setImg_adderss(String img_adderss) {
-		this.img_adderss = img_adderss;
+	public void setImg(String img) {
+		this.img = img;
 	}
-	public String getUser_id() {
-		return user_id;
+	public String getEmail() {
+		return email;
 	}
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public int getNum() {
-		return num;
+	public int getIdx() {
+		return idx;
 	}
-	public void setNum(int num) {
-		this.num = num;
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
-
 	@Override
 	public String toString() {
-		return "PortPolioDto [title=" + title + ", body=" + body + ", date=" + date + ", authority=" + authority
-				+ ", img_adderss=" + img_adderss + ", user_id=" + user_id + ", num=" + num + "]";
+		return "PortFolioDto [title=" + title + ", body=" + body + ", created_at=" + created_at + ", authority="
+				+ authority + ", img=" + img + ", email=" + email + ", idx=" + idx + "]";
 	}
-
-
 }

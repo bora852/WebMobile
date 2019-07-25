@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ssafy.ass.dao.PostMapper">
-	<select id="findAllPortPoilo" resultType="portfolio">
-		select * from portfolio where user_id=#{user_id}
+<mapper namespace="com.ssafy.ass.dao.PortFolioMapper">
+
+	<select id="searchAllPort" resultType="portfolio">
+		select * from portfolio;
+	</select>
+	
+	<select id="searchOncePort" parameterType="int" resultType="portfolio">
+		select * from portfolio where idx=#{idx};
 	</select>
 
-	<delete id="delete"  parameterType="String">
-		
+	<delete id="deletePort"  parameterType="int">
+		delete form portfolio where idx=#{idx};
 	</delete>
-
-
+	
+	<update id="updatePort" parameterType="portfolio">
+		update portfolio set title = #{title}, body = #{body}, created_at = default where idx=#{idx}; 
+	</update>
+	
+	<insert id="insertPort" parameterType="portfolio">
+	insert into portfolio  values (#{title}, #{body}, default, #{authority}, #{email}, 0);
+	</insert>
 </mapper>

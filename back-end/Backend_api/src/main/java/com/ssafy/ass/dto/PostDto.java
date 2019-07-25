@@ -3,12 +3,14 @@ package com.ssafy.ass.dto;
 import java.util.Date;
 
 public class PostDto {
+	
 	String title;
 	String body;
-	Date date;
+	Date created_at;
  	String authority;
- 	String User_id;
- 	int num;
+ 	String email;
+ 	int idx;
+ 	
 	public String getTitle() {
 		return title;
 	}
@@ -21,11 +23,11 @@ public class PostDto {
 	public void setBody(String body) {
 		this.body = body;
 	}
-	public Date getDate() {
-		return date;
+	public Date getCreated_at() {
+		return created_at;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setCreated_at(Date created_at) {
+		this.created_at = created_at;
 	}
 	public String getAuthority() {
 		return authority;
@@ -33,21 +35,23 @@ public class PostDto {
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
-	public String getUser_id() {
-		return User_id;
+	public String getEmail() {
+		return email;
 	}
-	public void setUser_id(String user_id) {
-		User_id = user_id;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public int getNum() {
-		return num;
+	public int getIdx() {
+		return idx;
 	}
-	public void setNum(int num) {
-		this.num = num;
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
 	@Override
 	public String toString() {
-		return "PostDto [title=" + title + ", body=" + body + ", date=" + date + ", authority=" + authority
-				+ ", User_id=" + User_id + ", num=" + num + "]";
+		return "PostDto [title=" + title + ", body=" + body + ", created_at=" + created_at + ", authority=" + authority
+				+ ", email=" + email + ", idx=" + idx + "]";
 	}
+ 	
+	
 }

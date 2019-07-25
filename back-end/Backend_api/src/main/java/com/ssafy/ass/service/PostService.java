@@ -13,6 +13,7 @@ public class PostService {
 	@Autowired
 	private PostMapper postMapper;
 	
+	//CRUD
 	public List<PostDto> findAllPosts(){
 		return postMapper.findAllPost();
 	}
@@ -21,12 +22,12 @@ public class PostService {
 		return postMapper.addPost(post);
 	}
 	
-	public PostDto serchPost(int num) {
-		return postMapper.searchPost(num);
+	public PostDto serchPost(int idx) {
+		return postMapper.searchPost(idx);
 	}
 	
-	public int deletePost(int num) {
-		return postMapper.deletePost(num);
+	public int deletePost(int idx) {
+		return postMapper.deletePost(idx);
 	}
 	
 	public int updatePost(PostDto post) {

@@ -7,7 +7,7 @@ import com.ssafy.ass.dto.PostDto;
 public interface PostMapper {
 	public List<PostDto> findAllPost();
 	public int addPost(PostDto post);
-	public PostDto searchPost(int num);
-	public int deletePost(int num);
+	public PostDto searchPost(int idx);
+	public int deletePost(int idx);
 	public int updatePost(PostDto post);
 }

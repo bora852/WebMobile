@@ -26,16 +26,16 @@ public class AssController {
 		return postService.findAllPosts();
 	}
 	@RequestMapping(value = "/postSelect", method = RequestMethod.GET)
-	public PostDto postSelect(@RequestParam int num) throws Exception {
+	public PostDto postSelect(@RequestParam int idx) throws Exception {
 		System.out.println("함수호출 테스트 2");
-		System.out.println("Post Select : " + postService.serchPost(num));
-		return postService.serchPost(num);
+		System.out.println("Post Select : " + postService.serchPost(idx));
+		return postService.serchPost(idx);
 	}
 	@RequestMapping(value = "/postDelete", method = RequestMethod.GET)
-	public int postDelete(@RequestParam int num) throws Exception {
+	public int postDelete(@RequestParam int idx) throws Exception {
 		System.out.println("함수호출 테스트 3");
-		System.out.println("Post Delete : " + postService.deletePost(num));
-		return postService.deletePost(num);
+		System.out.println("Post Delete : " + postService.deletePost(idx));
+		return postService.deletePost(idx);
 	}
 	
 	@RequestMapping(value = "/postAdd", method = RequestMethod.GET)
