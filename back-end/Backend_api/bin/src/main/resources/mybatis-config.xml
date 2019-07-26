@@ -1,0 +1,16 @@
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.ssafy.ass.dto.PostDto" alias="post" />
+		<typeAlias type="com.ssafy.ass.dto.PortFolioDto" alias="portFolio"/>
+		<typeAlias type="com.ssafy.ass.dto.UserDto" alias="user"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mapper/postMapper.xml" />
+		<mapper resource="mapper/portFoiloMapper.xml"/>
+		<mapper resource="mapper/userMapper.xml"/>
+	</mappers>
+</configuration>
