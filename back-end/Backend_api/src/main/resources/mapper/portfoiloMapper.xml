@@ -11,7 +11,7 @@
 	</select>
 
 	<delete id="deletePort"  parameterType="int">
-		delete form portfolio where idx=#{idx};
+		delete from portfolio where idx=#{idx};
 	</delete>
 	
 	<update id="updatePort" parameterType="portfolio">

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+
+<script src="https://unpkg.com/vue"></script>
+<script
+   src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+
+<body>
+   sad
+   <div id='app'>
+      -----------Select All 전부다 호출------
+      <template v-for="(temp,index) in info">
+      <p>{{temp.created_at}}
+      <p>{{temp.title}}
+      <p>{{temp.email}}
+      <p>{{temp.authority}}
+      <p>{{temp.idx}}
+      </template>
+      
+      <input type="text" v-model="search" /><!-- idx 값 전달을 위한 v-model -->
+      <button v-on:click="deletet">Delete 삭제</button>
+      
+      <br> <input type="text" v-model="select" />
+      <button v-on:click="selectfn">Select one 한개 선택</button>
+      <p>여기는 셀렉트--------------------
+      <p>{{oneinfo.idx}}
+      <p>{{oneinfo.title}}
+      <p>{{oneinfo.email}}
+      <p>{{oneinfo.authority}}
+      <p>{{oneinfo.created_at}}
+      
+      <button v-on:click="count">db post data 카운팅</button>
+      <p>{{cnt.postCount}}
+      <p>{{cnt.portfolioCount}}
+      
+   </div>
+</body>
+
+
+
+<script src="//unpkg.com/vue"></script><script type="text/javascript">    
+   var app=new Vue({
+      el:'#app',
+      data() {
+         return {
+            info : [],
+            search : "",
+            select : "",
+            oneinfo : [],
+            cnt : []
+         }},
+      mounted : function(){
+           {
+         axios.get('http://localhost:8082/ass/api/postAll',{
+            f_name : this.search
+         })
+         .then(response => (this.info = response.data))
+         }
+      },
+      methods : {
+         deletet : function(){
+            axios.get('http://localhost:8082/ass/api/postDelete',{
+               params : {
+               idx : this.search //index 번호 axios로 sever로 보내줌
+               }
+            })
+            .then(response => (this.info = response.data))
+            },
+         
+            selectfn : function(){
+               console.log("요기는 셀렉트 응답바란다.", this.oneinfo);
+               axios.get('http://localhost:8082/ass/api/postSelect',{
+                  params :{
+                     idx : this.select
+                  }
+               })
+            },
+            
+            count : function(){
+               console.log("여기는 counting",this.cnt);
+               axios.get("http://localhost:8082/ass/api/counting")
+               .then(response => (this.cnt = response.data))
+            }
+         }
+   })
+</script>
+
+
+</html>

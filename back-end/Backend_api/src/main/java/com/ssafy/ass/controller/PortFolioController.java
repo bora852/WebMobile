@@ -22,17 +22,20 @@ public class PortFolioController {
 	private PortFolioService portfolioService;
 	
 	@RequestMapping(value = "/portAll", method = RequestMethod.GET)
-	public List<PortFolioDto> postAll() throws Exception {
+	public List<PortFolioDto> portAll() throws Exception {
+		System.out.println("portAll" + portfolioService.searchAllPort());
 		return portfolioService.searchAllPort();
 	}
 	
 	@RequestMapping(value = "/portSelect", method = RequestMethod.GET)
 	public PortFolioDto portSelect(@RequestParam int idx) throws Exception {
 		return portfolioService.searchOncePort(idx);
+		
 	}
 	
 	@RequestMapping(value = "/portDelect", method = RequestMethod.GET)
 	public int portDelect(@RequestParam int idx) throws Exception {
+//		System.out.println("portdelete : " + portfolioService.deletePort(idx));
 		return portfolioService.deletePort(idx);
 	}
 	
