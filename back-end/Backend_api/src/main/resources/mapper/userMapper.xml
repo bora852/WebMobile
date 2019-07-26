@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ssafy.ass.dao.PortFolioMapper">
+<mapper namespace="com.ssafy.ass.dao.UserMapper">
 
-	<select id="searchAllUser" resultType="portfolio">
-		SELECT * FROM portfolio;
+	<select id="searchAllUser" resultType="user">
+		SELECT * FROM user;
 	</select>
 
-	<select id="searchOnceUser" parameterType="String" resultType="portfolio">
-		SELECT * FROM portfolio WHERE email=#{email};
+	<select id="searchOnceUser" parameterType="String" resultType="user">
+		SELECT * FROM user WHERE email=#{email};
 	</select>
 
 	<delete id="deleteUser" parameterType="String">
-		DELETE FROM portfolio
+		DELETE FROM user
 		WHERE email=#{email};
 	</delete>
 
 	<update id="updateUser" parameterType="user">
-		UPDATE portfolio set
+		UPDATE user set
 		authority=#{authority} WHERE email=#{email};
 	</update>
 
 	<insert id="insertUser" parameterType="user">
-		INSERT INTO portfolio values (#{email}, default, #{authority}, 0);
+		INSERT INTO user values (#{email}, default, #{authority}, 0);
 	</insert>
 	<select id="countUserAdmin" resultType="int">
 		SELECT count(*) FROM user WHERE authority ='admin'
