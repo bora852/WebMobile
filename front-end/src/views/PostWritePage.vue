@@ -11,9 +11,8 @@
 </template>
 
 <script>
-
 import { eventBus } from "../main.js";
-import WritePost from "../components/WritePost"
+import WritePost from "../components/WritePost";
 
 export default {
   name: "PostWritePage",
