@@ -45,7 +45,13 @@ public class PortFolioController {
 	}
 	
 	@RequestMapping(value = "/portUpdate", method = RequestMethod.GET)
-	public HashMap<String, Object> portUpdate(@RequestBody PortFolioDto port) throws Exception {
+	public HashMap<String, Object> portUpdate(@RequestParam int idx, @RequestParam String title, @RequestParam String body) throws Exception {
+		
+		PortFolioDto port = new PortFolioDto();
+		port.setIdx(idx);
+		port.setTitle(title);
+		port.setBody(body);
+		
 		int res = portfolioService.updatePort(port);
 		HashMap<String, Object> result = new HashMap<>();
 		if (res > 0) {
