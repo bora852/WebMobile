@@ -23,7 +23,7 @@ public class PortFolioController {
 	private PortFolioService portfolioService;
 	
 	@RequestMapping(value = "/portAll", method = RequestMethod.GET)
-	public List<PortFolioDto> postAll() throws Exception {
+	public List<PortFolioDto> portAll() throws Exception {
 		return portfolioService.searchAllPort();
 	}
 	

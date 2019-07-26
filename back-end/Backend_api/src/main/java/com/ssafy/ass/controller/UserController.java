@@ -46,9 +46,10 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/userUpdate", method = RequestMethod.GET)
-	public HashMap<String, Object> userUpdate(@RequestBody UserDto user) throws Exception {
-		System.out.println("1");
-		String user_authority = userService.searchOnceUser(user.getEmail()).getAuthority();
+	public HashMap<String, Object> userUpdate(@RequestParam String email, @RequestParam String authority) throws Exception {
+		System.out.println("1"+email+" : "+ authority);
+		UserDto user = new UserDto();
+		String user_authority = userService.searchOnceUser(email).getAuthority();
 		System.out.println("2");
 		int res = -1;
 		HashMap<String, Object> result = new HashMap<>();
@@ -60,6 +61,8 @@ public class UserController {
 				return result;
 			}
 		}
+		user.setEmail(email);
+		user.setAuthority(authority);
 		System.out.println("4");
 		res = userService.updateUser(user);
 		if (res > 0) {
