@@ -4,6 +4,7 @@ import SwalAlert from "../services/SwalAlert";
 export default {
   // 권한 확인 함수
   authChk() {
+    // store.state.user 사용
     var result = "admin";
     store.state.userAuth = result;
     return result;
