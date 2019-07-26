@@ -7,7 +7,7 @@
       :key="i"
     >
       <Post
-        :date="posts[i - 1].created_at"
+        :date="dateFormating(posts[i - 1].created_at)"
         :title="posts[i - 1].title"
         :body="posts[i - 1].body"
       ></Post>
@@ -26,7 +26,7 @@
 
 <script>
 import Post from "@/components/Post";
-import FirebaseService from "@/services/FirebaseService";
+import PostService from "@/services/PostService";
 
 export default {
   name: "PostList",
@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     async getPosts() {
-      this.posts = await FirebaseService.getPosts();
+      this.posts = await PostService.getList();
     },
     loadMorePosts() {
       this.count = this.count + 1;
@@ -68,6 +68,19 @@ export default {
   computed: {
     watch_auth() {
       return this.$store.state.userAuth;
+    },
+    dateFormating(postDate) {
+      console.log(this.posts[0].created_at);
+      console.log("dataFormating");
+      console.log("postDate", postDate);
+      var year = postDate.getFullYear();
+      var month = postDate.getMonth() + 1;
+      var day = postDate.getDate();
+      if (day < 10) {
+        day = "0" + day;
+      }
+      console.log(year + "" + month + "" + day);
+      return year + "" + month + "" + day;
     }
   },
   watch: {
