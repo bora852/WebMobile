@@ -9,7 +9,7 @@
 	</typeAliases>
 	
 	<mappers>
-		<mapper resource="mapper/assMapper.xml" />
+		<mapper resource="mapper/postMapper.xml" />
 		<mapper resource="mapper/portFoiloMapper.xml"/>
 		<mapper resource="mapper/userMapper.xml"/>
 	</mappers>

@@ -3,24 +3,27 @@
 <mapper namespace="com.ssafy.ass.dao.PortFolioMapper">
 
 	<select id="searchAllUser" resultType="portfolio">
-		select * from portfolio;
+		SELECT * FROM portfolio;
 	</select>
 
 	<select id="searchOnceUser" parameterType="String" resultType="portfolio">
-		select * from portfolio where email=#{email};
+		SELECT * FROM portfolio WHERE email=#{email};
 	</select>
 
 	<delete id="deleteUser" parameterType="String">
-		delete form portfolio
-		where email=#{email};
+		DELETE FROM portfolio
+		WHERE email=#{email};
 	</delete>
 
 	<update id="updateUser" parameterType="user">
-		update portfolio set
-		authority=#{authority} where email=#{email};
+		UPDATE portfolio set
+		authority=#{authority} WHERE email=#{email};
 	</update>
 
 	<insert id="insertUser" parameterType="user">
-		insert into portfolio values (#{email}, default, #{authority}, 0);
+		INSERT INTO portfolio values (#{email}, default, #{authority}, 0);
 	</insert>
+	<select id="countUserAdmin" resultType="int">
+		SELECT count(*) FROM user WHERE authority ='admin'
+	</select>
 </mapper>

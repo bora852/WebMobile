@@ -13,5 +13,5 @@ public interface PortFolioMapper {
 	public int deletePort(int idx);
 	public int updatePort(PortFolioDto port);
 	public int insertPort(PortFolioDto port);
-	
+	public int countPortfolio();
 }
