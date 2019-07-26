@@ -9,6 +9,7 @@ import Repository from "./views/RepositoryPage.vue";
 import SignUpPage from "./views/SignUpPage.vue";
 import ChatPage from "./views/ChatPage.vue";
 import AdminPage from "./views/AdminPage.vue";
+import PostWritePage from "./views/PostWritePage.vue";
 
 Vue.use(Router);
 export default new Router({
@@ -72,6 +73,11 @@ export default new Router({
       path: "/admin",
       name: "admin",
       component: AdminPage
+    },
+    {
+      path: "/writePost",
+      name: "writePost",
+      component: PostWritePage
     }
   ]
 });
