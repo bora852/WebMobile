@@ -17,6 +17,9 @@
       <v-btn color="warning" dark v-on:click="loadMorePosts">
         <v-icon size="25" class="mr-2">fa-plus</v-icon> View more
       </v-btn>
+      <v-btn color="warning" dark to="writePost" v-show="isWriter">
+        <v-icon size="25" class="mr-2">fa-edit</v-icon> writePost
+      </v-btn>
     </v-flex>
   </v-layout>
 </template>
@@ -43,6 +46,7 @@ export default {
   },
   data() {
     return {
+      isWriter: null,
       posts: [],
       count: this.limits
     };
@@ -59,6 +63,20 @@ export default {
     },
     loadMorePosts() {
       this.count = this.count + 1;
+    }
+  },
+  computed: {
+    watch_auth() {
+      return this.$store.state.userAuth;
+    }
+  },
+  watch: {
+    watch_auth(auth) {
+      if (auth == "admin" || auth == "team") {
+        this.isWriter = true;
+      } else {
+        this.isWriter = false;
+      }
     }
   }
 };
