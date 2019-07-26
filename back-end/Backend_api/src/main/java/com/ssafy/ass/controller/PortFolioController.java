@@ -1,5 +1,6 @@
 package com.ssafy.ass.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,18 +33,39 @@ public class PortFolioController {
 	}
 	
 	@RequestMapping(value = "/portDelect", method = RequestMethod.GET)
-	public int portDelect(@RequestParam int idx) throws Exception {
-		return portfolioService.deletePort(idx);
+	public HashMap<String, Object> portDelect(@RequestParam int idx) throws Exception {
+		int res = portfolioService.deletePort(idx);
+		HashMap<String, Object> result = new HashMap<>();
+		if (res > 0) {
+			result.put("state", "1");
+		} else {
+			result.put("state", "-1");
+		}
+		return result;
 	}
 	
 	@RequestMapping(value = "/portUpdate", method = RequestMethod.GET)
-	public int portUpdate(@RequestBody PortFolioDto port) throws Exception {
-		return portfolioService.updatePort(port);
+	public HashMap<String, Object> portUpdate(@RequestBody PortFolioDto port) throws Exception {
+		int res = portfolioService.updatePort(port);
+		HashMap<String, Object> result = new HashMap<>();
+		if (res > 0) {
+			result.put("state", "1");
+		} else {
+			result.put("state", "-1");
+		}
+		return result;
 	}
 	
 	@RequestMapping(value = "/portInsert", method = RequestMethod.GET)
-	public int portInsert(@RequestBody PortFolioDto port) throws Exception {
-		return portfolioService.insertPort(port);
+	public HashMap<String, Object> portInsert(@RequestBody PortFolioDto port) throws Exception {
+		int res = portfolioService.insertPort(port);
+		HashMap<String, Object> result = new HashMap<>();
+		if (res > 0) {
+			result.put("state", "1");
+		} else {
+			result.put("state", "-1");
+		}
+		return result;
 	}
 	
 }

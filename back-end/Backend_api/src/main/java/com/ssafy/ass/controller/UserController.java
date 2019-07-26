@@ -1,5 +1,6 @@
 package com.ssafy.ass.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,8 @@ public class UserController {
 
 	@RequestMapping(value = "/userAll", method = RequestMethod.GET)
 	public List<UserDto> userAll() throws Exception {
-		return  userService.findAllUser();
+
+		return userService.findAllUser();
 	}
 
 	@RequestMapping(value = "/userSelect", method = RequestMethod.GET)
@@ -32,17 +34,51 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/userDelect", method = RequestMethod.GET)
-	public int userDelect(@RequestParam String email) throws Exception {
-		return userService.deleteUser(email);
+	public HashMap<String, Object> userDelect(@RequestParam String email) throws Exception {
+		int res = userService.deleteUser(email);
+		HashMap<String, Object> result = new HashMap<>();
+		if (res > 0) {
+			result.put("state", "1");
+		} else {
+			result.put("state", "-1");
+		}
+		return result;
 	}
 
 	@RequestMapping(value = "/userUpdate", method = RequestMethod.GET)
-	public int userUpdate(@RequestBody UserDto user) throws Exception {
-		return userService.updateUser(user);
+	public HashMap<String, Object> userUpdate(@RequestBody UserDto user) throws Exception {
+		System.out.println("1");
+		String user_authority = userService.searchOnceUser(user.getEmail()).getAuthority();
+		System.out.println("2");
+		int res = -1;
+		HashMap<String, Object> result = new HashMap<>();
+		result.put("state", "-1");
+		System.out.println("3");
+		if (user_authority.equals("admin")) {
+			int admin_num = userService.countUserAdmin();
+			if (admin_num == 1) {
+				return result;
+			}
+		}
+		System.out.println("4");
+		res = userService.updateUser(user);
+		if (res > 0) {
+			result.put("state", "1");
+		}
+		System.out.println("5");
+		return result;
+
 	}
 
 	@RequestMapping(value = "/userInsert", method = RequestMethod.GET)
-	public int userInsert(@RequestBody UserDto user) throws Exception {
-		return userService.insertUser(user);
+	public HashMap<String, Object> userInsert(@RequestBody UserDto user) throws Exception {
+		int res = userService.insertUser(user);
+		HashMap<String, Object> result = new HashMap<>();
+		if (res > 0) {
+			result.put("state", "1");
+		} else {
+			result.put("state", "-1");
+		}
+		return result;
 	}
 }

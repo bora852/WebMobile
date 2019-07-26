@@ -10,4 +10,6 @@ public interface PostMapper {
 	public PostDto searchPost(int idx);
 	public int deletePost(int idx);
 	public int updatePost(PostDto post);
+	public int countPost();
+
 }

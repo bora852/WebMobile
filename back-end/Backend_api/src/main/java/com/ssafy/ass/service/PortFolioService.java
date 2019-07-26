@@ -34,4 +34,7 @@ public class PortFolioService {
 	public int insertPort(PortFolioDto port){
 		return portfolioMapper.insertPort(port);
 	} 
+	public int countPortfolio() {
+		return portfolioMapper.countPortfolio();
+	}
 }

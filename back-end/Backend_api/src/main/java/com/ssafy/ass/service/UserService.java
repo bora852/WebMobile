@@ -34,5 +34,8 @@ public class UserService {
 	public int insertUser(UserDto user) {
 		return userMapper.insertUser(user);
 	}
+	public int countUserAdmin() {
+		return userMapper.countUserAdmin();
+	}
 
 }

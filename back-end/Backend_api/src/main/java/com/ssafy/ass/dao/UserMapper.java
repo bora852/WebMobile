@@ -13,4 +13,5 @@ public interface UserMapper {
 	public int deleteUser(String email);
 	public int updateUser(UserDto user);
 	public int insertUser(UserDto user);
+	public int countUserAdmin();
 }

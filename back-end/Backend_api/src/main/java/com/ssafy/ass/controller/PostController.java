@@ -1,6 +1,8 @@
 package com.ssafy.ass.controller;
 
+import java.util.HashMap;
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.ass.dto.CountAll;
 import com.ssafy.ass.dto.PostDto;
+import com.ssafy.ass.service.PortFolioService;
 import com.ssafy.ass.service.PostService;
 
 @CrossOrigin(origins = { "*" })
@@ -19,6 +23,8 @@ import com.ssafy.ass.service.PostService;
 public class PostController {
 	@Autowired
 	private PostService postService;
+	@Autowired
+	private PortFolioService portfolioService;
 	@RequestMapping(value = "/postAll", method = RequestMethod.GET)
 	public List<PostDto> postAll() throws Exception {
 		System.out.println("함수호출 테스트 1");
@@ -32,24 +38,51 @@ public class PostController {
 		return postService.serchPost(idx);
 	}
 	@RequestMapping(value = "/postDelete", method = RequestMethod.GET)
-	public int postDelete(@RequestParam int idx) throws Exception {
+	public HashMap<String, Object> postDelete(@RequestParam int idx) throws Exception {
+		int res = postService.deletePost(idx);
 		System.out.println("함수호출 테스트 3");
-		System.out.println("Post Delete : " + postService.deletePost(idx));
-		return postService.deletePost(idx);
+		HashMap<String, Object> result = new HashMap<>();
+		if (res > 0) {
+			result.put("state", "1");
+		} else {
+			result.put("state", "-1");
+		}
+		return result;
 	}
 	
 	@RequestMapping(value = "/postAdd", method = RequestMethod.GET)
-	public int postAdd(@RequestBody PostDto post) throws Exception {
+	public HashMap<String, Object> postAdd(@RequestBody PostDto post) throws Exception {
+		int res = postService.addPost(post);
 		System.out.println("함수호출 테스트 4");
-		System.out.println("Post Add : " + postService.addPost(post));
-		return postService.addPost(post);
+		HashMap<String, Object> result = new HashMap<>();
+		if (res > 0) {
+			result.put("state", "1");
+		} else {
+			result.put("state", "-1");
+		}
+		return result;
 	}
 	
 	@RequestMapping(value = "/postUpdate", method = RequestMethod.GET)
-	public int postUpdate(@RequestBody PostDto post) throws Exception {
+	public HashMap<String, Object> postUpdate(@RequestBody PostDto post) throws Exception {
+		int res = postService.updatePost(post);
 		System.out.println("함수호출 테스트 5");
-		System.out.println("Post Update : " + postService.updatePost(post));
-		return postService.updatePost(post);
+		HashMap<String, Object> result = new HashMap<>();
+		if (res > 0) {
+			result.put("state", "1");
+		} else {
+			result.put("state", "-1");
+		}
+		return result;
 	}
-	
+	@RequestMapping(value = "/counting", method = RequestMethod.GET)
+	public CountAll postUpdate() throws Exception {
+		System.out.println("함수호출 테스트 6");
+		System.out.println("Post cnt : " + postService.countPost());
+		System.out.println("portfolio cnt : " + portfolioService.countPortfolio());
+		CountAll cnt = new CountAll();
+		cnt.setPortfolioCount(portfolioService.countPortfolio());
+		cnt.setPostCount(postService.countPost());
+		return cnt;
+	}
 }

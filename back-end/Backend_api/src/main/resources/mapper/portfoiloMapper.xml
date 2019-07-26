@@ -21,4 +21,7 @@
 	<insert id="insertPort" parameterType="portfolio">
 	insert into portfolio  values (#{title}, #{body}, default, #{authority}, #{email}, 0);
 	</insert>
+	<select id="countPortfolio" resultType="int">
+		SELECT count(*) FROM portfolio
+	</select>
 </mapper>

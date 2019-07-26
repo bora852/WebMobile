@@ -3,14 +3,12 @@ package com.ssafy.ass.dto;
 import java.util.Date;
 
 public class PostDto {
-	
 	String title;
 	String body;
 	Date created_at;
  	String authority;
  	String email;
  	int idx;
- 	
 	public String getTitle() {
 		return title;
 	}

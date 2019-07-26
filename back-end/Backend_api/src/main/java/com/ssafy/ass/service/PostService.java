@@ -13,9 +13,8 @@ public class PostService {
 	@Autowired
 	private PostMapper postMapper;
 	
-	//CRUD
 	public List<PostDto> findAllPosts(){
-		return postMapper.findAllPost(); 
+		return postMapper.findAllPost();
 	}
 	
 	public int addPost(PostDto post) {
@@ -33,4 +32,8 @@ public class PostService {
 	public int updatePost(PostDto post) {
 		return postMapper.updatePost(post);
 	}
+	public int countPost() {
+		return postMapper.countPost();
+	}
+
 }
