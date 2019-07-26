@@ -15,7 +15,7 @@ public class PostService {
 	
 	//CRUD
 	public List<PostDto> findAllPosts(){
-		return postMapper.findAllPost();
+		return postMapper.findAllPost(); 
 	}
 	
 	public int addPost(PostDto post) {

@@ -16,7 +16,7 @@ import com.ssafy.ass.service.PostService;
 @CrossOrigin(origins = { "*" })
 @RestController
 @RequestMapping("/api")
-public class AssController {
+public class PostController {
 	@Autowired
 	private PostService postService;
 	@RequestMapping(value = "/postAll", method = RequestMethod.GET)

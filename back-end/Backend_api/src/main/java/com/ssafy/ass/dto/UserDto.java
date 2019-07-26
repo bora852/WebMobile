@@ -7,7 +7,7 @@ public class UserDto {
 	String email;
 	Date created_at;
 	String authority;
-	int inx;
+	int idx;
 	public String getEmail() {
 		return email;
 	}
@@ -26,15 +26,15 @@ public class UserDto {
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
-	public int getInx() {
-		return inx;
+	public int getIdx() {
+		return idx;
 	}
-	public void setInx(int inx) {
-		this.inx = inx;
+	public void setInx(int idx) {
+		this.idx = idx;
 	}
 	@Override
 	public String toString() {
-		return "UserDto [email=" + email + ", created_at=" + created_at + ", authority=" + authority + ", inx=" + inx
+		return "UserDto [email=" + email + ", created_at=" + created_at + ", authority=" + authority + ", idx=" + idx
 				+ "]";
 	}
 
