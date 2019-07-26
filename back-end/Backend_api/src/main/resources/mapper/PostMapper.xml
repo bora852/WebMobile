@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.ass.dao.PostMapper">
+
   	<select id="findAllPost" resultType="post"> 
         SELECT *FROM post
     </select>
 
 	<select id="searchMember" parameterType="int" resultType="post">
-		SELECT * FROM member WHERE num=#{num}
+		SELECT * FROM member WHERE idx=#{idx}
 	</select>
+	
 	<insert id="addPost" parameterType="post"
 		useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO member VALUES (#{title},#{body},#{date},#{authority},#{User_id})
+		INSERT INTO member VALUES (#{title}, #{body}, default, #{authority}, #{email}, 0)
 	</insert>
 	
 	<delete id="deletePost" parameterType="int">
-		DELETE FROM member WHERE num=#{num}
+		DELETE FROM member WHERE idx=#{idx}
 	</delete>
 	
 	<update id="updateMember" parameterType="post">
-		UPDATE member SET title=#{title},body=#{body} WHERE User_id=#{User_id}
+		UPDATE member SET title = #{title}, body = #{body}, created_at = default WHERE User_id=#{email}
 	</update>
+	
 </mapper>

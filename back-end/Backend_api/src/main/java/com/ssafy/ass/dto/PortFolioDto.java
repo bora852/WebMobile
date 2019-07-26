@@ -2,15 +2,16 @@ package com.ssafy.ass.dto;
 
 import java.util.Date;
 
-public class PostDto {
+public class PortFolioDto {
 	
 	String title;
 	String body;
 	Date created_at;
- 	String authority;
- 	String email;
- 	int idx;
- 	
+	String authority;
+	String img;
+	String email;
+	int idx;
+	
 	public String getTitle() {
 		return title;
 	}
@@ -35,6 +36,12 @@ public class PostDto {
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -49,9 +56,7 @@ public class PostDto {
 	}
 	@Override
 	public String toString() {
-		return "PostDto [title=" + title + ", body=" + body + ", created_at=" + created_at + ", authority=" + authority
-				+ ", email=" + email + ", idx=" + idx + "]";
+		return "PortFolioDto [title=" + title + ", body=" + body + ", created_at=" + created_at + ", authority="
+				+ authority + ", img=" + img + ", email=" + email + ", idx=" + idx + "]";
 	}
- 	
-	
 }
