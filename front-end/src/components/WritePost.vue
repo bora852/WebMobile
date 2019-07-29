@@ -38,13 +38,14 @@
 
 <script>
 import { eventBus } from "../main.js";
-import FirebaseService from "@/services/FirebaseService";
+import PostService from "@/services/PostService";
 import SwalAlert from "../services/SwalAlert";
 
 export default {
   name: "WritePost",
   components: {},
   data: () => ({
+    idx: "",
     body: "",
     title: "",
     valid: true,
@@ -62,22 +63,15 @@ export default {
       } else if (this.body == "") {
         SwalAlert.swatAlert("Error!", "내용을 입력해주세요!", "error", "Ok!");
       } else {
-        var isPost = await FirebaseService.postPortfolio(this.title, this.body);
+        console.log(this.$store.state.user);
+        var isPost = await PostService.postPost(
+          this.title,
+          this.body,
+          this.$store.state.user
+        );
+        console.log(isPost)
         if (isPost == "success") {
-          SwalAlert.swatAlert(
-            "Success!",
-            "포스트가 등록되었습니다!",
-            "success",
-            "Ok!"
-          );
           this.$router.push("post");
-        } else {
-          SwalAlert.swatAlert(
-            "Error!",
-            "알수없는 에러가 발생했습니다! (error code : " + isPost + ")",
-            "error",
-            "Ok!"
-          );
         }
       }
     }

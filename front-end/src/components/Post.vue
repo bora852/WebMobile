@@ -32,7 +32,6 @@ export default {
   },
   computed: {
     formatedDate() {
-      console.log(this.date);
       return this.date;
     }
   },
