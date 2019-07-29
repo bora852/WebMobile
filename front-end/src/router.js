@@ -8,6 +8,8 @@ import WritePortfolio from './views/WritePortfolioPage.vue'
 import Repository from './views/RepositoryPage.vue'
 import SignUpPage from './views/SignUpPage.vue'
 import ChatPage from './views/ChatPage.vue'
+import AdminPage from "./views/AdminPage.vue";
+import PostWritePage from "./views/PostWritePage.vue";
 import PortfolioDetailPage from './views/PortfolioDetailPage.vue'
 
 Vue.use(Router);
@@ -23,54 +25,66 @@ export default new Router({
     SignUpPage,
     ChatPage,
     Repository,
+    AdminPage,
     PortfolioDetailPage
   },
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes: [{
-      path: '/',
-      name: 'home',
+  routes: [
+    {
+      path: "/",
+      name: "home",
       component: HomePage
     },
     {
-      path: '/post',
-      name: 'post',
+      path: "/post",
+      name: "post",
       component: PostPage
     },
     {
-      path: '/portfolio',
-      name: 'portfolio',
+      path: "/portfolio",
+      name: "portfolio",
       component: PortfolioPage
     },
     {
-      path: '/portfolioDetail',
-      name: 'portfolioDetail',
+      path: "/portfolioDetail",
+      name: "portfolioDetail",
       component: PortfolioDetailPage
     },
     {
-      path: '/login',
-      name: 'login',
+      path: "/login",
+      name: "login",
       component: LoginPage
     },
     {
-      path: '/writePortfolio',
-      name: 'writePortfolio',
+      path: "/writePortfolio",
+      name: "writePortfolio",
       component: WritePortfolio
     },
     {
-      path: '/repository',
-      name: 'Repository',
+      path: "/repository",
+      name: "Repository",
       component: Repository
     },
     {
-      path: '/signup',
-      name: 'signup',
+      path: "/signup",
+      name: "signup",
       component: SignUpPage
     },
     {
-      path: '/chat',
-      name: 'chat',
+      path: "/chat",
+      name: "chat",
       component: ChatPage
+    },
+    {
+      path: "/admin",
+      name: "admin",
+      component: AdminPage
+    },
+    {
+      path: "/writePost",
+      name: "writePost",
+      component: PostWritePage
     }
   ]
-})
+});

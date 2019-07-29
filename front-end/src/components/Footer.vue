@@ -1,11 +1,10 @@
 <template>
-  <v-footer height="40">
+  <v-footer height="123">
     <v-card class="flex" flat tile>
       <v-card-title class="teal">
         <div id="openweathermap-widget-23"></div>
-        <v-spacer></v-spacer>
+        <!-- <v-spacer></v-spacer> -->
       </v-card-title>
-      <!-- footer text -->
       <v-flex class="grey lighten-3 py-2 text-xs-center black--text xs12">
         &copy; <strong>NobleTuna</strong> {{ new Date().getFullYear() }}
       </v-flex>

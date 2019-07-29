@@ -19,7 +19,12 @@
           <v-toolbar-title class="text_font">Tuna's Blog</v-toolbar-title>
         </router-link>
 
-        <v-btn icon class="hidden-md-and-up" v-show="isLogin" @click.stop="drawer = !drawer">
+        <v-btn
+          icon
+          class="hidden-md-and-up"
+          v-show="isLogin"
+          @click.stop="drawer = !drawer"
+        >
           <v-icon color="yellow">check_circle</v-icon>
         </v-btn>
 
@@ -45,6 +50,12 @@
         <v-btn icon class="hidden-sm-and-down" title="SignUp" v-show="!isLogin">
           <router-link to="signup" tag="span">
             <v-icon>assignment_ind</v-icon>
+          </router-link>
+        </v-btn>
+
+        <v-btn v-show="isAdmin" icon class="hidden-sm-and-down" title="Admin">
+          <router-link to="/admin" tag="span">
+            <v-icon>settings</v-icon>
           </router-link>
         </v-btn>
 
@@ -115,7 +126,7 @@
               </v-list-tile-action>
               <v-list-tile-content>
                 <v-list-tile-title class="text_font">
-                  {{item.title}}
+                  {{ item.title }}
                 </v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
@@ -176,6 +187,8 @@ export default {
   },
   data() {
     return {
+      isAdmin: false,
+      isTeam: false,
       dialog: false,
       isLogin: false,
       userId: "",
@@ -206,11 +219,6 @@ export default {
           title: "Portfolio",
           icon: "dvr",
           router: "portfolio"
-        },
-        {
-          title: "Portfolio Write",
-          icon: "edit",
-          router: "writePortfolio"
         },
         {
           title: "Repository",
@@ -284,6 +292,25 @@ export default {
       this.userId = null;
       this.$router.push("/");
     });
+  },
+  computed: {
+    watch_auth() {
+      return this.$store.state.userAuth;
+    }
+  },
+  watch: {
+    watch_auth(auth) {
+      if (auth == "admin") {
+        this.isAdmin = true;
+        this.isTeam = true;
+      } else if (auth == "team") {
+        this.isAdmin = false;
+        this.isTeam = true;
+      } else {
+        this.isAdmin = false;
+        this.isTeam = false;
+      }
+    }
   }
 };
 </script>
@@ -297,10 +324,21 @@ export default {
   cursor: pointer;
   color: orange;
 }
+.container {
+  padding-top: 41px;
+}
 
 @media (max-width: 960px) {
   .mobile_login {
     display: none;
+  }
+  .container {
+    padding-top: 24px;
+  }
+}
+@media only screen and (max-width: 747px) {
+  .container {
+    padding-top: 40px;
   }
 }
 </style>

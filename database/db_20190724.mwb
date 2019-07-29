@@ -1,0 +1,25 @@
+#create database post;
+#drop database post;
+
+CREATE DATABASE ASS_SEVEN;
+
+show databases;
+USE ASS_SEVEN;
+CREATE TABLE POST (
+	id VARCHAR(15),
+    title VARCHAR(30),
+    body VARCHAR(500),
+    date date,
+    authority VARCHAR(10),
+    img_address VARCHAR(100)
+);
+SHOW TABLES;
+
+CREATE TABLE PORTFOLIO (
+	id VARCHAR(15),
+    title VARCHAR(30),
+    body VARCHAR(500),
+    date DECIMAL(30),
+    authority VARCHAR(10),
+    img_address VARCHAR(100)
+);

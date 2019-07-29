@@ -21,7 +21,7 @@ export default {
   name: "Post",
   props: {
     date: {
-      type: Date
+      type: String
     },
     title: {
       type: String
@@ -32,7 +32,8 @@ export default {
   },
   computed: {
     formatedDate() {
-      return `${this.date.getFullYear()}년 ${this.date.getMonth()}월 ${this.date.getDate()}일`;
+      console.log(this.date);
+      return this.date;
     }
   },
   created() {

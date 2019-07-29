@@ -1,7 +1,9 @@
+import AuthService from "../services/AuthService";
 import firebase from "firebase/app";
 import "firebase/functions";
 import Swal from "sweetalert2";
 import { eventBus } from "../main.js";
+import store from "../store";
 
 const config = {
   projectId: "webmobileproject-2d658",
@@ -147,6 +149,7 @@ export default {
         });
         callSignUpLog({}).then(function() {});
         callSignInLog({}).then(function() {});
+        store.state.userAuth = "guest";
         return true;
       })
       .catch(function(error) {
@@ -188,8 +191,11 @@ export default {
     return firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         eventBus.$emit("getUserId", user.email);
+        store.state.user = user.email;
+        AuthService.authChk();
         return user.email;
       } else {
+        store.state.userAuth = "";
         return null;
       }
     });
@@ -200,6 +206,7 @@ export default {
       .auth()
       .signOut()
       .then(function() {
+        store.state.userAuth = "";
         Swal.fire({
           title: "Bye Bye!",
           text: "로그아웃 되었습니다.",
