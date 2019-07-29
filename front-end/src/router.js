@@ -1,16 +1,16 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import HomePage from './views/HomePage.vue'
-import PostPage from './views/PostPage.vue'
-import PortfolioPage from './views/PortfolioPage.vue'
-import LoginPage from './views/LoginPage.vue'
-import WritePortfolio from './views/WritePortfolioPage.vue'
-import Repository from './views/RepositoryPage.vue'
-import SignUpPage from './views/SignUpPage.vue'
-import ChatPage from './views/ChatPage.vue'
+import Vue from "vue";
+import Router from "vue-router";
+import HomePage from "./views/HomePage.vue";
+import PostPage from "./views/PostPage.vue";
+import PortfolioPage from "./views/PortfolioPage.vue";
+import LoginPage from "./views/LoginPage.vue";
+import WritePortfolio from "./views/WritePortfolioPage.vue";
+import Repository from "./views/RepositoryPage.vue";
+import SignUpPage from "./views/SignUpPage.vue";
+import ChatPage from "./views/ChatPage.vue";
 import AdminPage from "./views/AdminPage.vue";
 import PostWritePage from "./views/PostWritePage.vue";
-import PortfolioDetailPage from './views/PortfolioDetailPage.vue'
+import PortfolioDetailPage from "./views/PortfolioDetailPage.vue";
 
 Vue.use(Router);
 export default new Router({
@@ -26,6 +26,7 @@ export default new Router({
     ChatPage,
     Repository,
     AdminPage,
+    PostWritePage,
     PortfolioDetailPage
   },
   mode: "history",
