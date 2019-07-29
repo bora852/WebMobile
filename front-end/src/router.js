@@ -8,6 +8,8 @@ import WritePortfolio from './views/WritePortfolioPage.vue'
 import Repository from './views/RepositoryPage.vue'
 import SignUpPage from './views/SignUpPage.vue'
 import ChatPage from './views/ChatPage.vue'
+import AdminPage from "./views/AdminPage.vue";
+import PostWritePage from "./views/PostWritePage.vue";
 import PortfolioDetailPage from './views/PortfolioDetailPage.vue'
 
 Vue.use(Router);
@@ -23,6 +25,7 @@ export default new Router({
     SignUpPage,
     ChatPage,
     Repository,
+    AdminPage,
     PortfolioDetailPage
   },
   mode: 'history',
@@ -71,6 +74,16 @@ export default new Router({
       path: '/chat',
       name: 'chat',
       component: ChatPage
+    },
+        {
+      path: "/admin",
+      name: "admin",
+      component: AdminPage
+    },
+    {
+      path: "/writePost",
+      name: "writePost",
+      component: PostWritePage
     }
   ]
 })
