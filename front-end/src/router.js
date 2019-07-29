@@ -10,6 +10,7 @@ import SignUpPage from "./views/SignUpPage.vue";
 import ChatPage from "./views/ChatPage.vue";
 import AdminPage from "./views/AdminPage.vue";
 import PostWritePage from "./views/PostWritePage.vue";
+import PortfolioDetailPage from "./views/PortfolioDetailPage.vue";
 
 Vue.use(Router);
 export default new Router({
@@ -24,7 +25,9 @@ export default new Router({
     SignUpPage,
     ChatPage,
     Repository,
-    AdminPage
+    AdminPage,
+    PostWritePage,
+    PortfolioDetailPage
   },
   mode: "history",
   base: process.env.BASE_URL,
@@ -43,6 +46,11 @@ export default new Router({
       path: "/portfolio",
       name: "portfolio",
       component: PortfolioPage
+    },
+    {
+      path: "/portfolioDetail",
+      name: "portfolioDetail",
+      component: PortfolioDetailPage
     },
     {
       path: "/login",

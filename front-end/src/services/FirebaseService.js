@@ -38,9 +38,19 @@ export default {
         return docSnapshots.docs.map(doc => {
           let data = doc.data();
           data.created_at = new Date(data.created_at.toDate());
+          data.id = doc.id;
           return data;
         });
       });
+  },
+  getPortfolioById(id) {
+    const postsCollection = firestore.collection(PORTFOLIOS).doc(id);
+    return postsCollection.get().then(docSnapshots => {
+      let data = docSnapshots.data();
+      data.created_at = new Date(data.created_at.toDate());
+      data.id = docSnapshots.id;
+      return data;
+    });
   },
   postPortfolio(title, body, img) {
     return firestore
