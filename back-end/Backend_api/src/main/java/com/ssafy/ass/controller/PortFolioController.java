@@ -45,7 +45,7 @@ public class PortFolioController {
 	}
 	
 	@RequestMapping(value = "/portUpdate", method = RequestMethod.PUT)
-	public HashMap<String, Object> portUpdate(@RequestParam int idx, @RequestParam String title, @RequestParam String body) throws Exception {
+	public HashMap<String, Object> portUpdate(@RequestParam int idx, @RequestParam String title, @RequestParam String body, @RequestParam String img) throws Exception {
 		
 		PortFolioDto port = new PortFolioDto();
 		port.setIdx(idx);

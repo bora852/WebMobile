@@ -30,6 +30,7 @@ public class PostController {
 		System.out.println("Post목록 : " + postService.findAllPosts());
 		return postService.findAllPosts();
 	}
+	
 	@RequestMapping(value = "/postSelect", method = RequestMethod.GET)
 	public PostDto postSelect(@RequestParam int idx) throws Exception {
 		System.out.println("Post Select : " + postService.serchPost(idx));
@@ -80,4 +81,7 @@ public class PostController {
 		cnt.setPostCount(postService.countPost());
 		return cnt;
 	}
+	
 }
+
+
