@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import FirebaseService from "@/services/FirebaseService";
+import UserService from "@/services/UserService";
 import Swal from "sweetalert2";
 
 export default {
@@ -60,10 +60,7 @@ export default {
   methods: {
     async submit() {
       if (this.password == this.confirm_password) {
-        var signUpSuccess = await FirebaseService.signUp(
-          this.email,
-          this.password
-        );
+        var signUpSuccess = await UserService.signUp(this.email, this.password);
         if (signUpSuccess) {
           this.$router.push("/");
         }
