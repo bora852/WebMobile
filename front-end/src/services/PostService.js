@@ -6,7 +6,6 @@ const URL = "http://192.168.100.87:8082/";
 export default {
   getList() {
     return axios.get(URL + "ass/api/postAll").then(response => {
-      // console.log(response.data);
       return response.data;
     });
   },
@@ -18,7 +17,6 @@ export default {
         }
       })
       .then(response => {
-        console.log(response.data);
         return response.data;
       });
   },
@@ -30,7 +28,6 @@ export default {
         }
       })
       .then(response => {
-        console.log(response.data);
         return response.data;
       });
   }

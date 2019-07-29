@@ -69,18 +69,17 @@ export default {
     watch_auth() {
       return this.$store.state.userAuth;
     },
-    dateFormating(postDate) {
-      console.log(this.posts[0].created_at);
-      console.log("dataFormating");
-      console.log("postDate", postDate);
-      var year = postDate.getFullYear();
-      var month = postDate.getMonth() + 1;
-      var day = postDate.getDate();
-      if (day < 10) {
-        day = "0" + day;
-      }
-      console.log(year + "" + month + "" + day);
-      return year + "" + month + "" + day;
+    dateFormating() {
+      return postDate => {
+        var curDate = new Date(postDate);
+        var year = curDate.getFullYear();
+        var month = curDate.getMonth() + 1;
+        var day = curDate.getDate();
+        if (day < 10) {
+          day = "0" + day;
+        }
+        return year + "/" + month + "/" + day;
+      };
     }
   },
   watch: {
