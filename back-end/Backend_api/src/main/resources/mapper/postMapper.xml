@@ -9,8 +9,8 @@
 		SELECT * FROM post WHERE idx=#{idx}
 	</select>
 	<insert id="addPost" parameterType="post"
-		useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO post VALUES (#{title},#{body},#{date},#{authority},#{User_id})
+		useGeneratedKeys="true">
+		INSERT INTO post VALUES (#{title},#{body},default,#{email},0)
 	</insert>
 	
 	<delete id="deletePost" parameterType="int">
@@ -18,7 +18,7 @@
 	</delete>
 	
 	<update id="updatePost" parameterType="post">
-		UPDATE post SET title=#{title},body=#{body} WHERE User_id=#{User_id}
+		UPDATE post SET title = #{title}, body = #{body}, created_at = default WHERE idx=#{idx};
 	</update>
 	<select id="countPost" resultType="int">
 		SELECT count(*) FROM post
