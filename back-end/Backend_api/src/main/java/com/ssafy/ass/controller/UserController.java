@@ -33,7 +33,7 @@ public class UserController {
 		return userService.searchOnceUser(email);
 	}
 
-	@RequestMapping(value = "/userDelect", method = RequestMethod.GET)
+	@RequestMapping(value = "/userDelect", method = RequestMethod.DELETE)
 	public HashMap<String, Object> userDelect(@RequestParam String email) throws Exception {
 		int res = userService.deleteUser(email);
 		HashMap<String, Object> result = new HashMap<>();
@@ -45,7 +45,7 @@ public class UserController {
 		return result;
 	}
 
-	@RequestMapping(value = "/userUpdate", method = RequestMethod.GET)
+	@RequestMapping(value = "/userUpdate", method = RequestMethod.PUT)
 	public HashMap<String, Object> userUpdate(@RequestParam String email, @RequestParam String authority) throws Exception {
 		System.out.println("1"+email+" : "+ authority);
 		UserDto user = new UserDto();
@@ -73,7 +73,7 @@ public class UserController {
 
 	}
 
-	@RequestMapping(value = "/userInsert", method = RequestMethod.GET)
+	@RequestMapping(value = "/userInsert", method = RequestMethod.POST)
 	public HashMap<String, Object> userInsert(@RequestBody UserDto user) throws Exception {
 		int res = userService.insertUser(user);
 		HashMap<String, Object> result = new HashMap<>();

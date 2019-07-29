@@ -7,7 +7,6 @@ public class PortFolioDto {
 	String title;
 	String body;
 	Date created_at;
-	String authority;
 	String img;
 	String email;
 	int idx;
@@ -30,12 +29,6 @@ public class PortFolioDto {
 	public void setCreated_at(Date created_at) {
 		this.created_at = created_at;
 	}
-	public String getAuthority() {
-		return authority;
-	}
-	public void setAuthority(String authority) {
-		this.authority = authority;
-	}
 	public String getImg() {
 		return img;
 	}
@@ -56,7 +49,6 @@ public class PortFolioDto {
 	}
 	@Override
 	public String toString() {
-		return "PortFolioDto [title=" + title + ", body=" + body + ", created_at=" + created_at + ", authority="
-				+ authority + ", img=" + img + ", email=" + email + ", idx=" + idx + "]";
+		return "PortFolioDto [title=" + title + ", body=" + body + ", created_at=" + created_at + ", img=" + img + ", email=" + email + ", idx=" + idx + "]";
 	}
 }
