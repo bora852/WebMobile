@@ -13,7 +13,7 @@
         :title="portfolios[i - 1].title"
         :body="portfolios[i - 1].body"
         :imgSrc="portfolios[i - 1].img"
-        :id="portfolios[i - 1].id"
+        :idx="portfolios[i - 1].idx"
       ></Portfolio>
     </v-flex>
 
@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import Portfolio from "@/components/Portfolio";
-import FirebaseService from "@/services/FirebaseService";
+import Portfolio from "./Portfolio";
+import PortfolioService from "../services/PortfolioService";
 
 export default {
   name: "PortfoliosList",
@@ -58,7 +58,9 @@ export default {
   },
   methods: {
     async getPortfolios() {
-      this.portfolios = await FirebaseService.getPortfolios();
+      //this.portfolios = await FirebaseService.getPortfolios();
+      this.portfolios = await PortfolioService.getList();
+      console.log("포토폴리오 : ",this.portfolios);
     },
     loadMorePortfolios() {
       this.count = this.count + 3;

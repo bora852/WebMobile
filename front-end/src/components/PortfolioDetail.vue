@@ -1,22 +1,28 @@
 <template>
   <div>
-    <h1>{{ portfolio.title }}</h1><!--display-3 font-weight-bold mb-4-->
+    <h1>{{ portfolio.title }}</h1>
     <p class="text-md-right">
-      <v-icon class="mr-1">date_range</v-icon> <!--{{ formatedDate }}-->
-      <v-icon class="mr-1">person</v-icon> 작성자
+      <v-icon class="mr-1">date_range</v-icon> {{ formatedDate }}
+      <v-icon>person</v-icon> {{ portfolio.email }}
     </p>
     <v-divider></v-divider>
     <div class="ImgPadding">
       <v-img :src="portfolio.img" aspect-ratio="3" contain></v-img>
       <Viewer :value="portfolio.body" />
     </div>
+    <v-btn color="warning" dark to="portfolioUpdate">
+      <v-icon size="20" class="mr-2">create</v-icon> 수정
+    </v-btn>
+    <v-btn color="warning" dark to="portfolioUpdate">
+      <v-icon size="20" class="mr-2">delete</v-icon> 삭제
+    </v-btn>
     <Comments></Comments>
   </div>
 </template>
 
 <script>
 import Comments from "@/components/Comments";
-import FirebaseService from "@/services/FirebaseService";
+import PortfolioService from "../services/PortfolioService";
 import "tui-editor/dist/tui-editor.css";
 import "tui-editor/dist/tui-editor-contents.css";
 import "codemirror/lib/codemirror.css";
@@ -34,24 +40,26 @@ export default {
     Viewer
   },
   computed: {
-    // formatedDate() {
-    //   return `${this.portfolio.created_at.getFullYear()}년 ${this.portfolio.created_at.getMonth()}월 ${this.portfolio.created_at.getDate()}일 ${this.portfolio.created_at.getHours()}:${this.portfolio.created_at.getMinutes()}`;
-    // }
+    formatedDate() {
+      let curDate = new Date(this.portfolio.created_at);
+      let year = curDate.getFullYear();
+      let month = curDate.getMonth() + 1;
+      let day = curDate.getDate();
+      if (day < 10) {
+        day = "0" + day;
+      }
+      return year + "/" + month + "/" + day;
+    }
   },
   mounted() {
     this.getPortfolioById();
   },
   methods: {
-    async getPortfolioById(){
-      this.portfolio = await FirebaseService.getPortfolioById(this.$route.query.id);
-      console.log("포토폴리오",this.portfolio);
+    async getPortfolioById() {
+      this.portfolio = await PortfolioService.select(this.$route.query.idx);
     }
   },
-  created(){
-     // this.datas = this.$store.state.portfolioData;
-     // console.log("가져왔니?",this.$route.query.id);
-
-  }
+  created() {}
 };
 </script>
 

@@ -2,7 +2,7 @@
   <div class="py-3">
     <v-layout>
       <v-flex xs10>
-        <h1 class="text_font">Portfolio Write</h1>
+        <h1 class="text_font">Portfolio Update</h1>
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-container>
             <v-flex px10 py10>
