@@ -6,7 +6,6 @@ const URL = "http://192.168.100.87:8082/";
 export default {
   getList() {
     return axios.get(URL + "ass/api/postAll").then(response => {
-      console.log(response.data);
       return response.data;
     });
   },
@@ -48,21 +47,20 @@ export default {
         }
       });
   },
-  updatePost(title, body, email, idx){
+  updatePost(title, body, idx){
     return axios
-      .post(URL + "ass/api/postUpdate", {
+      .put(URL + "ass/api/postUpdate", {
         title: title,
         body: body,
-        email: email
+        idx: idx
       })
       .then(response => {
-      console.log(response.data);
         return response.data;
       });
   },
   delete(idx) {
     return axios
-      .get(URL + "ass/api/postDelete", {
+      .delete(URL + "ass/api/postDelete", {
         params: {
           idx: idx
         }
