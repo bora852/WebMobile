@@ -33,8 +33,9 @@ public class UserController {
 		return userService.searchOnceUser(email);
 	}
 
-	@RequestMapping(value = "/userDelect", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/userDelete", method = RequestMethod.DELETE)
 	public HashMap<String, Object> userDelect(@RequestParam String email) throws Exception {
+		System.out.println("userdelete : " + email);
 		int res = userService.deleteUser(email);
 		HashMap<String, Object> result = new HashMap<>();
 		if (res > 0) {
@@ -46,10 +47,9 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/userUpdate", method = RequestMethod.PUT)
-	public HashMap<String, Object> userUpdate(@RequestParam String email, @RequestParam String authority) throws Exception {
-		System.out.println("1"+email+" : "+ authority);
-		UserDto user = new UserDto();
-		String user_authority = userService.searchOnceUser(email).getAuthority();
+	public HashMap<String, Object> userUpdate(@RequestBody UserDto user) throws Exception {
+		System.out.println("userupdate" + user);
+		String user_authority = userService.searchOnceUser(user.getEmail()).getAuthority();
 		System.out.println("2");
 		int res = -1;
 		HashMap<String, Object> result = new HashMap<>();
@@ -61,8 +61,8 @@ public class UserController {
 				return result;
 			}
 		}
-		user.setEmail(email);
-		user.setAuthority(authority);
+		user.setEmail(user.getEmail());
+		user.setAuthority(user.getAuthority());
 		System.out.println("4");
 		res = userService.updateUser(user);
 		if (res > 0) {
@@ -75,6 +75,7 @@ public class UserController {
 
 	@RequestMapping(value = "/userInsert", method = RequestMethod.POST)
 	public HashMap<String, Object> userInsert(@RequestBody UserDto user) throws Exception {
+		System.out.println("userinsert" + user);
 		int res = userService.insertUser(user);
 		HashMap<String, Object> result = new HashMap<>();
 		if (res > 0) {

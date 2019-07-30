@@ -6,10 +6,12 @@
       px-3
       :key="i"
     >
+
       <Post
         :date="dateFormating(posts[i - 1].created_at)"
         :title="posts[i - 1].title"
         :body="posts[i - 1].body"
+        :idx="posts[i-1].idx"
       ></Post>
       <v-divider></v-divider>
     </v-flex>
@@ -63,7 +65,8 @@ export default {
     },
     loadMorePosts() {
       this.count = this.count + 1;
-    }
+    },
+
   },
   computed: {
     watch_auth() {
