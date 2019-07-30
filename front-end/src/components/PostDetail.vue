@@ -16,6 +16,7 @@
           </p>
         </div>
         <v-btn
+          v-show="isAuthor()"
           @click="postEdit()"
           color="warning"
           flat
@@ -27,6 +28,7 @@
           >Edit post</v-btn
         >
         <v-btn
+          v-show="isAuthor()"
           @click="postDelete()"
           color="warning"
           flat
@@ -48,7 +50,7 @@ import "tui-editor/dist/tui-editor-contents.css";
 import "codemirror/lib/codemirror.css";
 import PostService from "@/services/PostService";
 export default {
-  name: "PortfolioDetail",
+  name: "PostDetail",
   data() {
     return {
       post: []
@@ -57,14 +59,28 @@ export default {
   created() {
     this.getPostById();
   },
+  computed: {
+    isAuthor: function() {
+      return this.chkAuthor;
+    }
+  },
   methods: {
+    chkAuthor() {
+      var email = this.$store.state.user;
+      var auth = this.$store.state.userAuth;
+      var result = false;
+      if (this.post.email == email || auth == "admin") {
+        result = true;
+      }
+      return result;
+    },
     async getPostById() {
       this.post = await PostService.select(this.$route.query.num);
     },
-    postEdit(){
-      this.$router.push("/postedit?num="+this.post.idx);
+    postEdit() {
+      this.$router.push("/postedit?num=" + this.post.idx);
     },
-    async postDelete(){
+    async postDelete() {
       await PostService.delete(this.post.idx);
       this.$router.push("/post");
     }
