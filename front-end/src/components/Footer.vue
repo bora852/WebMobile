@@ -3,8 +3,7 @@
     <v-card class="flex" flat tile>
       <v-card-title class="teal">
         <div id="openweathermap-widget-23"></div>
-        <div id="frogue-container" class="position-right-bottom" data-chatbot="ca2778bc-a8e5-4076-9543-40debed84c1f" data-user="rlagpqls123@gmail.com" data-init-key="value"></div>
-        <v-spacer></v-spacer>
+        <!-- <v-spacer></v-spacer> -->
       </v-card-title>
       <v-flex class="grey lighten-3 py-2 text-xs-center black--text xs12">
         &copy; <strong>NobleTuna</strong> {{ new Date().getFullYear() }}
@@ -40,16 +39,6 @@ window.myWidgetParam.push({
   var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(script, s);
 })();
-</script>
-
-<script>
-(function(d, s, id) {
-  var js,fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
-  js.src = "https:\/\/danbee.ai/js/plugins/frogue-embed/frogue-embed.min.js";
-  fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'frogue-embed'));
 </script>
 
 <style>

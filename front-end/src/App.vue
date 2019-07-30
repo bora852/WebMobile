@@ -1,6 +1,8 @@
 <template>
   <v-app>
     <go-top />
+    <ChatBot />
+
     <Header />
     <Alert />
     <BannerImg />
@@ -18,6 +20,7 @@ import Footer from "./components/Footer";
 import GoTop from "@inotom/vue-go-top";
 import Alert from "./components/BrowserAlert";
 import BannerImg from "./components/BannerImgSetup";
+import ChatBot from "./components/ChatBot"
 
 export default {
   name: "App",
@@ -26,7 +29,8 @@ export default {
     Footer,
     GoTop,
     Alert,
-    BannerImg
+    BannerImg,
+    ChatBot
   },
   store,
   data() {
