@@ -45,7 +45,7 @@ export default {
     passwordRules: {
       required: value => !!value || "Required.",
       min: v => v.length >= 6 || "Min 6 characters",
-      emailMatch: () => ('The email and password you entered don\'t match')
+      emailMatch: () => "The email and password you entered don't match"
     },
     emailRules: [
       v => !!v || "E-mail is required",

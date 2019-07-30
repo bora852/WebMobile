@@ -17,7 +17,7 @@ export default {
           "Offline",
           "알수없는 에러가 발생했습니다!\
           오프라인 데이터를 사용합니다.",
-          "warning",
+          "error",
           "Ok!"
         );
         return OfflineService.loadPostMemory();

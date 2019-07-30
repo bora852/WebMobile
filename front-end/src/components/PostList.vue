@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import SwalAlert from "./SwalAlert";
+import SwalAlert from "@/services/SwalAlert";
 import Post from "@/components/Post";
 import PostService from "@/services/PostService";
 
