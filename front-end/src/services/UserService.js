@@ -1,7 +1,6 @@
 import AuthService from "../services/AuthService";
 import firebase from "firebase/app";
 import "firebase/functions";
-import Swal from "sweetalert2";
 import { eventBus } from "../main.js";
 import store from "../store";
 import SwalAlert from "./SwalAlert";
@@ -28,12 +27,7 @@ export default {
       .signInWithPopup(provider)
       .then(function(result) {
         callSignInLog();
-        Swal.fire({
-          title: "Hello!",
-          text: "로그인 되었습니다.",
-          type: "success",
-          confirmButtonText: "Ok!"
-        });
+        SwalAlert.swatAlert("Hello!", "로그인 되었습니다.", "success", "Ok!");
         return result;
       })
       .catch(function(error) {
@@ -57,25 +51,24 @@ export default {
                       .then(user => {
                         user.linkWithCredential(error.credential);
                         callSignInLog();
-                        Swal.fire({
-                          title: "Hello!",
-                          text: "로그인 되었습니다.",
-                          type: "success",
-                          confirmButtonText: "Ok!"
-                        });
+                        SwalAlert.swatAlert(
+                          "Hello!",
+                          "로그인 되었습니다.",
+                          "success",
+                          "Ok!"
+                        );
                       });
                   });
               }
             });
         } else {
-          Swal.fire({
-            title: "Error!",
-            text:
-              "예기치 않은 문제가 발생했습니다. 관리자에게 문의바랍니다. ErrorCode : " +
+          SwalAlert.swatAlert(
+            "Error!",
+            "예기치 않은 문제가 발생했습니다. 관리자에게 문의바랍니다. ErrorCode : " +
               error.code,
-            type: "error",
-            confirmButtonText: "Ok!"
-          });
+            "error",
+            "Ok!"
+          );
         }
       });
   },
@@ -86,12 +79,7 @@ export default {
       .signInWithPopup(provider)
       .then(function(result) {
         callSignInLog();
-        Swal.fire({
-          title: "Hello!",
-          text: "로그인 되었습니다.",
-          type: "success",
-          confirmButtonText: "Ok!"
-        });
+        SwalAlert.swatAlert("Hello!", "로그인 되었습니다.", "success", "Ok!");
         return result;
       })
       .catch(function(error) {
@@ -115,25 +103,24 @@ export default {
                       .then(user => {
                         user.linkWithCredential(error.credential);
                         callSignInLog();
-                        Swal.fire({
-                          title: "Hello!",
-                          text: "로그인 되었습니다.",
-                          type: "success",
-                          confirmButtonText: "Ok!"
-                        });
+                        SwalAlert.swatAlert(
+                          "Hello!",
+                          "로그인 되었습니다.",
+                          "success",
+                          "Ok!"
+                        );
                       });
                   });
               }
             });
         } else {
-          Swal.fire({
-            title: "Error!",
-            text:
-              "예기치 않은 문제가 발생했습니다. 관리자에게 문의바랍니다. ErrorCode : " +
+          SwalAlert.swatAlert(
+            "Error!",
+            "예기치 않은 문제가 발생했습니다. 관리자에게 문의바랍니다. ErrorCode : " +
               error.code,
-            type: "error",
-            confirmButtonText: "Ok!"
-          });
+            "error",
+            "Ok!"
+          );
         }
       });
   },
@@ -216,12 +203,12 @@ export default {
       .signOut()
       .then(function() {
         store.state.userAuth = "";
-        Swal.fire({
-          title: "Bye Bye!",
-          text: "로그아웃 되었습니다.",
-          type: "success",
-          confirmButtonText: "Ok!"
-        });
+        SwalAlert.swatAlert(
+          "Bye Bye!",
+          "로그아웃 되었습니다.",
+          "success",
+          "Ok!"
+        );
         eventBus.$emit("logOut", "value");
       })
       .catch(function() {});
@@ -233,12 +220,7 @@ export default {
       .then(function(result) {
         eventBus.$emit("popUpLogin", "value");
         callSignInLog();
-        Swal.fire({
-          title: "Hello!",
-          text: "로그인 되었습니다.",
-          type: "success",
-          confirmButtonText: "Ok!"
-        });
+        SwalAlert.swatAlert("Hello!", "로그인 되었습니다.", "success", "Ok!");
         return result;
       })
       .catch(function(error) {
@@ -247,21 +229,20 @@ export default {
           errorCode === "auth/wrong-password" ||
           errorCode === "auth/invalid-email"
         ) {
-          Swal.fire({
-            title: "Error!",
-            text: "이메일과 패스워드를 다시 확인해주세요!",
-            type: "error",
-            confirmButtonText: "Ok!"
-          });
+          SwalAlert.swatAlert(
+            "Error!",
+            "이메일과 패스워드를 다시 확인해주세요!",
+            "error",
+            "Ok!"
+          );
         } else {
-          Swal.fire({
-            title: "Error!",
-            text:
-              "예기치 않은 문제가 발생했습니다. 관리자에게 문의바랍니다. ErrorCode : " +
+          SwalAlert.swatAlert(
+            "Error!",
+            "예기치 않은 문제가 발생했습니다. 관리자에게 문의바랍니다. ErrorCode : " +
               error.code,
-            type: "error",
-            confirmButtonText: "Ok!"
-          });
+            "error",
+            "Ok!"
+          );
         }
       });
   }
