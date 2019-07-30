@@ -203,6 +203,7 @@ export default {
       .signOut()
       .then(function() {
         store.state.userAuth = "";
+        store.state.user = "";
         SwalAlert.swatAlert(
           "Bye Bye!",
           "로그아웃 되었습니다.",

@@ -43,7 +43,6 @@ export default {
   },
   methods: {
     detailpost() {
-      console.log("post 응답 : ",this.idx);
       this.$router.push("/postdetail?num="+this.idx);
     }
   },
