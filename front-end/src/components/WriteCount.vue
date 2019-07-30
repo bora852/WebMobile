@@ -38,10 +38,10 @@ export default {
     return {
       options,
       chartData: {
-        labels: ["Post", "Portfolio"],
+        labels: ["Portfolio", "Post"],
         datasets: [
           {
-            backgroundColor: ["orange", "yellow"],
+            backgroundColor: ["yellow", "orange"],
             data: []
           }
         ]
@@ -50,8 +50,13 @@ export default {
   },
   created: async function() {
     var counts = await AuthService.getCounts();
-    this.chartData.datasets[0].data = [counts.postCount, counts.portfolioCount];
-    this.$refs.count_chart.render();
+    if (counts != null) {
+      this.chartData.datasets[0].data = [
+        counts.portfolioCount,
+        counts.postCount
+      ];
+      this.$refs.count_chart.render();
+    }
   }
 };
 </script>

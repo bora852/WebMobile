@@ -75,8 +75,22 @@ export default {
       .catch(() => {});
   },
   getCounts() {
-    var result = { postCount: 100, portfolioCount: 5 };
-    return result;
+    return axios
+      .get(URL + "ass/api/counting")
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => {
+        SwalAlert.swatAlert(
+          "Error",
+          "게시물 숫자를 가져오는데 에러가 발생했습니다!\
+          (" +
+            error.response +
+            ")",
+          "error",
+          "Ok!"
+        );
+      });
   },
   userAuthInsert(email) {
     return axios
