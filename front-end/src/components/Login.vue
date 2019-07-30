@@ -87,19 +87,23 @@ export default {
       this.dialog = false;
       this.$router.push("signup");
     },
-    login() {
-      UserService.signIn(this.email, this.password);
+    async login() {
+      const result = await UserService.signIn(this.email, this.password);
+      if (result != null) {
+        this.$store.state.user = result.user.email;
+        this.dialog = false;
+      }
     },
     async loginGoogle() {
       const result = await UserService.loginWithGoogle();
       this.$store.state.accessToken = result.credential.accessToken;
-      this.$store.state.user = result.user;
+      this.$store.state.user = result.user.email;
       this.dialog = false;
     },
     async loginFacebook() {
       const result = await UserService.loginWithFacebook();
       this.$store.state.accessToken = result.credential.accessToken;
-      this.$store.state.user = result.user;
+      this.$store.state.user = result.user.email;
       this.dialog = false;
     }
   }

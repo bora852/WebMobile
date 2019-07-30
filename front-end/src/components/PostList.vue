@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import SwalAlert from "@/services/SwalAlert";
 import Post from "@/components/Post";
 import PostService from "@/services/PostService";
 
@@ -48,7 +49,7 @@ export default {
   },
   data() {
     return {
-      isWriter: null,
+      isWriter: false,
       posts: [],
       count: this.limits
     };
@@ -58,10 +59,26 @@ export default {
   },
   mounted() {
     this.getPosts();
+    if (
+      this.$store.state.userAuth == "admin" ||
+      this.$store.state.userAuth == "team"
+    ) {
+      this.isWriter = true;
+    }
   },
   methods: {
     async getPosts() {
-      this.posts = await PostService.getList();
+      var data = await PostService.getList();
+      if (data != null) {
+        this.posts = data;
+      } else {
+        SwalAlert.swatAlert(
+          "Error",
+          "데이터를 불러오는데 실패했습니다.",
+          "error",
+          "Ok!"
+        );
+      }
     },
     loadMorePosts() {
       this.count = this.count + 1;

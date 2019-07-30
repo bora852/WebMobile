@@ -1,9 +1,9 @@
 import AuthService from "../services/AuthService";
 import firebase from "firebase/app";
 import "firebase/functions";
-import Swal from "sweetalert2";
 import { eventBus } from "../main.js";
 import store from "../store";
+import SwalAlert from "./SwalAlert";
 
 const config = {
   projectId: "webmobileproject-2d658",
@@ -26,13 +26,8 @@ export default {
       .auth()
       .signInWithPopup(provider)
       .then(function(result) {
-        callSignInLog({}).then(function() {});
-        Swal.fire({
-          title: "Hello!",
-          text: "로그인 되었습니다.",
-          type: "success",
-          confirmButtonText: "Ok!"
-        });
+        callSignInLog();
+        SwalAlert.swatAlert("Hello!", "로그인 되었습니다.", "success", "Ok!");
         return result;
       })
       .catch(function(error) {
@@ -55,26 +50,25 @@ export default {
                       .signInWithCredential(result.credential)
                       .then(user => {
                         user.linkWithCredential(error.credential);
-                        callSignInLog({}).then(function() {});
-                        Swal.fire({
-                          title: "Hello!",
-                          text: "로그인 되었습니다.",
-                          type: "success",
-                          confirmButtonText: "Ok!"
-                        });
+                        callSignInLog();
+                        SwalAlert.swatAlert(
+                          "Hello!",
+                          "로그인 되었습니다.",
+                          "success",
+                          "Ok!"
+                        );
                       });
                   });
               }
             });
         } else {
-          Swal.fire({
-            title: "Error!",
-            text:
-              "예기치 않은 문제가 발생했습니다. 관리자에게 문의바랍니다. ErrorCode : " +
+          SwalAlert.swatAlert(
+            "Error!",
+            "예기치 않은 문제가 발생했습니다. 관리자에게 문의바랍니다. ErrorCode : " +
               error.code,
-            type: "error",
-            confirmButtonText: "Ok!"
-          });
+            "error",
+            "Ok!"
+          );
         }
       });
   },
@@ -84,13 +78,8 @@ export default {
       .auth()
       .signInWithPopup(provider)
       .then(function(result) {
-        callSignInLog({}).then(function() {});
-        Swal.fire({
-          title: "Hello!",
-          text: "로그인 되었습니다.",
-          type: "success",
-          confirmButtonText: "Ok!"
-        });
+        callSignInLog();
+        SwalAlert.swatAlert("Hello!", "로그인 되었습니다.", "success", "Ok!");
         return result;
       })
       .catch(function(error) {
@@ -113,86 +102,93 @@ export default {
                       .signInWithCredential(result.credential)
                       .then(user => {
                         user.linkWithCredential(error.credential);
-                        callSignInLog({}).then(function() {});
-                        Swal.fire({
-                          title: "Hello!",
-                          text: "로그인 되었습니다.",
-                          type: "success",
-                          confirmButtonText: "Ok!"
-                        });
+                        callSignInLog();
+                        SwalAlert.swatAlert(
+                          "Hello!",
+                          "로그인 되었습니다.",
+                          "success",
+                          "Ok!"
+                        );
                       });
                   });
               }
             });
         } else {
-          Swal.fire({
-            title: "Error!",
-            text:
-              "예기치 않은 문제가 발생했습니다. 관리자에게 문의바랍니다. ErrorCode : " +
+          SwalAlert.swatAlert(
+            "Error!",
+            "예기치 않은 문제가 발생했습니다. 관리자에게 문의바랍니다. ErrorCode : " +
               error.code,
-            type: "error",
-            confirmButtonText: "Ok!"
-          });
+            "error",
+            "Ok!"
+          );
         }
       });
   },
-  signUp(email, password) {
-    return firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(function() {
-        Swal.fire({
-          title: "Welcome!",
-          text: email + "님 가입을 환영합니다!",
-          type: "success",
-          confirmButtonText: "Ok!"
-        });
-        callSignUpLog({}).then(function() {});
-        callSignInLog({}).then(function() {});
-        store.state.userAuth = "guest";
-        return true;
-      })
-      .catch(function(error) {
-        var errorCode = error.code;
-        if (errorCode == "auth/weak-password") {
-          Swal.fire({
-            title: "Warning!",
-            text: "패스워드가 취약합니다.",
-            type: "warning",
-            confirmButtonText: "Ok!"
-          });
-        } else if (error.code === "auth/email-already-in-use") {
-          Swal.fire({
-            title: "Error!",
-            text: "이미 존재하는 이메일입니다.",
-            type: "error",
-            confirmButtonText: "Ok!"
-          });
-        } else if (error.code === "auth/invalid-email") {
-          Swal.fire({
-            title: "Error!",
-            text: "이메일을 정확히 입력해주세요.",
-            type: "error",
-            confirmButtonText: "Ok!"
-          });
-        } else {
-          Swal.fire({
-            title: "Error!",
-            text:
+  async signUp(email, password) {
+    // 디비에 권한먼저 등록
+    var DBConnect = await AuthService.userAuthInsert(email);
+    if (DBConnect != null && DBConnect.data.state == 1) {
+      return firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(function() {
+          SwalAlert.swatAlert(
+            "Welcome",
+            email + "님 가입을 환영합니다!",
+            "success",
+            "OK!"
+          );
+          callSignUpLog();
+          callSignInLog();
+          store.state.userAuth = "guest";
+          return true;
+        })
+        .catch(async function(error) {
+          // 파이어베이스 계정 등록 실패시 DB에서 권한삭제
+          var errorCode = error.code;
+          if (errorCode == "auth/weak-password") {
+            await AuthService.userDelete(email);
+            SwalAlert.swatAlert(
+              "Warning!",
+              "패스워드가 취약합니다.",
+              "warning",
+              "Ok!"
+            );
+          } else if (error.code === "auth/email-already-in-use") {
+            SwalAlert.swatAlert(
+              "Error!",
+              "이미 존재하는 이메일입니다.",
+              "error",
+              "Ok!"
+            );
+          } else if (error.code === "auth/invalid-email") {
+            await AuthService.userDelete(email);
+            SwalAlert.swatAlert(
+              "Error!",
+              "이메일을 정확히 입력해주세요.",
+              "error",
+              "Ok!"
+            );
+          } else {
+            await AuthService.userDelete(email);
+            SwalAlert.swatAlert(
+              "Error!",
               "예기치 않은 문제가 발생했습니다. 관리자에게 문의바랍니다. ErrorCode : " +
-              error.code,
-            type: "error",
-            confirmButtonText: "Ok!"
-          });
-        }
-      });
+                error.code,
+              "error",
+              "Ok!"
+            );
+          }
+        });
+    }
+    return false;
   },
   loginChk() {
     return firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         eventBus.$emit("getUserId", user.email);
         store.state.user = user.email;
-        AuthService.authChk();
+        AuthService.authChk(user.email);
         return user.email;
       } else {
         store.state.userAuth = "";
@@ -201,35 +197,31 @@ export default {
     });
   },
   logOut() {
-    callSignOutLog({}).then(function() {});
+    callSignOutLog();
     firebase
       .auth()
       .signOut()
       .then(function() {
         store.state.userAuth = "";
-        Swal.fire({
-          title: "Bye Bye!",
-          text: "로그아웃 되었습니다.",
-          type: "success",
-          confirmButtonText: "Ok!"
-        });
+        SwalAlert.swatAlert(
+          "Bye Bye!",
+          "로그아웃 되었습니다.",
+          "success",
+          "Ok!"
+        );
         eventBus.$emit("logOut", "value");
       })
       .catch(function() {});
   },
   signIn(email, password) {
-    firebase
+    return firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(function() {
+      .then(function(result) {
         eventBus.$emit("popUpLogin", "value");
-        callSignInLog({}).then(function() {});
-        Swal.fire({
-          title: "Hello!",
-          text: "로그인 되었습니다.",
-          type: "success",
-          confirmButtonText: "Ok!"
-        });
+        callSignInLog();
+        SwalAlert.swatAlert("Hello!", "로그인 되었습니다.", "success", "Ok!");
+        return result;
       })
       .catch(function(error) {
         var errorCode = error.code;
@@ -237,21 +229,20 @@ export default {
           errorCode === "auth/wrong-password" ||
           errorCode === "auth/invalid-email"
         ) {
-          Swal.fire({
-            title: "Error!",
-            text: "이메일과 패스워드를 다시 확인해주세요!",
-            type: "error",
-            confirmButtonText: "Ok!"
-          });
+          SwalAlert.swatAlert(
+            "Error!",
+            "이메일과 패스워드를 다시 확인해주세요!",
+            "error",
+            "Ok!"
+          );
         } else {
-          Swal.fire({
-            title: "Error!",
-            text:
-              "예기치 않은 문제가 발생했습니다. 관리자에게 문의바랍니다. ErrorCode : " +
+          SwalAlert.swatAlert(
+            "Error!",
+            "예기치 않은 문제가 발생했습니다. 관리자에게 문의바랍니다. ErrorCode : " +
               error.code,
-            type: "error",
-            confirmButtonText: "Ok!"
-          });
+            "error",
+            "Ok!"
+          );
         }
       });
   }
