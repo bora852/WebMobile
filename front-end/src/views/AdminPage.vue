@@ -20,7 +20,8 @@ export default {
   },
   created: async function() {
     eventBus.$emit("sendTitle", "Admin");
-    var auth = await AuthService.authChk();
+    var curEmail = this.$store.state.user;
+    var auth = await AuthService.authChk(curEmail);
     if (auth != "admin") {
       SwalAlert.swatAlert("Error", "잘못된 접근입니다.", "error", "OK!");
       this.$router.push("/");
