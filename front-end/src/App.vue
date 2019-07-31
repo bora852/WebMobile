@@ -1,8 +1,7 @@
 <template>
   <v-app>
-    <go-top />
+    <go-top right="22px" :size="60"/>
     <ChatBot />
-
     <Header />
     <Alert />
     <BannerImg />
