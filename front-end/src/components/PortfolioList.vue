@@ -58,12 +58,10 @@ export default {
   },
   methods: {
     async getPortfolios() {
-      //this.portfolios = await FirebaseService.getPortfolios();
       this.portfolios = await PortfolioService.getList();
-      console.log("포토폴리오 : ",this.portfolios);
     },
     loadMorePortfolios() {
-      this.count = this.count + 3;
+      this.count = this.count + 6;
     }
   }
 };

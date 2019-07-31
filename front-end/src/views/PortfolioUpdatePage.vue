@@ -1,10 +1,9 @@
 <template>
   <div>
     <v-container>
-      <!-- PortfolioDetail -->
       <v-layout>
         <v-flex xs12 data-aos="fade-right">
-          <PortfolioDetail></PortfolioDetail>
+          <PortfolioUpdate></PortfolioUpdate>
         </v-flex>
       </v-layout>
     </v-container>
@@ -12,13 +11,13 @@
 </template>
 
 <script>
-import PortfolioDetail from "../components/PortfolioDetail";
+import PortfolioUpdate from "../components/PortfolioUpdate";
 import { eventBus } from "../main.js";
 
 export default {
-  name: "PortfolioPage",
+  name: "PortfolioUpdatePage",
   components: {
-    PortfolioDetail
+    PortfolioUpdate
   },
   created() {
     eventBus.$emit("sendTitle", "PortfolioDetail");

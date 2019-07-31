@@ -31,7 +31,7 @@ export default {
       type: String
     },
     idx: {
-      type: String
+      type: Number
     }
   },
   data() {
@@ -48,12 +48,7 @@ export default {
   },
   methods: {
     sendPortfolioData: function() {
-      console.log("idx : ",this.idx);
-      // this.$store.state.portfolioData = this.date;
-      // this.$store.state.portfolioTitle = this.thisTitle;
-      // this.$store.state.portfolioBody = this.thisBody;
-      // this.$store.state.portfolioImgSrc = this.imgSrc;
-      this.$router.push("/portfolioDetail?idx="+this.idx);
+      this.$router.push("/portfolioDetail?idx=" + this.idx);
     }
   },
   created() {

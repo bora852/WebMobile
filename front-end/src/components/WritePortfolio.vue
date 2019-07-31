@@ -89,7 +89,6 @@ export default {
         SwalAlert.swatAlert("Error!", "사진을 등록해주세요!", "error", "Ok!");
       } else {
         var isPost = await PortfolioService.postPortfolio(
-        //var isPost = await FirebaseService.postPortfolio(
           this.title,
           this.body,
           this.$store.state.user,

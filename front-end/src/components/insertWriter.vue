@@ -45,6 +45,11 @@ if (token) authorization = "Bearer " + token;
 else authorization = "Client-ID " + clientId;
 
 export default {
+  props: {
+    sendImg: {
+      type: String
+    }
+  },
   name: "attachimg",
   components: {},
   data: function() {
@@ -145,6 +150,14 @@ export default {
         this.imageFile = "";
         this.imageUrl = "";
       }
+    }
+  },
+  watch: {
+    sendImg: function() {
+      var tempVue = this;
+      tempVue.$emit("FolioImgLink", this.sendImg);
+      tempVue.imglink = this.sendImg;
+      tempVue.$refs.myFileInputForm.reset();
     }
   }
 };

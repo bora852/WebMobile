@@ -8,7 +8,7 @@ export default {
       return response.data;
     });
   },
-  select(idx) {
+  getPortfolio(idx) {
     return axios
       .get(URL + "ass/api/portSelect", {
         params: {
@@ -31,9 +31,10 @@ export default {
         return response.data.state;
       });
   },
-  updatePortfolio(title, body, email, img) {
+  updatePortfolio(idx, title, body, img) {
     return axios
       .put(URL + "ass/api/portUpdate", {
+        idx: idx,
         title: title,
         body: body,
         img: img

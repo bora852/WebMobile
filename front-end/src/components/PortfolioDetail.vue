@@ -1,21 +1,33 @@
 <template>
   <div>
     <h1>{{ portfolio.title }}</h1>
-    <p class="text-md-right">
+    <div class="text-md-right">
       <v-icon class="mr-1">date_range</v-icon> {{ formatedDate }}
       <v-icon>person</v-icon> {{ portfolio.email }}
-    </p>
+    </div>
     <v-divider></v-divider>
     <div class="ImgPadding">
       <v-img :src="portfolio.img" aspect-ratio="3" contain></v-img>
       <Viewer :value="portfolio.body" />
     </div>
-    <v-btn color="warning" dark to="portfolioUpdate">
-      <v-icon size="20" class="mr-2">create</v-icon> 수정
-    </v-btn>
-    <v-btn color="warning" dark to="portfolioUpdate">
-      <v-icon size="20" class="mr-2">delete</v-icon> 삭제
-    </v-btn>
+    <div class="text-md-right text-xs-center">
+      <v-btn
+        v-show="isAuthor()"
+        color="warning"
+        @click="portfolioUpdate()"
+        dark
+      >
+        <v-icon size="20" class="mr-2">create</v-icon> 수정
+      </v-btn>
+      <v-btn
+        v-show="isAuthor()"
+        color="warning"
+        @click="portfolioDelete()"
+        dark
+      >
+        <v-icon size="20" class="mr-2">delete</v-icon> 삭제
+      </v-btn>
+    </div>
     <Comments></Comments>
   </div>
 </template>
@@ -40,6 +52,9 @@ export default {
     Viewer
   },
   computed: {
+    isAuthor: function() {
+      return this.chkAuthor;
+    },
     formatedDate() {
       let curDate = new Date(this.portfolio.created_at);
       let year = curDate.getFullYear();
@@ -56,7 +71,25 @@ export default {
   },
   methods: {
     async getPortfolioById() {
-      this.portfolio = await PortfolioService.select(this.$route.query.idx);
+      this.portfolio = await PortfolioService.getPortfolio(
+        this.$route.query.idx
+      );
+    },
+    chkAuthor() {
+      let email = this.$store.state.user;
+      let auth = this.$store.state.userAuth;
+      let result = false;
+      if (this.portfolio.email == email || auth == "admin") {
+        result = true;
+      }
+      return result;
+    },
+    portfolioUpdate() {
+      this.$router.push("/portfolioUpdate?idx=" + this.portfolio.idx);
+    },
+    async portfolioDelete() {
+      await PortfolioService.delete(this.$route.query.idx);
+      this.$router.push("/portfolio");
     }
   },
   created() {}
