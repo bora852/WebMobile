@@ -13,7 +13,7 @@
         :title="portfolios[i - 1].title"
         :body="portfolios[i - 1].body"
         :imgSrc="portfolios[i - 1].img"
-        :id="portfolios[i - 1].id"
+        :idx="portfolios[i - 1].idx"
       ></Portfolio>
     </v-flex>
 
@@ -21,7 +21,7 @@
       <v-btn color="warning" dark v-on:click="loadMorePortfolios">
         <v-icon size="25" class="mr-2">fa-plus</v-icon> View more
       </v-btn>
-      <v-btn color="warning" dark to="writePortfolio">
+      <v-btn color="warning" dark to="writePortfolio" v-show="isWriter">
         <v-icon size="25" class="mr-2">fa-edit</v-icon> writePortfolio
       </v-btn>
     </v-flex>
@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import Portfolio from "@/components/Portfolio";
-import FirebaseService from "@/services/FirebaseService";
+import Portfolio from "./Portfolio";
+import PortfolioService from "../services/PortfolioService";
 
 export default {
   name: "PortfoliosList",
@@ -46,6 +46,7 @@ export default {
   },
   data() {
     return {
+      isWriter: false,
       portfolios: [],
       count: this.limits
     };
@@ -55,13 +56,28 @@ export default {
   },
   mounted() {
     this.getPortfolios();
+    if (
+      this.$store.state.userAuth == "admin" ||
+      this.$store.state.userAuth == "team"
+    ) {
+      this.isWriter = true;
+    }
   },
   methods: {
     async getPortfolios() {
-      this.portfolios = await FirebaseService.getPortfolios();
+      this.portfolios = await PortfolioService.getList();
     },
     loadMorePortfolios() {
-      this.count = this.count + 3;
+      this.count = this.count + 6;
+    }
+  },
+  watch: {
+    watch_auth(auth) {
+      if (auth == "admin" || auth == "team") {
+        this.isWriter = true;
+      } else {
+        this.isWriter = false;
+      }
     }
   }
 };
