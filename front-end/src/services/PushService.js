@@ -1,10 +1,11 @@
 import firebase from "firebase/app";
-import store from "../store";
 import "firebase/database";
 import "firebase/messaging";
+import axios from "axios";
+import store from "../store";
 
+const URL = "http://192.168.100.87:8082/";
 const messaging = firebase.messaging();
-messaging.requestPermission();
 
 export default {
   getFCMToken() {
@@ -13,31 +14,17 @@ export default {
       .then(() => messaging.getToken())
       .then(token => {
         if (token != null) {
-          var email = store.state.user;
-          firebase
-            .database()
-            .ref("FCM")
-            .child(this.encodeUserEmail(email))
-            .set(token);
+          axios.post(URL + "ass/api/***", {
+            email: store.state.user,
+            token: token
+          });
+        } else {
+          console.log("firebase Error (token is null)")
         }
       })
-      // "FCMId/" + this.encodeUserEmail(email)
       .catch(error => {
         console.log("token save Error");
         console.log(error)
       });
-  },
-  encodeUserEmail(email) {
-    return email.replace(".", ",");
-  },
-  decodeUserEmail(email) {
-    return email.replace(",", ".");
   }
 };
-// Notification.requestPermission().then(function(permission) {
-//   if (permission === "granted") {
-//     console.log("Notification permission granted.");
-//   } else {
-//     console.log('Unable to get permission to notify.');
-//   }
-// });
