@@ -91,8 +91,7 @@ export default {
       await PortfolioService.delete(this.$route.query.idx);
       this.$router.push("/portfolio");
     }
-  },
-  created() {}
+  }
 };
 </script>
 
