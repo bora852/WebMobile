@@ -29,7 +29,7 @@
       </v-form>
       <v-flex px10 py10>
         <v-btn color="warning" dark @click.stop="submit()" class="float-right"
-          >Submit</v-btn
+          >수정완료</v-btn
         >
       </v-flex>
     </v-flex>
@@ -42,12 +42,13 @@ import PostService from "@/services/PostService";
 import SwalAlert from "../services/SwalAlert";
 
 export default {
-  name: "WritePost",
+  name: "PostEdit",
   components: {},
   data: () => ({
     idx: "",
     body: "",
     title: "",
+    post: [],
     valid: true,
     titleRules: [
       v => !!v || "제목을 입력해주세요!",
@@ -55,7 +56,9 @@ export default {
     ],
     linkeddata: ""
   }),
-  created() {},
+  created() {
+    this.getPostById();
+  },
   methods: {
     async submit() {
       if (this.title == "") {
@@ -63,16 +66,22 @@ export default {
       } else if (this.body == "") {
         SwalAlert.swatAlert("Error!", "내용을 입력해주세요!", "error", "Ok!");
       } else {
-        console.log("user",this.$store.state.user);
-        var isPost = await PostService.postPost(
+        var isPost = await PostService.updatePost(
           this.title,
           this.body,
-          this.$store.state.user
+          this.idx
         );
-        // console.log(isPost);
-        if (isPost == "success") {
+        if (isPost.state == 1) {
           this.$router.push("post");
         }
+      }
+    },
+    async getPostById() {
+      if (this.$route.query.num != null) {
+        this.post = await PostService.select(this.$route.query.num);
+        this.title = this.post.title;
+        this.body = this.post.body;
+        this.idx = this.post.idx;
       }
     }
   }

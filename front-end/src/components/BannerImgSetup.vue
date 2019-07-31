@@ -29,7 +29,7 @@ export default {
   data() {
     return {
       imgUrl: "https://source.unsplash.com/random",
-      bannerText: "자"
+      bannerText: ""
     };
   },
   methods: {

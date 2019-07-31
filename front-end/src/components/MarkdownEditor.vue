@@ -10,6 +10,7 @@
     </v-layout>
   </v-container>
 </template>
+
 <script>
 import "tui-editor/dist/tui-editor.css";
 import "tui-editor/dist/tui-editor-contents.css";

@@ -1,4 +1,5 @@
 <template>
+  <v-card style="cursor:pointer" @click ="detailpost">
   <v-layout py-4 h-100>
     <v-flex row>
       <div class="caption">{{ formatedDate }}</div>
@@ -10,8 +11,10 @@
       >
         {{ thisBody }}
       </p>
+      <!-- <div visibility= 'hidden'>{{idx}}</div> -->
     </v-flex>
   </v-layout>
+</v-card>
 </template>
 
 <script>
@@ -28,12 +31,19 @@ export default {
     },
     body: {
       type: String
+    },
+    idx :{
+      type: Number
     }
   },
   computed: {
     formatedDate() {
-      console.log(this.date);
       return this.date;
+    }
+  },
+  methods: {
+    detailpost() {
+      this.$router.push("/postdetail?num="+this.idx);
     }
   },
   created() {
@@ -70,6 +80,7 @@ export default {
     return {
       thisTitle: "",
       thisBody: "",
+      thisidx: 0,
       fromLang: "ko",
       toLang: "en"
     };

@@ -3,23 +3,19 @@
 <mapper namespace="com.ssafy.ass.dao.PortFolioMapper">
 
 	<select id="searchAllPort" resultType="portfolio">
-		select * from portfolio;
+		SELECT * FROM portfolio ORDER BY idx DESC;
 	</select>
-	
 	<select id="searchOncePort" parameterType="int" resultType="portfolio">
-		select * from portfolio where idx=#{idx};
+		SELECT * FROM portfolio WHERE idx=#{idx};
 	</select>
-
 	<delete id="deletePort"  parameterType="int">
-		delete form portfolio where idx=#{idx};
+		DELETE FROM portfolio WHERE idx=#{idx};
 	</delete>
-	
 	<update id="updatePort" parameterType="portfolio">
-		update portfolio set title = #{title}, body = #{body}, created_at = default where idx=#{idx}; 
+		UPDATE portfolio SET title = #{title}, body = #{body}, created_at = default, img=#{img} WHERE idx=#{idx}; 
 	</update>
-	
 	<insert id="insertPort" parameterType="portfolio">
-	insert into portfolio  values (#{title}, #{body}, default, #{authority}, #{email}, 0);
+		INSERT INTO portfolio  values (#{title}, #{body}, default,#{img} ,#{email}, 0);
 	</insert>
 	<select id="countPortfolio" resultType="int">
 		SELECT count(*) FROM portfolio

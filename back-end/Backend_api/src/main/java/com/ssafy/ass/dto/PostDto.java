@@ -6,7 +6,6 @@ public class PostDto {
 	String title;
 	String body;
 	Date created_at;
- 	String authority;
  	String email;
  	int idx;
 	public String getTitle() {
@@ -27,12 +26,6 @@ public class PostDto {
 	public void setCreated_at(Date created_at) {
 		this.created_at = created_at;
 	}
-	public String getAuthority() {
-		return authority;
-	}
-	public void setAuthority(String authority) {
-		this.authority = authority;
-	}
 	public String getEmail() {
 		return email;
 	}
@@ -47,7 +40,7 @@ public class PostDto {
 	}
 	@Override
 	public String toString() {
-		return "PostDto [title=" + title + ", body=" + body + ", created_at=" + created_at + ", authority=" + authority
+		return "PostDto [title=" + title + ", body=" + body + ", created_at=" + created_at
 				+ ", email=" + email + ", idx=" + idx + "]";
 	}
  	

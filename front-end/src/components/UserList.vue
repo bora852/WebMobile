@@ -52,7 +52,6 @@
           :total-visible="5"
         ></v-pagination>
       </div>
-
     </div>
   </div>
 </template>

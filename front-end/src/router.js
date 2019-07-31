@@ -12,6 +12,8 @@ import AdminPage from "./views/AdminPage.vue";
 import PostWritePage from "./views/PostWritePage.vue";
 import PortfolioDetailPage from "./views/PortfolioDetailPage.vue";
 import PortfolioUpdatePage from "./views/PortfolioUpdatePage.vue";
+import PostDetailPage from "./views/PostDetailPage.vue";
+import PostEditPage from "./views/PostEditPage.vue";
 
 Vue.use(Router);
 export default new Router({
@@ -29,7 +31,9 @@ export default new Router({
     AdminPage,
     PostWritePage,
     PortfolioDetailPage,
-    PortfolioUpdatePage
+    PortfolioUpdatePage,
+    PostDetailPage,
+    PostEditPage
   },
   mode: "history",
   base: process.env.BASE_URL,
@@ -93,6 +97,16 @@ export default new Router({
       path: "/portfolioUpdate",
       name: "portfolioUpdate",
       component: PortfolioUpdatePage
+    },
+    {
+      path: "/postdetail",
+      name: "postdetail",
+      component: PostDetailPage
+    },
+    {
+      path: "/postedit",
+      name: "postedit",
+      component: PostEditPage
     }
   ]
 });

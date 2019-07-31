@@ -32,7 +32,7 @@ public class PortFolioController {
 		return portfolioService.searchOncePort(idx);
 	}
 	
-	@RequestMapping(value = "/portDelect", method = RequestMethod.GET)
+	@RequestMapping(value = "/portDelect", method = RequestMethod.DELETE)
 	public HashMap<String, Object> portDelect(@RequestParam int idx) throws Exception {
 		int res = portfolioService.deletePort(idx);
 		HashMap<String, Object> result = new HashMap<>();
@@ -44,8 +44,8 @@ public class PortFolioController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/portUpdate", method = RequestMethod.GET)
-	public HashMap<String, Object> portUpdate(@RequestParam int idx, @RequestParam String title, @RequestParam String body) throws Exception {
+	@RequestMapping(value = "/portUpdate", method = RequestMethod.PUT)
+	public HashMap<String, Object> portUpdate(@RequestParam int idx, @RequestParam String title, @RequestParam String body, @RequestParam String img) throws Exception {
 		
 		PortFolioDto port = new PortFolioDto();
 		port.setIdx(idx);
@@ -62,7 +62,7 @@ public class PortFolioController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/portInsert", method = RequestMethod.GET)
+	@RequestMapping(value = "/portInsert", method = RequestMethod.POST)
 	public HashMap<String, Object> portInsert(@RequestBody PortFolioDto port) throws Exception {
 		int res = portfolioService.insertPort(port);
 		HashMap<String, Object> result = new HashMap<>();
