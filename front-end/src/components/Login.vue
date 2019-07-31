@@ -55,6 +55,7 @@
 <script>
 import { eventBus } from "../main.js";
 import UserService from "@/services/UserService";
+import PushService from "@/services/PushService";
 
 export default {
   data() {
@@ -92,6 +93,7 @@ export default {
       if (result != null) {
         this.$store.state.user = result.user.email;
         this.dialog = false;
+        PushService.getFCMToken();
       }
     },
     async loginGoogle() {
@@ -99,12 +101,14 @@ export default {
       this.$store.state.accessToken = result.credential.accessToken;
       this.$store.state.user = result.user.email;
       this.dialog = false;
+      PushService.getFCMToken();
     },
     async loginFacebook() {
       const result = await UserService.loginWithFacebook();
       this.$store.state.accessToken = result.credential.accessToken;
       this.$store.state.user = result.user.email;
       this.dialog = false;
+      PushService.getFCMToken();
     }
   }
 };

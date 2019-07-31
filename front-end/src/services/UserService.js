@@ -10,7 +10,8 @@ const config = {
   authDomain: "webmobileproject-2d658.firebaseapp.com",
   apiKey: "AIzaSyCmQ16A9lD5zpXztM6kLbHTBQAyzfht35o",
   databaseURL: "https://webmobileproject-2d658.firebaseio.com",
-  storageBucket: ""
+  storageBucket: "",
+  messagingSenderId: "417231299643"
 };
 
 firebase.initializeApp(config);
