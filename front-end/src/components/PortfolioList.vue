@@ -63,6 +63,11 @@ export default {
       this.isWriter = true;
     }
   },
+  computed: {
+    watch_auth() {
+      return this.$store.state.userAuth;
+    }
+  },
   methods: {
     async getPortfolios() {
       this.portfolios = await PortfolioService.getList();
