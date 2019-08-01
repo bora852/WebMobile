@@ -4,6 +4,13 @@ import "firebase/database";
 
 var ref = firebase.database().ref("reply");
 
+// import CommentService from "../services/CommentService";
+// CommentService.sendComment("post", 2772, "lyy7661@gmail.com", "sendUnitTest2");
+// CommentService.modifyComment("post", 2772, "-LlAamagQ7pj-boIUtbh" ,"modify@gmail.com", "modify");
+// CommentService.getAllComment("post", 2772);
+// CommentService.getOneComment("post", 2772, "-LlAamagQ7pj-boIUtbh");
+// CommentService.deleteComment("post", 2772, "-LlAamagQ7pj-boIUtbh");
+
 export default {
   sendComment(category, num, email, message) {
     ref
