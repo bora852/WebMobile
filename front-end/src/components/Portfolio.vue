@@ -4,9 +4,9 @@
     <v-card-title>
       <div>
         <div class="headline">
-          <p class=" text_font body_overflow">{{ thisTitle }}</p>
+          <p class=" text_font port_body_overflow">{{ thisTitle }}</p>
         </div>
-        <span class="grey--text body_overflow text_font">{{ thisBody }}</span>
+        <span class="grey--text port_body_overflow text_font">{{ thisBody }}</span>
       </div>
     </v-card-title>
   </v-card>
@@ -80,7 +80,7 @@ export default {
 </script>
 
 <style>
-.title_overflow {
+/* .port_title_overflow {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -88,9 +88,9 @@ export default {
   -ms-text-overflow: ellipsis;
   -moz-text-overflow: ellipsis;
   word-break: break-all;
-}
+} */
 
-.body_overflow {
+.port_body_overflow {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
