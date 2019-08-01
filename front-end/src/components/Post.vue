@@ -110,12 +110,12 @@ export default {
   -moz-text-overflow: ellipsis;
 }
 
-.body_overflow {
+/* .body_overflow {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   word-wrap: break-word;
-}
+} */
 </style>

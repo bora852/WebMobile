@@ -1,12 +1,13 @@
 <template>
   <v-card @click="sendPortfolioData" hover>
     <v-img :src="imgSrc" height="200px"> </v-img>
-    <v-card-title primary-title>
+    <v-card-title>
       <div>
-        <div class="headline title_overflow">
-          <p class=" text_font">{{ thisTitle }}</p>
+        <div class="headline">
+          <p class=" text_font body_overflow">{{ thisTitle }}</p>
         </div>
         <span class="grey--text body_overflow text_font">{{ thisBody }}</span>
+        <!-- <div class="text-no-wrap text-truncate">{{ thisBody }}</div> -->
       </div>
     </v-card-title>
   </v-card>
@@ -88,14 +89,18 @@ export default {
   -o-text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
   -moz-text-overflow: ellipsis;
+  word-break: break-all;
+  /* width: 70%; */
 }
 
 .body_overflow {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   word-wrap: break-word;
+  word-break: break-all;
+  /* width: 70%; */
 }
 </style>
