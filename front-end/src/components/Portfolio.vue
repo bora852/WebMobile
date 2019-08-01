@@ -7,7 +7,6 @@
           <p class=" text_font body_overflow">{{ thisTitle }}</p>
         </div>
         <span class="grey--text body_overflow text_font">{{ thisBody }}</span>
-        <!-- <div class="text-no-wrap text-truncate">{{ thisBody }}</div> -->
       </div>
     </v-card-title>
   </v-card>
@@ -61,7 +60,6 @@ export default {
       translateUrl += "&target=" + this.toLang;
       translateUrl += "&q=" + encodeURI(this.thisTitle);
       translateUrl += "&q=" + encodeURI(this.thisBody);
-      // console.log(translateUrl)
       axios({
         methods: "GET",
         url: translateUrl
@@ -90,7 +88,6 @@ export default {
   -ms-text-overflow: ellipsis;
   -moz-text-overflow: ellipsis;
   word-break: break-all;
-  /* width: 70%; */
 }
 
 .body_overflow {
@@ -101,6 +98,5 @@ export default {
   -webkit-box-orient: vertical;
   word-wrap: break-word;
   word-break: break-all;
-  /* width: 70%; */
 }
 </style>
