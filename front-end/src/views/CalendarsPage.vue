@@ -1,12 +1,12 @@
 <template>
-<Calendars />
+<Calendars></Calendars>
 </template>
 
 <script>
-import Calendars from "../components/calendars";
+import Calendars from "../components/Calendars";
 
 export default {
-  name: "CalendarsPage",
+  name: "calendarsPage",
   components: {
     Calendars
   },
