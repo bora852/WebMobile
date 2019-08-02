@@ -3,7 +3,7 @@
     <v-flex
       v-for="i in posts.length > count ? count : posts.length"
       px-3
-      md4
+      md6
       sm6
       xs12
       :key="i"
