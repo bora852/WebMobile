@@ -21,13 +21,16 @@
                 <v-icon right>arrow_drop_down</v-icon>
               </v-btn>
             </template>
+
             <v-list>
               <v-list-item @click="type = 'week'">
                    <v-list-item-title>Week</v-list-item-title>
                  </v-list-item>
               <v-list-item @click="type = 'month'">
                 <v-list-item-title>Month</v-list-item-title>
-              </v-list>
+                   </v-list-item>
+            </v-list>
+
           </v-menu>
         </v-toolbar>
       </v-sheet>
@@ -129,10 +132,7 @@ export default {
         case "month":
           return `${startMonth} ${startYear}`;
         case "week":
-        case "4day":
           return `${startMonth} ${startDay} ${startYear} - ${suffixMonth} ${endDay} ${suffixYear}`;
-        case "day":
-          return `${startMonth} ${startDay} ${startYear}`;
       }
       return "";
     },
