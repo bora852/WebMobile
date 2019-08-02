@@ -44,8 +44,9 @@
 <script>
 import insertWriter from "./insertWriter";
 import MarkdownEditor from "../components/MarkdownEditor";
-import FirebaseService from "@/services/FirebaseService";
-import Swal from "sweetalert2";
+// import FirebaseService from "@/services/FirebaseService";
+import PortfolioService from "../services/PortfolioService";
+import SwalAlert from "../services/SwalAlert";
 
 export default {
   name: "writePortfolio",
@@ -79,29 +80,22 @@ export default {
     resetValidation() {
       this.$refs.form.resetValidation();
     },
-    alert(title, text, type, confirmButtonText) {
-      Swal.fire({
-        title: title,
-        text: text,
-        type: type,
-        confirmButtonText: confirmButtonText
-      });
-    },
     async submit() {
       if (this.title == "") {
-        this.alert("Error!", "제목을 입력해주세요!", "error", "Ok!");
+        SwalAlert.swatAlert("Error!", "제목을 입력해주세요!", "error", "Ok!");
       } else if (this.body == "내용을 마크다운 형식으로 작성해주세요!") {
-        this.alert("Error!", "내용을 입력해주세요!", "error", "Ok!");
+        SwalAlert.swatAlert("Error!", "내용을 입력해주세요!", "error", "Ok!");
       } else if (this.linkeddata == "") {
-        this.alert("Error!", "사진을 등록해주세요!", "error", "Ok!");
+        SwalAlert.swatAlert("Error!", "사진을 등록해주세요!", "error", "Ok!");
       } else {
-        var isPost = await FirebaseService.postPortfolio(
+        var isPost = await PortfolioService.postPortfolio(
           this.title,
           this.body,
+          this.$store.state.user,
           this.linkeddata
         );
-        if (isPost == "success") {
-          this.alert(
+        if (isPost == 1) {
+          SwalAlert.swatAlert(
             "Success!",
             "포트폴리오가 등록되었습니다!",
             "success",
@@ -109,7 +103,7 @@ export default {
           );
           this.$router.push("portfolio");
         } else {
-          this.alert(
+          SwalAlert.swatAlert(
             "Error!",
             "알수없는 에러가 발생했습니다! (error code : " + isPost + ")",
             "error",

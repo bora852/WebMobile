@@ -1,17 +1,21 @@
 <template>
-  <v-layout py-4 h-100>
-    <v-flex row>
-      <div class="caption">{{ formatedDate }}</div>
-      <h2 class="color-333 font-weight-light title_overflow text_font">
-        {{ thisTitle }}
-      </h2>
-      <p
-        class="mb-1 color-666 font-weight-light subheading body_overflow text_font"
-      >
-        {{ thisBody }}
-      </p>
-    </v-flex>
-  </v-layout>
+  <v-card style="cursor:pointer" @click="detailpost" hover>
+    <v-layout py-4 h-100>
+      <v-flex row>
+        <div class="postPadding">
+          <div class="caption">{{ formatedDate }}</div>
+          <h2 class="color-333 font-weight-light title_overflow text_font">
+            {{ thisTitle }}
+          </h2>
+          <p
+            class="mb-1 color-666 font-weight-light subheading body_overflow text_font"
+          >
+            {{ thisBody }}
+          </p>
+        </div>
+      </v-flex>
+    </v-layout>
+  </v-card>
 </template>
 
 <script>
@@ -21,18 +25,26 @@ export default {
   name: "Post",
   props: {
     date: {
-      type: Date
+      type: String
     },
     title: {
       type: String
     },
     body: {
       type: String
+    },
+    idx: {
+      type: Number
     }
   },
   computed: {
     formatedDate() {
-      return `${this.date.getFullYear()}년 ${this.date.getMonth()}월 ${this.date.getDate()}일`;
+      return this.date;
+    }
+  },
+  methods: {
+    detailpost() {
+      this.$router.push("/postdetail?num=" + this.idx);
     }
   },
   created() {
@@ -69,6 +81,7 @@ export default {
     return {
       thisTitle: "",
       thisBody: "",
+      thisidx: 0,
       fromLang: "ko",
       toLang: "en"
     };
@@ -102,8 +115,11 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   word-wrap: break-word;
+}
+.postPadding {
+  padding: 15px;
 }
 </style>
