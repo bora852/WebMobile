@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <v-layout fill-height>
     <v-flex>
       <v-sheet height="64">
@@ -14,6 +14,7 @@
           </v-btn>
           <v-toolbar-title>{{ title }}</v-toolbar-title>
           <v-spacer></v-spacer>
+
           <v-menu bottom right>
             <template v-slot:activator="{ on }">
               <v-btn outlined v-on="on">
@@ -24,14 +25,15 @@
 
             <v-list>
               <v-list-item @click="type = 'week'">
-                   <v-list-item-title>Week</v-list-item-title>
-                 </v-list-item>
+                <v-list-item-title>Week</v-list-item-title>
+              </v-list-item>
               <v-list-item @click="type = 'month'">
                 <v-list-item-title>Month</v-list-item-title>
-                   </v-list-item>
+              </v-list-item>
             </v-list>
 
           </v-menu>
+
         </v-toolbar>
       </v-sheet>
       <v-sheet height="600">
@@ -56,6 +58,7 @@
           full-width
           offset-x
         >
+        <!-- 일정상세보기 -->
           <v-card color="grey lighten-4" min-width="350px" flat>
             <v-toolbar :color="selectedEvent.color" dark>
               <v-btn icon>
@@ -110,6 +113,7 @@ export default {
       // }
     ]
   }),
+
   computed: {
     title() {
       const { start, end } = this;
@@ -136,6 +140,7 @@ export default {
       }
       return "";
     },
+
     monthFormatter() {
       return this.$refs.calendar.getFormatter({
         timeZone: "UTC",
@@ -189,4 +194,4 @@ export default {
   }
   }
 </script>
-};
+}; -->
