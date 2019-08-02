@@ -4,7 +4,7 @@
       <!-- Post -->
       <v-layout>
         <v-flex xs12 data-aos="fade-right">
-          <PostList :limits="3" :load-more="true"></PostList>
+          <PostList :limits="6" :load-more="true"></PostList>
         </v-flex>
       </v-layout>
     </v-container>

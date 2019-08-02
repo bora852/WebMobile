@@ -138,13 +138,13 @@ export default {
         this.avatar_url = avatar_url;
       }
 
-      for (let i = 0; i < datas.length; i++) {
+      for (let i = 0; i < 4; i++) {
         const pjtList = await GitlabService.getMembersPJTList(
           datas[i].username,
           tokens[i]
         );
         let temp2 = [];
-        for (let j = 0; j < datas.length; j++) {
+        for (let j = 0; j < 4; j++) {
           temp2.push(
             new RepoInfo(
               pjtList.data[j].owner.name,

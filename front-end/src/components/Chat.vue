@@ -141,7 +141,7 @@ export default {
   color: black;
   border-width: 2px;
   padding: 5px;
-  border-radius: 5px 5px 5px 5px;
+  border-radius: 0px 12px 12px 12px;
 }
 .chattime {
   color: gray;
