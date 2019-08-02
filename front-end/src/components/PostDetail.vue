@@ -15,36 +15,38 @@
             {{ post.body }}
           </p>
         </div>
-        <v-btn
-          v-show="isAuthor()"
-          @click="postEdit()"
-          color="warning"
-          flat
-          large
-          replace
-          style="font-size:1.2em;text-transform:none;"
-          slot="text"
-          class="text_font"
-          >Edit post</v-btn
-        >
-        <v-btn
-          v-show="isAuthor()"
-          @click="postDelete()"
-          color="warning"
-          flat
-          large
-          replace
-          style="font-size:1.2em;text-transform:none;"
-          slot="text"
-          class="text_font"
-          >Delete Post</v-btn
-        >
       </v-flex>
     </v-layout>
+    <div class="text-sm-right text-xs-center">
+      <v-btn
+        v-show="isAuthor()"
+        color="warning"
+        @click="postEdit()"
+        dark
+        class="text_font"
+      >
+        <v-icon size="20" class="mr-2">create</v-icon> 수정
+      </v-btn>
+      <v-btn
+        v-show="isAuthor()"
+        color="warning"
+        @click="postDelete()"
+        dark
+        class="text_font"
+      >
+        <v-icon size="20" class="mr-2">delete</v-icon> 삭제
+      </v-btn>
+    </div>
+
+    <v-divider></v-divider>
+    <div class="cmtPadding">
+      <Comments></Comments>
+    </div>
   </v-container>
 </template>
 
 <script>
+import Comments from "@/components/Comments";
 import "tui-editor/dist/tui-editor.css";
 import "tui-editor/dist/tui-editor-contents.css";
 import "codemirror/lib/codemirror.css";
@@ -55,6 +57,9 @@ export default {
     return {
       post: []
     };
+  },
+  components: {
+    Comments
   },
   created() {
     this.getPostById();
@@ -91,6 +96,9 @@ export default {
 <style>
 .postbodyStyle {
   padding: 10px;
-  border: 3px solid orange;
+  /* border: 3px solid orange; */
+}
+.cmtPadding {
+  padding: 20px;
 }
 </style>

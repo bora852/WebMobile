@@ -31,9 +31,8 @@
       </v-btn>
     </div>
     <v-divider></v-divider>
-    <div class="replyPadding">
+    <div class="cmtPadding">
       <Comments></Comments>
-      <!-- <Reply></Reply> -->
     </div>
   </div>
 </template>
@@ -105,7 +104,7 @@ export default {
 .ImgPadding {
   padding: 10px;
 }
-.replyPadding {
+.cmtPadding {
   padding: 20px;
 }
 </style>
