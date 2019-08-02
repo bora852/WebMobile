@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ portfolio.title }}</h1>
+    <div class="text_font" style="font-size:1.5em;">{{ portfolio.title }}</div>
     <div class="text-md-right">
       <v-icon class="mr-1">date_range</v-icon> {{ formatedDate }}
       <v-icon>person</v-icon> {{ portfolio.email }}
@@ -8,14 +8,15 @@
     <v-divider></v-divider>
     <div class="ImgPadding">
       <v-img :src="portfolio.img" aspect-ratio="3" contain></v-img>
-      <Viewer :value="portfolio.body" />
+      <Viewer :value="portfolio.body" class="body_font"/>
     </div>
-    <div class="text-md-right text-xs-center">
+    <div class="text-sm-right text-xs-center">
       <v-btn
         v-show="isAuthor()"
         color="warning"
         @click="portfolioUpdate()"
         dark
+        class="text_font"
       >
         <v-icon size="20" class="mr-2">create</v-icon> 수정
       </v-btn>
@@ -24,11 +25,16 @@
         color="warning"
         @click="portfolioDelete()"
         dark
+        class="text_font"
       >
         <v-icon size="20" class="mr-2">delete</v-icon> 삭제
       </v-btn>
     </div>
-    <Comments></Comments>
+    <v-divider></v-divider>
+    <div class="replyPadding">
+      <Comments></Comments>
+      <!-- <Reply></Reply> -->
+    </div>
   </div>
 </template>
 
@@ -89,7 +95,7 @@ export default {
     },
     async portfolioDelete() {
       await PortfolioService.delete(this.$route.query.idx);
-      this.$router.push("/portfolio");
+      this.$router.replace("/portfolio");
     }
   }
 };
@@ -98,5 +104,8 @@ export default {
 <style>
 .ImgPadding {
   padding: 10px;
+}
+.replyPadding {
+  padding: 20px;
 }
 </style>
