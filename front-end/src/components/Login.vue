@@ -93,7 +93,7 @@ export default {
       if (result != null) {
         this.$store.state.user = result.user.email;
         this.dialog = false;
-        PushService.getFCMToken();
+        PushService.saveFCMToken();
       }
     },
     async loginGoogle() {
@@ -101,14 +101,14 @@ export default {
       this.$store.state.accessToken = result.credential.accessToken;
       this.$store.state.user = result.user.email;
       this.dialog = false;
-      PushService.getFCMToken();
+      PushService.saveFCMToken();
     },
     async loginFacebook() {
       const result = await UserService.loginWithFacebook();
       this.$store.state.accessToken = result.credential.accessToken;
       this.$store.state.user = result.user.email;
       this.dialog = false;
-      PushService.getFCMToken();
+      PushService.saveFCMToken();
     }
   }
 };

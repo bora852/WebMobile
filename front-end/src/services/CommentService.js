@@ -1,7 +1,7 @@
 import firebase from "firebase/app";
+import pushService from "./PushService";
 import { eventBus } from "../main.js";
 import "firebase/database";
-
 var ref = firebase.database().ref("reply");
 
 // import CommentService from "../services/CommentService";
@@ -21,7 +21,8 @@ export default {
         time: firebase.database.ServerValue.TIMESTAMP,
         email: email,
         message: message
-      });
+      })
+      .then(() => {});
   },
   getOneComment(category, num, key) {
     return ref
