@@ -39,7 +39,11 @@
           <v-card-actions>
             <v-spacer></v-spacer>
 
-            <v-btn color="orange darken-1" flat="flat" @click="login()"
+            <v-btn
+              color="orange darken-1"
+              v-on:keyup.enter="click"
+              flat="flat"
+              @click="login()"
               >로그인</v-btn
             >
             <v-btn color="orange darken-1" flat="flat" @click="signUp()"
@@ -93,7 +97,7 @@ export default {
       if (result != null) {
         this.$store.state.user = result.user.email;
         this.dialog = false;
-        // PushService.getFCMToken();
+        PushService.saveFCMToken();
       }
     },
     async loginGoogle() {
@@ -101,14 +105,14 @@ export default {
       this.$store.state.accessToken = result.credential.accessToken;
       this.$store.state.user = result.user.email;
       this.dialog = false;
-      // PushService.getFCMToken();
+      PushService.saveFCMToken();
     },
     async loginFacebook() {
       const result = await UserService.loginWithFacebook();
       this.$store.state.accessToken = result.credential.accessToken;
       this.$store.state.user = result.user.email;
       this.dialog = false;
-      // PushService.getFCMToken();
+      PushService.saveFCMToken();
     }
   }
 };
