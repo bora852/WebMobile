@@ -15,29 +15,10 @@
           <v-btn fab text small @click="next">
             <v-icon small>arrow_forward_ios</v-icon>
           </v-btn>
-
-
-          <!-- <v-toolbar-title>{{ title }}</v-toolbar-title> -->
           <v-spacer></v-spacer>
           <h1>MONTH</h1>
-          <!-- <v-menu bottom right>
-            <template v-slot:activator="{ on }">
-              <v-btn outlined v-on="on">
-                <span>{{ typeToLabel[type] }}</span>
-                <v-icon right>arrow_drop_down</v-icon>
-              </v-btn>
-            </template> -->
-
-
-            <!-- <v-list>
-              <v-list-item @click="type = 'month'">
-                <v-list-item-title>Month</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu> -->
         </v-toolbar>
       </v-sheet>
-
 
       <v-sheet height="600">
         <v-calendar
@@ -50,7 +31,8 @@
           :now="today"
           :type="type"
           @click:event="showEvent"
-          @click:more="viewDay" @click:date="viewDay"
+          @click:more="viewDay"
+          @click:date="viewDay"
           @change="updateRange"
         ></v-calendar>
         <v-menu
@@ -90,7 +72,6 @@
   </v-layout>
 </template>
 
-
 <script>
 export default {
   data: () => ({
@@ -108,7 +89,7 @@ export default {
     events: [
       {
         name: "Vacation",
-        details: "Going to the beach!",
+        // details: "Going to the beach!",
         start: "2019-08-01",
         end: "2019-08-09",
         color: "blue"
@@ -116,28 +97,34 @@ export default {
     ]
   }),
 
+  created() {
+    let newday = new Date();
+    let month = newday.getMonth() + 1;
+    let date = newday.getDate();
+    const year = newday.getFullYear();
 
+    if (month.toString().length == 1) {
+      month = "0" + month.toString();
+    }
+    if (date.toString().length == 1) {
+      date = "0" + date.toString();
+    }
+    this.today = year + "-" + month + "-" + date;
+  },
   computed: {
     title() {
       const { start, end } = this;
       if (!start || !end) {
         return "";
       }
-
-
       const startMonth = this.monthFormatter(start);
       const endMonth = this.monthFormatter(end);
       const suffixMonth = startMonth === endMonth ? "" : endMonth;
-
-
       const startYear = start.year;
       const endYear = end.year;
       const suffixYear = startYear === endYear ? "" : endYear;
-
-
       const startDay = start.day + this.nth(start.day);
       const endDay = end.day + this.nth(end.day);
-
 
       switch (this.type) {
         case "month":
@@ -147,7 +134,6 @@ export default {
       }
       return "";
     },
-
 
     monthFormatter() {
       return this.$refs.calendar.getFormatter({
@@ -180,14 +166,12 @@ export default {
         setTimeout(() => (this.selectedOpen = true), 10);
       };
 
-
       if (this.selectedOpen) {
         this.selectedOpen = false;
         setTimeout(open, 10);
       } else {
         open();
       }
-
 
       nativeEvent.stopPropagation();
     },
@@ -202,6 +186,23 @@ export default {
         : ["th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"][d % 10];
     }
   }
-}
+};
 </script>
 };
+
+<style scoped>
+.my-event {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 2px;
+  background-color: #1867c0;
+  color: #ffffff;
+  border: 1px solid #1867c0;
+  width: 100%;
+  font-size: 12px;
+  padding: 3px;
+  cursor: pointer;
+  margin-bottom: 1px;
+}
+</style>
