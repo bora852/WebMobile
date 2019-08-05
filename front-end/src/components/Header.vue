@@ -177,6 +177,7 @@
 <script>
 import { eventBus } from "../main.js";
 import UserService from "@/services/UserService";
+import PushService from "@/services/PushService";
 import Login from "../components/Login.vue";
 import Swal from "sweetalert2";
 
@@ -282,7 +283,7 @@ export default {
   },
   created() {
     UserService.loginChk();
-
+    // PushService.listenPush();
     eventBus.$on("getUserId", userId => {
       this.isLogin = true;
       this.userId = userId;
