@@ -1,41 +1,44 @@
-<!-- <template>
+<template>
   <v-layout fill-height>
     <v-flex>
-      <v-sheet height="64">
-        <v-toolbar flat color="white">
+      <v-sheet height="80" color="grey lighten-3">
+        <v-toolbar flat color="grey lighten-3">
+          <!-- today but 클릭시 당일로 이동 -->
           <v-btn outlined class="mr-4" @click="setToday">
             Today
           </v-btn>
+          <!-- <버튼_클릭시 전달로 이동 -->
           <v-btn fab text small @click="prev">
             <v-icon small>arrow_back_ios</v-icon>
           </v-btn>
+          <!-- >버튼_클릭시 다음달로 이동 -->
           <v-btn fab text small @click="next">
             <v-icon small>arrow_forward_ios</v-icon>
           </v-btn>
-          <v-toolbar-title>{{ title }}</v-toolbar-title>
-          <v-spacer></v-spacer>
 
-          <v-menu bottom right>
+
+          <!-- <v-toolbar-title>{{ title }}</v-toolbar-title> -->
+          <v-spacer></v-spacer>
+          <h1>MONTH</h1>
+          <!-- <v-menu bottom right>
             <template v-slot:activator="{ on }">
               <v-btn outlined v-on="on">
                 <span>{{ typeToLabel[type] }}</span>
                 <v-icon right>arrow_drop_down</v-icon>
               </v-btn>
-            </template>
+            </template> -->
 
-            <v-list>
-              <v-list-item @click="type = 'week'">
-                <v-list-item-title>Week</v-list-item-title>
-              </v-list-item>
+
+            <!-- <v-list>
               <v-list-item @click="type = 'month'">
                 <v-list-item-title>Month</v-list-item-title>
               </v-list-item>
             </v-list>
-
-          </v-menu>
-
+          </v-menu> -->
         </v-toolbar>
       </v-sheet>
+
+
       <v-sheet height="600">
         <v-calendar
           ref="calendar"
@@ -47,8 +50,7 @@
           :now="today"
           :type="type"
           @click:event="showEvent"
-          @click:more="viewDay"
-          @click:date="viewDay"
+          @click:more="viewDay" @click:date="viewDay"
           @change="updateRange"
         ></v-calendar>
         <v-menu
@@ -88,6 +90,7 @@
   </v-layout>
 </template>
 
+
 <script>
 export default {
   data: () => ({
@@ -95,8 +98,7 @@ export default {
     focus: "",
     type: "month",
     typeToLabel: {
-      month: "Month",
-      week: "Week"
+      month: "Month"
     },
     start: null,
     end: null,
@@ -104,15 +106,16 @@ export default {
     selectedElement: null,
     selectedOpen: false,
     events: [
-      // {
-      //   name: "Vacation",
-      //   details: "Going to the beach!",
-      //   start: "2018-12-29",
-      //   end: "2019-01-01",
-      //   color: "blue"
-      // }
+      {
+        name: "Vacation",
+        details: "Going to the beach!",
+        start: "2019-08-01",
+        end: "2019-08-09",
+        color: "blue"
+      }
     ]
   }),
+
 
   computed: {
     title() {
@@ -121,16 +124,20 @@ export default {
         return "";
       }
 
+
       const startMonth = this.monthFormatter(start);
       const endMonth = this.monthFormatter(end);
       const suffixMonth = startMonth === endMonth ? "" : endMonth;
+
 
       const startYear = start.year;
       const endYear = end.year;
       const suffixYear = startYear === endYear ? "" : endYear;
 
+
       const startDay = start.day + this.nth(start.day);
       const endDay = end.day + this.nth(end.day);
+
 
       switch (this.type) {
         case "month":
@@ -140,6 +147,7 @@ export default {
       }
       return "";
     },
+
 
     monthFormatter() {
       return this.$refs.calendar.getFormatter({
@@ -172,12 +180,14 @@ export default {
         setTimeout(() => (this.selectedOpen = true), 10);
       };
 
+
       if (this.selectedOpen) {
         this.selectedOpen = false;
         setTimeout(open, 10);
       } else {
         open();
       }
+
 
       nativeEvent.stopPropagation();
     },
@@ -192,6 +202,6 @@ export default {
         : ["th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"][d % 10];
     }
   }
-  }
+}
 </script>
-}; -->
+};
