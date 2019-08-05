@@ -98,10 +98,14 @@ export default {
         this.$store.state.user = result.user.email;
         this.dialog = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
         PushService.saveFCMToken();
 =======
         // PushService.getFCMToken();
 >>>>>>> develop
+=======
+        PushService.saveFCMToken();
+>>>>>>> 3592d7cd01d3f13f31e0a33bffa723e8d4498f7a
       }
     },
     async loginGoogle() {
@@ -110,10 +114,14 @@ export default {
       this.$store.state.user = result.user.email;
       this.dialog = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
       PushService.saveFCMToken();
 =======
       // PushService.getFCMToken();
 >>>>>>> develop
+=======
+      PushService.saveFCMToken();
+>>>>>>> 3592d7cd01d3f13f31e0a33bffa723e8d4498f7a
     },
     async loginFacebook() {
       const result = await UserService.loginWithFacebook();
@@ -121,10 +129,14 @@ export default {
       this.$store.state.user = result.user.email;
       this.dialog = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
       PushService.saveFCMToken();
 =======
       // PushService.getFCMToken();
 >>>>>>> develop
+=======
+      PushService.saveFCMToken();
+>>>>>>> 3592d7cd01d3f13f31e0a33bffa723e8d4498f7a
     }
   }
 };
