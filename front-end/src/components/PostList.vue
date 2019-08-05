@@ -2,18 +2,21 @@
   <v-layout row wrap mw-700>
     <v-flex
       v-for="i in posts.length > count ? count : posts.length"
-      :class="'xs' + 12 / column"
       px-3
+      md6
+      sm6
+      xs12
       :key="i"
     >
-
+    <!-- :class="'xs' + 12 / column" -->
       <Post
+        class="ma-2"
+
         :date="dateFormating(posts[i - 1].created_at)"
         :title="posts[i - 1].title"
         :body="posts[i - 1].body"
-        :idx="posts[i-1].idx"
+        :idx="posts[i - 1].idx"
       ></Post>
-      <v-divider></v-divider>
     </v-flex>
     <v-flex xs12 text-xs-center round my-5 v-if="loadMore">
       <v-btn color="warning" dark v-on:click="loadMorePosts">
@@ -40,7 +43,7 @@ export default {
     },
     limits: {
       type: Number,
-      default: 4
+      default: 6
     },
     loadMore: {
       type: Boolean,
@@ -81,9 +84,8 @@ export default {
       }
     },
     loadMorePosts() {
-      this.count = this.count + 1;
-    },
-
+      this.count = this.count + 6;
+    }
   },
   computed: {
     watch_auth() {

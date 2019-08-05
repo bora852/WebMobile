@@ -1,20 +1,21 @@
 <template>
-  <v-card style="cursor:pointer" @click ="detailpost">
-  <v-layout py-4 h-100>
-    <v-flex row>
-      <div class="caption">{{ formatedDate }}</div>
-      <h2 class="color-333 font-weight-light title_overflow text_font">
-        {{ thisTitle }}
-      </h2>
-      <p
-        class="mb-1 color-666 font-weight-light subheading body_overflow text_font"
-      >
-        {{ thisBody }}
-      </p>
-      <!-- <div visibility= 'hidden'>{{idx}}</div> -->
-    </v-flex>
-  </v-layout>
-</v-card>
+  <v-card style="cursor:pointer" @click="detailpost" hover>
+    <v-layout py-4 h-100>
+      <v-flex row>
+        <div class="postPadding">
+          <div class="caption">{{ formatedDate }}</div>
+          <h2 class="color-333 font-weight-light title_overflow text_font">
+            {{ thisTitle }}
+          </h2>
+          <p
+            class="mb-1 color-666 font-weight-light subheading body_overflow text_font"
+          >
+            {{ thisBody }}
+          </p>
+        </div>
+      </v-flex>
+    </v-layout>
+  </v-card>
 </template>
 
 <script>
@@ -32,7 +33,7 @@ export default {
     body: {
       type: String
     },
-    idx :{
+    idx: {
       type: Number
     }
   },
@@ -43,7 +44,7 @@ export default {
   },
   methods: {
     detailpost() {
-      this.$router.push("/postdetail?num="+this.idx);
+      this.$router.push("/postdetail?num=" + this.idx);
     }
   },
   created() {
@@ -114,8 +115,11 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   word-wrap: break-word;
+}
+.postPadding {
+  padding: 15px;
 }
 </style>
