@@ -8,7 +8,7 @@
       :key="i"
     >
       <Portfolio
-        class="ma-3"
+        class="ma-2"
         :date="portfolios[i - 1].created_at.toString()"
         :title="portfolios[i - 1].title"
         :body="portfolios[i - 1].body"
@@ -61,6 +61,11 @@ export default {
       this.$store.state.userAuth == "team"
     ) {
       this.isWriter = true;
+    }
+  },
+  computed: {
+    watch_auth() {
+      return this.$store.state.userAuth;
     }
   },
   methods: {

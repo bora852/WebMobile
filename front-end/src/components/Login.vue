@@ -97,7 +97,11 @@ export default {
       if (result != null) {
         this.$store.state.user = result.user.email;
         this.dialog = false;
+<<<<<<< HEAD
         PushService.saveFCMToken();
+=======
+        // PushService.getFCMToken();
+>>>>>>> develop
       }
     },
     async loginGoogle() {
@@ -105,14 +109,22 @@ export default {
       this.$store.state.accessToken = result.credential.accessToken;
       this.$store.state.user = result.user.email;
       this.dialog = false;
+<<<<<<< HEAD
       PushService.saveFCMToken();
+=======
+      // PushService.getFCMToken();
+>>>>>>> develop
     },
     async loginFacebook() {
       const result = await UserService.loginWithFacebook();
       this.$store.state.accessToken = result.credential.accessToken;
       this.$store.state.user = result.user.email;
       this.dialog = false;
+<<<<<<< HEAD
       PushService.saveFCMToken();
+=======
+      // PushService.getFCMToken();
+>>>>>>> develop
     }
   }
 };

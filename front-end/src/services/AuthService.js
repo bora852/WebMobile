@@ -121,5 +121,21 @@ export default {
         }
         return null;
       });
+  },
+  anotherProviderLogin(email) {
+    axios
+      .get(URL + "ass/api/userSelect", { params: { email: email } })
+      .then(response => {
+        if (response.data == "") {
+          this.userAuthInsert(email);
+          store.state.userAuth = "guest";
+        } else {
+          store.state.userAuth = response.data.authority;
+        }
+      })
+      .catch(() => {
+        this.userAuthInsert(email);
+        store.state.userAuth = "guest";
+      });
   }
 };

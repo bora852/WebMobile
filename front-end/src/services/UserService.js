@@ -27,6 +27,7 @@ export default {
       .auth()
       .signInWithPopup(provider)
       .then(function(result) {
+        AuthService.anotherProviderLogin(result.user.email);
         callSignInLog();
         SwalAlert.swatAlert("Hello!", "로그인 되었습니다.", "success", "Ok!");
         return result;
@@ -52,6 +53,7 @@ export default {
                       .then(user => {
                         user.linkWithCredential(error.credential);
                         callSignInLog();
+                        AuthService.authChk(user.email);
                         SwalAlert.swatAlert(
                           "Hello!",
                           "로그인 되었습니다.",
@@ -79,6 +81,7 @@ export default {
       .auth()
       .signInWithPopup(provider)
       .then(function(result) {
+        AuthService.anotherProviderLogin(result.user.email);
         callSignInLog();
         SwalAlert.swatAlert("Hello!", "로그인 되었습니다.", "success", "Ok!");
         return result;
@@ -104,6 +107,7 @@ export default {
                       .then(user => {
                         user.linkWithCredential(error.credential);
                         callSignInLog();
+                        AuthService.authChk(user.email);
                         SwalAlert.swatAlert(
                           "Hello!",
                           "로그인 되었습니다.",

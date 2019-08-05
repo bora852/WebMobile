@@ -69,10 +69,10 @@ export default {
     async drawGraph() {
       this.loading = true;
       this.repos = await GitlabService.getRepos("JeongSY");
-      this.commits = await GitlabService.getCommits(this.repos.data[0].id);
+      this.commits = await GitlabService.getCommits(this.repos.data[1].id);
       this.draw(this.commits);
       this.loading = false;
-      this.title = this.repos.data[0].name;
+      this.title = this.repos.data[1].name;
     },
 
     draw: function(commits) {
