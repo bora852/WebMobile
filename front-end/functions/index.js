@@ -1,3 +1,27 @@
+const admin = require('firebase-admin');
+admin.initializeApp(functions.config().firebase);
+
+
+export.sendPush = functions.https.onCall((data, context) => {
+  console.log(data);
+
+  const playload = {
+    notification {
+      title: "Tuna's blog"
+      body: "새 댓글이 등록되었습니다."
+      click_action : "http://localhost:8080/" + data.category + "?num=" + data.num
+    }
+  }
+
+  admin.messaging().sendToDevice(data.token, playload).then(response => {
+    console.log("success sendPush Call");
+    console.log(response);
+  });
+
+});
+
+
+
 // 회원가입 트리거
 exports.signUpLog = functions.https.onCall((data, context) => {
   var email = context.auth.token.email;

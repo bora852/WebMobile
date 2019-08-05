@@ -71,6 +71,7 @@ import PostList from "../components/PostList";
 import AboutMe from "../components/AboutMe";
 import { eventBus } from "../main.js";
 import RepositoryList from "../components/RepositoryList";
+import PushService from "../services/PushService";
 
 export default {
   name: "HomePage",
@@ -84,6 +85,10 @@ export default {
     return {};
   },
   created() {
+    var user = this.$store.state.user;
+    if (user) {
+      PushService.sendPush(user);
+    }
     eventBus.$emit("sendTitle", "Home");
   }
 };
