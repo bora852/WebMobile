@@ -1,12 +1,12 @@
 <template>
   <v-card @click="sendPortfolioData" hover>
     <v-img :src="imgSrc" height="200px"> </v-img>
-    <v-card-title primary-title>
+    <v-card-title>
       <div>
-        <div class="headline title_overflow">
-          <p class=" text_font">{{ thisTitle }}</p>
+        <div class="headline">
+          <p class=" text_font port_body_overflow">{{ thisTitle }}</p>
         </div>
-        <span class="grey--text body_overflow text_font">{{ thisBody }}</span>
+        <span class="grey--text port_body_overflow text_font">{{ thisBody }}</span>
       </div>
     </v-card-title>
   </v-card>
@@ -60,7 +60,6 @@ export default {
       translateUrl += "&target=" + this.toLang;
       translateUrl += "&q=" + encodeURI(this.thisTitle);
       translateUrl += "&q=" + encodeURI(this.thisBody);
-      // console.log(translateUrl)
       axios({
         methods: "GET",
         url: translateUrl
@@ -81,21 +80,23 @@ export default {
 </script>
 
 <style>
-.title_overflow {
+/* .port_title_overflow {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
   -moz-text-overflow: ellipsis;
-}
+  word-break: break-all;
+} */
 
-.body_overflow {
+.port_body_overflow {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   word-wrap: break-word;
+  word-break: break-all;
 }
 </style>

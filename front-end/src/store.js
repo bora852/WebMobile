@@ -7,10 +7,6 @@ export default new Vuex.Store({
   state: {
     accessToken: "",
     user: "",
-    userAuth: "",
-    portfolioData: "",
-    portfolioTitle: "",
-    portfolioBody: "",
-    portfolioImgSrc: ""
+    userAuth: ""
   }
 });
