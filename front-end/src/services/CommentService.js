@@ -41,9 +41,15 @@ export default {
       .child(category)
       .child(num)
       .on("child_added", data => {
-        console.log("data key :", data.key);
-        console.log("data value : ", data.val());
+        // console.log("data key :", data.key);
+        // console.log("data value : ", data.val());
         result = data;
+
+        ///////////////
+        eventBus.$emit("commentData",result);
+
+        //////////////
+
       });
     return result;
   },
