@@ -15,6 +15,7 @@
           <v-btn fab text small @click="next">
             <v-icon small>arrow_forward_ios</v-icon>
           </v-btn>
+          <v-toolbar-title>{{ title }}</v-toolbar-title>
           <v-spacer></v-spacer>
           <h1>MONTH</h1>
         </v-toolbar>
@@ -110,10 +111,12 @@ export default {
       date = "0" + date.toString();
     }
     this.today = year + "-" + month + "-" + date;
+    this.focus = year + "-" + month + "-" + date;
   },
   computed: {
     title() {
       const { start, end } = this;
+      console.log(start);
       if (!start || !end) {
         return "";
       }
