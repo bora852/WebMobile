@@ -48,6 +48,7 @@ public class TokenController {
 	
 	@RequestMapping(value = "/tokenInsert", method = RequestMethod.POST)
 	public HashMap<String, Object> tokenAdd(@RequestBody TokenDto token) throws Exception {
+		System.out.println("token : " + token);
 		int res = tokenService.insertToken(token);
 		HashMap<String, Object> result = new HashMap<>();
 		if (res > 0) {

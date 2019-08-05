@@ -6,12 +6,11 @@
         SELECT *FROM f_token
     </select>
 	<select id="searchOnceToken" parameterType="java.lang.String" resultType="Token">
-		SELECT * FROM f_token WHERE email=#{email}
+		select a.email, a.token, b.authority from f_token a, user b where a.email =  #{email} and a.email = b.email
 	</select>
 	
-	<insert id="InsertToken" parameterType="Token"
-		useGeneratedKeys="true">
-		INSERT INTO f_token VALUES (#{title},#{body},default,#{email},0)
+	<insert id="insertToken" parameterType="Token" useGeneratedKeys="true">
+		INSERT INTO f_token VALUES (#{email}, #{token})
 	</insert>
 	
 	<delete id="deleteToken" parameterType="java.lang.String">
