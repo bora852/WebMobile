@@ -11,18 +11,22 @@ public class SendMessageService {
 		final String apiKey = "AAAAYSTsZDs:APA91bF1Xh2qqDYi48-QLnwH-TOi0pt-r0WGFW50jWMzgrs11kVF1zEzFBe-_XuYiWk3-_FXXCxCyUGHh7ST49pc_f7AC5JhJdWZHPjm8p2NTzAGMvb2924GpvCwS8of9Qs__f7EqFSs";
 		URL url = new URL("https://fcm.googleapis.com/fcm/send");
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		String iconURL =
+				    "https://item.kakaocdn.net/do/ece533cdf7d604ac0440418f8cad3028f43ad912ad8dd55b04db6a64cddaf76d";
+		
+		
 		conn.setDoOutput(true);
 		conn.setRequestMethod("POST");
 		conn.setRequestProperty("Content-Type", "application/json");
 		conn.setRequestProperty("Authorization", "key=" + apiKey);
-
-		conn.setDoOutput(true);
+		
+		conn.setDoOutput(true); 
 
 		// 이렇게 보내면 주제를 ALL로 지정해놓은 모든 사람들한테 알림을 날려준다.
 //         String input = "{\"notification\" : {\"title\" : \"여기다 제목 넣기 \", \"body\" : \"여기다 내용 넣기\"}, \"to\":\"/topics/ALL\"}";
 
 		// 이걸로 보내면 특정 토큰을 가지고있는 어플에만 알림을 날려준다 위에 둘중에 한개 골라서 날려주자
-		String input = "{\"notification\" : {\"title\" : \" Tuna's Blog \", \"body\" : \""+location+"에 새글이 등록되었습니다.\"}, \"to\":\""+token+"\"}";
+		String input = "{\"notification\" : {\"title\" : \" Tuna's Blog \",\"icon\" : \""+iconURL+"\", \"body\" : \""+location+"에 새글이 등록되었습니다.\"}, \"to\":\""+token+"\"}";
 
 		OutputStream os = conn.getOutputStream();
 
