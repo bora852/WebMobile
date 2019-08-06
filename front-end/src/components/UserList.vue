@@ -9,6 +9,7 @@
     <div v-show="!listLoding">
       <div class="searchInput">
         <v-text-field
+          class="orange"
           v-model="searchEmail"
           flat
           hide-details
