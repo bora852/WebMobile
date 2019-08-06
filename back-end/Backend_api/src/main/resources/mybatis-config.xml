@@ -6,11 +6,13 @@
 		<typeAlias type="com.ssafy.ass.dto.PostDto" alias="post" />
 		<typeAlias type="com.ssafy.ass.dto.PortFolioDto" alias="portFolio"/>
 		<typeAlias type="com.ssafy.ass.dto.UserDto" alias="user"/>
+		<typeAlias type="com.ssafy.ass.dto.TokenDto" alias="Token"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mapper/postMapper.xml" />
 		<mapper resource="mapper/portFoiloMapper.xml"/>
 		<mapper resource="mapper/userMapper.xml"/>
+		<mapper resource="mapper/TokenMapper.xml"/>
 	</mappers>
 </configuration>

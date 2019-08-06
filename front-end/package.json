@@ -1,7 +1,6 @@
 {
   "name": "ssafy",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build"
@@ -41,5 +40,6 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0"
-  }
+  },
+  "private": true
 }
