@@ -77,6 +77,8 @@
 </template>
 
 <script>
+import CalendarsService from "../services/CalendarsService";
+
 export default {
   data: () => ({
     today: "",
