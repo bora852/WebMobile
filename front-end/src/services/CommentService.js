@@ -31,7 +31,6 @@ export default {
       .child(key)
       .once("value")
       .then(data => {
-        console.log(data);
         return data;
       });
   },
@@ -66,7 +65,10 @@ export default {
       .child(key)
       .remove();
   },
-  closeComment() {
-    ref.off("child_added");
+  closeComment(category, num) {
+    ref
+      .child(category)
+      .child(num)
+      .off();
   }
 };

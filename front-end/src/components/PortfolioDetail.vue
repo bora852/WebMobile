@@ -78,7 +78,7 @@ export default {
   methods: {
     async getPortfolioById() {
       this.portfolio = await PortfolioService.getPortfolio(
-        this.$route.query.idx
+        this.$route.query.num
       );
     },
     chkAuthor() {
@@ -91,10 +91,10 @@ export default {
       return result;
     },
     portfolioUpdate() {
-      this.$router.push("/portfolioUpdate?idx=" + this.portfolio.idx);
+      this.$router.push("/portfolioUpdate?num=" + this.$route.query.num);
     },
     async portfolioDelete() {
-      await PortfolioService.delete(this.$route.query.idx);
+      await PortfolioService.delete(this.$route.query.num);
       this.$router.replace("/portfolio");
     }
   }

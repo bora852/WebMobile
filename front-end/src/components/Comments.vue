@@ -1,23 +1,25 @@
 <template>
   <v-container>
+    <!-- <div v-show="true"> -->
     <v-layout wrap>
       <v-flex>
         <v-textarea
           v-model="contents"
           background-color="grey lighten-3"
           color="orange"
-          label="댓글"
+          :label="label"
           class="body_font"
           @keyup.enter="sendComment()"
+          :disabled="isWriter"
         ></v-textarea>
       </v-flex>
     </v-layout>
-    <div class="text-sm-right text-xs-center">
+    <div class="text-sm-center text-xs-center">
       <v-btn color="warning" dark class="text_font" @click="sendComment()">
         등록
       </v-btn>
     </div>
-
+    <!-- </div> -->
     <span v-for="(item, index) in comments" v-bind:key="item.index">
       <v-divider class="cmtPadding" v-if="index === 0"></v-divider>
       <div>
@@ -30,6 +32,7 @@
         <div class="body_font">{{ item.message }}</div>
         <div class="cmtleftAlign text-sm-right text-xs-center">
           <v-btn
+            v-show="chkPermission(item)"
             @click="modifyButton(item)"
             color="warning"
             flat
@@ -41,6 +44,7 @@
             >수정</v-btn
           >
           <v-btn
+            v-show="chkPermission(item)"
             @click="deleteComment(item)"
             color="warning"
             flat
@@ -83,6 +87,8 @@
 <script>
 import CommentService from "../services/CommentService";
 import { eventBus } from "../main.js";
+import Swal from "sweetalert2";
+
 export default {
   name: "Comments",
   props: {
@@ -95,7 +101,10 @@ export default {
       contents: "",
       data: "",
       updateContents: "",
-      comments: []
+      comments: [],
+      num: this.$route.query.num,
+      isWriter: true,
+      label: "로그인 후 댓글 작성이 가능합니다."
     };
   },
   created() {
@@ -112,7 +121,9 @@ export default {
     });
     CommentService.getAllComment(this.category, this.$route.query.num);
   },
-  mounted() {},
+  mounted() {
+    this.rePermission();
+  },
   methods: {
     convertTime(data) {
       var d = new Date(data);
@@ -139,6 +150,22 @@ export default {
       this.comments.splice(index, 1);
     },
     sendComment() {
+      if (this.contents.length < 5) {
+        Swal.fire({
+          text: "댓글을 5글자 이상 작성해주세요.",
+          type: "warning",
+          confirmButtonText: "Ok"
+        });
+        return;
+      }
+      if (this.contents.length > 100) {
+        Swal.fire({
+          text: "댓글을 100글자 이하로 작성해주세요.",
+          type: "warning",
+          confirmButtonText: "Ok"
+        });
+        return;
+      }
       CommentService.sendComment(
         this.category,
         this.$route.query.num,
@@ -151,6 +178,22 @@ export default {
       data.update = !data.update;
     },
     modifyComment(data) {
+      if (data.message.length < 5) {
+        Swal.fire({
+          text: "댓글을 5글자 이상 작성해주세요.",
+          type: "warning",
+          confirmButtonText: "Ok"
+        });
+        return;
+      }
+      if (data.message.length > 100) {
+        Swal.fire({
+          text: "댓글을 100글자 이하로 작성해주세요.",
+          type: "warning",
+          confirmButtonText: "Ok"
+        });
+        return;
+      }
       data.update = !data.update;
       CommentService.modifyComment(
         this.category,
@@ -159,11 +202,44 @@ export default {
         this.$store.state.user,
         data.message
       );
+    },
+    chkPermission(data) {
+      let email = this.$store.state.user;
+      let auth = this.$store.state.userAuth;
+      let result = false;
+      if (data.email == email || auth == "admin") {
+        result = true;
+      }
+      return result;
+    },
+    rePermission() {
+      if (
+        this.$store.state.userAuth == "admin" ||
+        this.$store.state.userAuth == "team"
+      ) {
+        this.isWriter = false;
+        this.label = "댓글 작성";
+      }
     }
   },
-  computed: {},
-  destroyed() {
-    CommentService.closeComment();
+  computed: {
+    watch_auto() {
+      return this.$store.state.userAuth;
+    }
+  },
+  watch: {
+    watch_auto(auth) {
+      if (auth == "admin" || auth == "team") {
+        this.isWriter = false;
+        this.label = "댓글 작성";
+      } else {
+        this.isWriter = true;
+        this.label = "로그인 후 댓글 작성이 가능합니다.";
+      }
+    }
+  },
+  beforeDestroy() {
+    CommentService.closeComment(this.category, this.num);
     eventBus.$off("commentData");
   }
 };

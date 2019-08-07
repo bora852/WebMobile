@@ -63,13 +63,11 @@ export default {
       } else if (this.body == "") {
         SwalAlert.swatAlert("Error!", "내용을 입력해주세요!", "error", "Ok!");
       } else {
-        console.log("user",this.$store.state.user);
         var isPost = await PostService.postPost(
           this.title,
           this.body,
           this.$store.state.user
         );
-        // console.log(isPost);
         if (isPost == "success") {
           this.$router.push("post");
         }

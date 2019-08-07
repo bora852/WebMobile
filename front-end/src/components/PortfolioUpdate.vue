@@ -78,7 +78,9 @@ export default {
   },
   methods: {
     async getPortfolioById() {
-      this.portfolio = await PortfolioService.getPortfolio(this.$route.query.idx);
+      this.portfolio = await PortfolioService.getPortfolio(
+        this.$route.query.num
+      );
       this.body = this.portfolio.body;
       this.sendImg = this.portfolio.img;
     },
@@ -103,7 +105,7 @@ export default {
         SwalAlert.swatAlert("Error!", "사진을 등록해주세요!", "error", "Ok!");
       } else {
         var isPort = await PortfolioService.updatePortfolio(
-          this.$route.query.idx,
+          this.$route.query.num,
           this.portfolio.title,
           this.body,
           this.linkeddata
