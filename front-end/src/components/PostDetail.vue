@@ -40,7 +40,7 @@
 
     <v-divider></v-divider>
     <div class="cmtPadding">
-      <Comments></Comments>
+      <Comments category="post"></Comments>
     </div>
   </v-container>
 </template>

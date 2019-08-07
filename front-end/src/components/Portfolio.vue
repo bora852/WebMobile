@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     sendPortfolioData: function() {
-      this.$router.push("/portfolioDetail?idx=" + this.idx);
+      this.$router.push("/portfolioDetail?num=" + this.idx);
     }
   },
   created() {

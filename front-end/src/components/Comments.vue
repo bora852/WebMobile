@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout wrap>
-      <v-flex><!-- v-if="init" -->
+      <v-flex>
         <v-textarea
           v-model="contents"
           background-color="grey lighten-3"
@@ -21,13 +21,13 @@
     <span v-for="(item, index) in comments" v-bind:key="item.index">
       <v-divider class="cmtPadding" v-if="index === 0"></v-divider>
       <div>
-        <span class="text_font">작성자 : {{ item.email }}</span>0
+        <span class="text_font">작성자 : {{ item.email }}</span>
       </div>
       <div class="cmtleftAlign grey--text text_font" style="font-size:0.9em;">
         {{ item.time }}
       </div>
       <div v-if="!item.update">
-        <div  class="body_font">{{ item.message }}</div>
+        <div class="body_font">{{ item.message }}</div>
         <div class="cmtleftAlign text-sm-right text-xs-center">
           <v-btn
             @click="modifyButton(item)"
@@ -63,31 +63,18 @@
         </div>
         <div class="cmtleftAlign text-sm-right text-xs-center">
           <v-btn
-            @click="modifyButton(item)"
+            @click="modifyComment(item)"
             color="warning"
             flat
             small
             replace
-            style="font-size:1.0em;text-transform:none;"
+            style="font-size:1.2em;text-transform:none;"
             slot="text"
             class="text_font"
             >수정완료</v-btn
           >
         </div>
       </div>
-      <!-- <div class="cmtleftAlign text-sm-right text-xs-center"> -->
-        <!-- <v-btn
-          @click="modifyButton(item)"
-          color="warning"
-          flat
-          small
-          replace
-          style="font-size:1.0em;text-transform:none;"
-          slot="text"
-          class="text_font"
-          >수정</v-btn
-        > -->
-      <!-- </div> -->
       <v-divider class="cmtPadding"></v-divider>
     </span>
   </v-container>
@@ -97,18 +84,22 @@
 import CommentService from "../services/CommentService";
 import { eventBus } from "../main.js";
 export default {
+  name: "Comments",
+  props: {
+    category: {
+      type: String
+    }
+  },
   data() {
     return {
       contents: "",
       data: "",
       updateContents: "",
-      comments: [],
-      idxArr: []
+      comments: []
     };
   },
   created() {
     this.comments = [];
-    this.idxArr = [];
     eventBus.$on("commentData", result => {
       if (result.val() != null) {
         let data = result;
@@ -119,7 +110,7 @@ export default {
         this.comments.push(dataVal);
       }
     });
-    CommentService.getAllComment("port", this.$route.query.idx);
+    CommentService.getAllComment(this.category, this.$route.query.num);
   },
   mounted() {},
   methods: {
@@ -139,22 +130,35 @@ export default {
       return time;
     },
     deleteComment(data) {
-      CommentService.deleteComment("port", this.$route.query.idx, data.keys);
+      CommentService.deleteComment(
+        this.category,
+        this.$route.query.num,
+        data.keys
+      );
       let index = this.comments.indexOf(data);
       this.comments.splice(index, 1);
     },
     sendComment() {
       CommentService.sendComment(
-        "port",
-        this.$route.query.idx,
+        this.category,
+        this.$route.query.num,
         this.$store.state.user,
         this.contents
       );
       this.contents = "";
     },
     modifyButton(data) {
-      console.log("수정 : ",data);
       data.update = !data.update;
+    },
+    modifyComment(data) {
+      data.update = !data.update;
+      CommentService.modifyComment(
+        this.category,
+        this.$route.query.num,
+        data.keys,
+        this.$store.state.user,
+        data.message
+      );
     }
   },
   computed: {},

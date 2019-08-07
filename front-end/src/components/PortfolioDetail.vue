@@ -32,7 +32,7 @@
     </div>
     <v-divider></v-divider>
     <div class="cmtPadding">
-      <Comments></Comments>
+      <Comments category="port"></Comments>
     </div>
   </div>
 </template>
@@ -49,6 +49,7 @@ export default {
   name: "PortfolioDetail",
   data() {
     return {
+      // categ
       portfolio: []
     };
   },
