@@ -2,10 +2,12 @@
   <div>
     <UserList></UserList>
     <WriteCount></WriteCount>
+    <Analytics></Analytics>
   </div>
 </template>
 
 <script>
+import Analytics from "../components/Analytics";
 import UserList from "../components/UserList";
 import WriteCount from "../components/WriteCount";
 import { eventBus } from "../main.js";
@@ -16,7 +18,8 @@ export default {
   name: "adminpage",
   components: {
     UserList,
-    WriteCount
+    WriteCount,
+    Analytics
   },
   created: async function() {
     eventBus.$emit("sendTitle", "Admin");
