@@ -88,7 +88,7 @@ public class PostController {
 
 		for (int tokenNum = 0; tokenNum < tokenlist.size(); tokenNum++) {
 			UserDto user = userService.searchOnceUser(tokenlist.get(tokenNum).getEmail());
-			if (!user.getAuthority().equals("guest")) {
+			if (!user.getAuthority().equals("guest")&&!post.getEmail().equals(tokenlist.get(tokenNum).getEmail())) {
 				sendMessageService.MessageSend("post", tokenlist.get(tokenNum).getToken());
 			}
 		}

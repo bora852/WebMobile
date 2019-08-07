@@ -82,7 +82,7 @@ public class PortFolioController {
 
 		for (int tokenNum = 0; tokenNum < tokenlist.size(); tokenNum++) {
 			UserDto user = userService.searchOnceUser(tokenlist.get(tokenNum).getEmail());
-			if (!user.getAuthority().equals("guest")) {
+			if (!user.getAuthority().equals("guest") &&!port.getEmail().equals(tokenlist.get(tokenNum).getEmail())) {
 				sendMessageService.MessageSend("portfolio", tokenlist.get(tokenNum).getToken());
 			}
 		}
