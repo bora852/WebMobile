@@ -1,6 +1,6 @@
 <template>
   <div class="chart text-align">
-    <span class="chart-label title_font">게시글 수</span>
+    <span class="chart-label title_font">사용 브라우져</span>
     <CountChart :chart-data="chartData" :options="options" ref="count_chart">
     </CountChart>
   </div>
@@ -32,6 +32,9 @@ const options = {
 };
 
 export default {
+  props: {
+    browser: []
+  },
   name: "WriteCount",
   components: { CountChart },
   data: function() {
@@ -41,7 +44,7 @@ export default {
         labels: ["Portfolio", "Post"],
         datasets: [
           {
-            backgroundColor: ["rgba(255, 206, 86, 0.2)", "orange"],
+            backgroundColor: ["yellow", "orange"],
             data: []
           }
         ]
