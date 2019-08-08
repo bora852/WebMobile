@@ -98,7 +98,7 @@ export default {
   padding: 10px;
   /* border: 3px solid orange; */
 }
-.cmtPadding {
+/* .cmtPadding {
   padding: 20px;
-}
+} */
 </style>

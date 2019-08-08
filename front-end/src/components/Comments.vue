@@ -1,31 +1,30 @@
 <template>
-  <v-container>
-    <!-- <div v-show="true"> -->
-    <v-layout wrap>
-      <v-flex>
-        <v-textarea
-          v-model="contents"
-          background-color="grey lighten-3"
-          color="orange"
-          :label="label"
-          class="body_font"
-          @keyup.enter="sendComment()"
-          :disabled="isWriter"
-        ></v-textarea>
-      </v-flex>
-    </v-layout>
+  <div>
+    <v-textarea
+      v-model="contents"
+      background-color="grey lighten-3"
+      color="orange"
+      :label="label"
+      class="body_font"
+      @keyup.enter="sendComment()"
+      :disabled="isWriter"
+    ></v-textarea>
     <div class="text-sm-center text-xs-center">
-      <v-btn color="warning" dark class="text_font" @click="sendComment()">
+      <v-btn
+        color="warning"
+        dark
+        class="text_font contentFontSize"
+        @click="sendComment()"
+      >
         등록
       </v-btn>
     </div>
-    <!-- </div> -->
     <span v-for="(item, index) in comments" v-bind:key="item.index">
-      <v-divider class="cmtPadding" v-if="index === 0"></v-divider>
+      <v-divider class="cmtsPadding" v-if="index === 0"></v-divider>
       <div>
-        <span class="text_font">작성자 : {{ item.email }}</span>
+        <span class="text_font contentFontSize">작성자 : {{ item.email }}</span>
       </div>
-      <div class="cmtleftAlign grey--text text_font" style="font-size:0.9em;">
+      <div class="cmtleftAlign grey--text text_font dateFontSize">
         {{ item.time }}
       </div>
       <div v-if="!item.update">
@@ -38,9 +37,8 @@
             flat
             small
             replace
-            style="font-size:1.0em;text-transform:none;"
             slot="text"
-            class="text_font"
+            class="text_font btn"
             >수정</v-btn
           >
           <v-btn
@@ -50,9 +48,8 @@
             flat
             small
             replace
-            style="font-size:1.0em;text-transform:none;"
             slot="text"
-            class="text_font"
+            class="text_font btn"
             >삭제</v-btn
           >
         </div>
@@ -72,16 +69,15 @@
             flat
             small
             replace
-            style="font-size:1.2em;text-transform:none;"
             slot="text"
-            class="text_font"
+            class="text_font updateBtn"
             >수정완료</v-btn
           >
         </div>
       </div>
-      <v-divider class="cmtPadding"></v-divider>
+      <v-divider class="cmtsPadding"></v-divider>
     </span>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -131,6 +127,9 @@ export default {
       let year = d.getFullYear();
       let month = d.getMonth() + 1;
       let day = d.getDate();
+      if (month < 10) {
+        month = "0" + month;
+      }
       if (day < 10) {
         day = "0" + day;
       }
@@ -249,10 +248,24 @@ export default {
 .replyMsg {
   min-height: 0px;
 }
-.cmtPadding {
-  padding: 10px;
+.cmtsPadding {
+  padding: 5px;
 }
 .cmtleftAlign {
   text-align: right;
+}
+.btn {
+  font-size: 1.2em;
+  text-transform: none;
+}
+.updateBtn {
+  font-size: 1.2em;
+  text-transform: none;
+}
+.dateFontSize {
+  font-size: 0.9em;
+}
+.contentFontSize {
+  font-size: 1.1em;
 }
 </style>

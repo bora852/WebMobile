@@ -1,15 +1,17 @@
 <template>
-  <div>
-    <div class="text_font" style="font-size:1.5em;">{{ portfolio.title }}</div>
+  <div class="v-card theme--light detailPadding">
+    <div class="text_font titleFontSize">{{ portfolio.title }}</div>
     <div class="text-md-right">
-      <v-icon class="mr-1">date_range</v-icon> {{ formatedDate }}
-      <v-icon>person</v-icon> {{ portfolio.email }}
+      <v-icon class="mr-0 iconSize">date_range</v-icon>
+      {{ formatedDate }} <v-icon class="mr-0 iconSize">person</v-icon>
+      {{ portfolio.email }}
     </div>
     <v-divider></v-divider>
     <div class="ImgPadding">
       <v-img :src="portfolio.img" aspect-ratio="3" contain></v-img>
-      <Viewer :value="portfolio.body" class="body_font"/>
+      <Viewer :value="portfolio.body" class="body_font" />
     </div>
+    <v-divider></v-divider>
     <div class="text-sm-right text-xs-center">
       <v-btn
         v-show="isAuthor()"
@@ -30,7 +32,6 @@
         <v-icon size="20" class="mr-2">delete</v-icon> 삭제
       </v-btn>
     </div>
-    <v-divider></v-divider>
     <div class="cmtPadding">
       <Comments category="port"></Comments>
     </div>
@@ -105,7 +106,13 @@ export default {
 .ImgPadding {
   padding: 10px;
 }
-.cmtPadding {
-  padding: 20px;
+.titleFontSize {
+  font-size: 1.7em;
+}
+.detailPadding {
+  padding: 30px;
+}
+.iconSize {
+  font-size: 1.3em;
 }
 </style>
