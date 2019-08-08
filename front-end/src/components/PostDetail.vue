@@ -1,23 +1,26 @@
 <template>
-  <v-container>
+  <div class="v-card theme--light detailPadding">
     <v-layout py-4 h-100>
-      <v-flex row class="postbodyStyle">
-        <h2 class="color-333 font-weight-light title_overflow text_font">
-          제목 : {{ post.title }}
-        </h2>
-        <br />
+      <v-flex row>
+        <div class="text_font titleFontSize">
+          {{ post.title }}
+        </div>
+        <div class="text-md-right">
+          <v-icon class="mr-0 iconSize">date_range</v-icon>
+          {{ formatedDate }} <v-icon class="mr-0 iconSize">person</v-icon>
+          {{ post.email }}
+        </div>
         <hr />
         <br />
         <div>
-          <p
-            class="mb-1 color-666 font-weight-light subheading body_overflow text_font"
-          >
+          <p class="body_font">
             {{ post.body }}
           </p>
         </div>
       </v-flex>
     </v-layout>
-    <div class="text-sm-right text-xs-center">
+    <hr />
+    <div class="text-sm-right text-xs-center my-2">
       <v-btn
         v-show="isAuthor()"
         color="warning"
@@ -37,12 +40,10 @@
         <v-icon size="20" class="mr-2">delete</v-icon> 삭제
       </v-btn>
     </div>
-
-    <v-divider></v-divider>
     <div class="cmtPadding">
       <Comments category="post"></Comments>
     </div>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -67,6 +68,19 @@ export default {
   computed: {
     isAuthor: function() {
       return this.chkAuthor;
+    },
+    formatedDate() {
+      let curDate = new Date(this.post.created_at);
+      let year = curDate.getFullYear();
+      let month = curDate.getMonth() + 1;
+      let day = curDate.getDate();
+      if (day < 10) {
+        day = "0" + day;
+      }
+      if (month < 10) {
+        month = "0" + month;
+      }
+      return year + "/" + month + "/" + day;
     }
   },
   methods: {
@@ -93,12 +107,4 @@ export default {
 };
 </script>
 
-<style>
-.postbodyStyle {
-  padding: 10px;
-  /* border: 3px solid orange; */
-}
-/* .cmtPadding {
-  padding: 20px;
-} */
-</style>
+<style></style>

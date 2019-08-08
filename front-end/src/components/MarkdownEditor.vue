@@ -1,11 +1,16 @@
 <template>
   <v-container fluid :grid-list-md="!$vuetify.breakpoint.xs">
     <v-layout wrap row>
-      <v-flex xs12 sm6>
+      <v-flex xs12>
         <editor v-model="editorText" @input="postMsg()" />
       </v-flex>
-      <v-flex xs12 sm6>
-        <viewer :value="editorText" />
+      <v-flex xs12>
+        <div class="my-3 text_font">
+          <v-icon class="mr-0 previewIcon">pageview</v-icon>
+          <span class="titleFontSize">미리보기</span>
+          <v-divider></v-divider>
+        </div>
+        <viewer class="border-styles body_font" :value="editorText" />
       </v-flex>
     </v-layout>
   </v-container>
@@ -48,3 +53,16 @@ export default {
   }
 };
 </script>
+
+<style>
+.previewIcon {
+  font-size: 2em;
+}
+
+.border-styles {
+  padding: 10px;
+  border-width: 1px;
+  border-color: #aaa;
+  border-style: solid;
+}
+</style>

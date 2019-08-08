@@ -3,7 +3,7 @@
     <v-container>
       <v-layout>
         <v-flex xs12 data-aos="fade-right">
-          <WritePost></WritePost>
+          <PostWrite></PostWrite>
         </v-flex>
       </v-layout>
     </v-container>
@@ -12,11 +12,11 @@
 
 <script>
 import { eventBus } from "../main.js";
-import WritePost from "../components/WritePost";
+import PostWrite from "../components/PostWrite";
 
 export default {
   name: "PostWritePage",
-  components: { WritePost },
+  components: { PostWrite },
   created() {
     eventBus.$emit("sendTitle", "PostWrite");
   }

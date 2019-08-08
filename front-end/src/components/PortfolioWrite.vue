@@ -1,8 +1,7 @@
 <template>
-  <div class="py-3">
+  <div class="v-card theme--light detailPadding">
     <v-layout>
-      <v-flex xs10>
-        <h1 class="text_font">Portfolio Write</h1>
+      <v-flex>
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-container>
             <v-flex px10 py10>
@@ -12,6 +11,8 @@
                 :rules="titleRules"
                 label="제목"
                 required
+                color="orange"
+                class="body_font titleFontSize"
               >
               </v-text-field>
             </v-flex>
@@ -31,8 +32,17 @@
                 </v-flex>
               </v-container>
             </v-flex>
-            <v-flex px10 py10>
-              <v-btn color="warning" dark @click.stop="submit()">Submit</v-btn>
+            <v-flex px10 py10 class="text-sm-right text-xs-center text_font">
+              <v-btn
+                color="warning"
+                class="ImgBtnSize"
+                dark
+                @click.stop="submit()"
+                >작성</v-btn
+              >
+              <v-btn color="warning" class="ImgBtnSize" dark to="portfolio"
+                >취소</v-btn
+              >
             </v-flex>
           </v-container>
         </v-form>
@@ -44,12 +54,11 @@
 <script>
 import insertWriter from "./insertWriter";
 import MarkdownEditor from "../components/MarkdownEditor";
-// import FirebaseService from "@/services/FirebaseService";
 import PortfolioService from "../services/PortfolioService";
 import SwalAlert from "../services/SwalAlert";
 
 export default {
-  name: "writePortfolio",
+  name: "PortfolioWrite",
   components: {
     MarkdownEditor,
     insertWriter

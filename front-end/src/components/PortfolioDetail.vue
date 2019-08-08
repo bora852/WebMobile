@@ -6,17 +6,17 @@
       {{ formatedDate }} <v-icon class="mr-0 iconSize">person</v-icon>
       {{ portfolio.email }}
     </div>
-    <v-divider></v-divider>
+    <hr />
     <div class="ImgPadding">
       <v-img :src="portfolio.img" aspect-ratio="3" contain></v-img>
       <Viewer :value="portfolio.body" class="body_font" />
     </div>
-    <v-divider></v-divider>
-    <div class="text-sm-right text-xs-center">
+    <hr />
+    <div class="text-sm-right text-xs-center my-2">
       <v-btn
         v-show="isAuthor()"
         color="warning"
-        @click="portfolioUpdate()"
+        @click="portfolioEdit()"
         dark
         class="text_font"
       >
@@ -70,6 +70,9 @@ export default {
       if (day < 10) {
         day = "0" + day;
       }
+      if (month < 10) {
+        month = "0" + month;
+      }
       return year + "/" + month + "/" + day;
     }
   },
@@ -91,8 +94,8 @@ export default {
       }
       return result;
     },
-    portfolioUpdate() {
-      this.$router.push("/portfolioUpdate?num=" + this.$route.query.num);
+    portfolioEdit() {
+      this.$router.push("/portfolioEdit?num=" + this.$route.query.num);
     },
     async portfolioDelete() {
       await PortfolioService.delete(this.$route.query.num);

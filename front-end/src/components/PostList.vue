@@ -8,10 +8,8 @@
       xs12
       :key="i"
     >
-    <!-- :class="'xs' + 12 / column" -->
       <Post
         class="ma-2"
-
         :date="dateFormating(posts[i - 1].created_at)"
         :title="posts[i - 1].title"
         :body="posts[i - 1].body"
@@ -22,8 +20,8 @@
       <v-btn color="warning" dark v-on:click="loadMorePosts">
         <v-icon size="25" class="mr-2">fa-plus</v-icon> View more
       </v-btn>
-      <v-btn color="warning" dark to="writePost" v-show="isWriter">
-        <v-icon size="25" class="mr-2">fa-edit</v-icon> writePost
+      <v-btn color="warning" dark to="postWrite" v-show="isWriter">
+        <v-icon size="25" class="mr-2">fa-edit</v-icon> write Post
       </v-btn>
     </v-flex>
   </v-layout>
@@ -99,6 +97,9 @@ export default {
         var day = curDate.getDate();
         if (day < 10) {
           day = "0" + day;
+        }
+        if (month < 10) {
+          month = "0" + month;
         }
         return year + "/" + month + "/" + day;
       };

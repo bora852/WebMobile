@@ -1,39 +1,47 @@
 <template>
-  <div>
-    <v-flex xs10>
-      <h1 class="text_font">Post Write</h1>
-      <v-form ref="form" v-model="valid" lazy-validation>
-        <v-container>
-          <v-flex px10 py10>
-            <v-text-field
-              v-model="title"
-              :counter="30"
-              :rules="titleRules"
-              label="제목"
-              required
-            >
-            </v-text-field>
-          </v-flex>
-        </v-container>
-        <v-container fluid grid-list-md>
-          <v-layout wrap>
-            <v-flex xs12>
+  <v-container>
+    <div class="v-card theme--light padding30">
+      <v-layout>
+        <v-flex>
+          <v-form ref="form" v-model="valid" lazy-validation>
+            <v-flex class="my-4">
+              <v-text-field
+                v-model="title"
+                :counter="30"
+                :rules="titleRules"
+                label="제목"
+                color="orange"
+                required
+              >
+              </v-text-field>
+            </v-flex>
+
+            <v-flex xs12 class="my-3">
               <v-textarea
                 name="input-7-1"
                 label="내용"
+                color="orange"
                 v-model="body"
               ></v-textarea>
             </v-flex>
-          </v-layout>
-        </v-container>
-      </v-form>
-      <v-flex px10 py10>
-        <v-btn color="warning" dark @click.stop="submit()" class="float-right"
-          >수정완료</v-btn
-        >
-      </v-flex>
-    </v-flex>
-  </div>
+
+            <v-flex class="text-sm-right text-xs-center text_font">
+              <v-btn
+                color="warning"
+                class="ImgBtnSize"
+                dark
+                @click.stop="submit()"
+                >수정완료</v-btn
+              >
+              <v-btn color="warning" class="ImgBtnSize" to="post" dark
+                >수정취소</v-btn
+              >
+            </v-flex>
+          </v-form>
+        </v-flex>
+      </v-layout>
+    </div>
+  </v-container>
 </template>
 
 <script>
@@ -62,9 +70,26 @@ export default {
   methods: {
     async submit() {
       if (this.title == "") {
-        SwalAlert.swatAlert("Error!", "제목을 입력해주세요!", "error", "Ok!");
+        SwalAlert.swatAlert(
+          "warning",
+          "제목을 입력해주세요!",
+          "warning",
+          "Ok!"
+        );
+      } else if (this.title.length > 30) {
+        SwalAlert.swatAlert(
+          "warning",
+          "제목을 30자 이하로 입력해주세요",
+          "warning",
+          "Ok!"
+        );
       } else if (this.body == "") {
-        SwalAlert.swatAlert("Error!", "내용을 입력해주세요!", "error", "Ok!");
+        SwalAlert.swatAlert(
+          "warning",
+          "내용을 입력해주세요!",
+          "warning",
+          "Ok!"
+        );
       } else {
         var isPost = await PostService.updatePost(
           this.title,
@@ -91,5 +116,8 @@ export default {
 <style>
 .float-right {
   float: right;
+}
+.padding30 {
+  padding: 30px;
 }
 </style>

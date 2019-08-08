@@ -1,5 +1,10 @@
 <template>
   <div>
+    <div class="text-sm-left text-xs-left">
+      <v-icon class="mr-0 previewIcon">add_photo_alternate</v-icon>
+      <span class="text_font titleFontSize">이미지 선택</span>
+      <v-divider></v-divider>
+    </div>
     <v-container fluid>
       <v-flex
         xs12
@@ -23,9 +28,24 @@
         </form>
       </v-flex>
     </v-container>
-    <v-btn color="warning" dark @click.stop="imgrand()"
-      >Random Image from Imgur</v-btn
-    >
+    <div class="text_font">
+      <v-btn
+        color="warning"
+        class="ImgBtnSize"
+        flat
+        dark
+        @click.stop="pickFile()"
+        >이미지첨부</v-btn
+      >
+      <v-btn
+        color="warning"
+        class="ImgBtnSize"
+        flat
+        dark
+        @click.stop="imgrand()"
+        >랜덤이미지</v-btn
+      >
+    </div>
   </div>
 </template>
 
@@ -162,3 +182,9 @@ export default {
   }
 };
 </script>
+
+<style>
+.ImgBtnSize {
+  font-size: 1.2em;
+}
+</style>

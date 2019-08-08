@@ -1,5 +1,10 @@
 <template>
-  <v-card style="cursor:pointer" @click="detailpost" hover>
+  <v-card
+    color="orange lighten-5"
+    style="cursor:pointer"
+    @click="detailpost"
+    hover
+  >
     <v-layout py-4 h-100>
       <v-flex row>
         <div class="postPadding">

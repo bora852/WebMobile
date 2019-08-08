@@ -21,7 +21,7 @@ export default {
     Postdetail
   },
   created() {
-    eventBus.$emit("sendTitle", "PostDetail");
+    eventBus.$emit("sendTitle", "Post Detail");
   }
 };
 </script>

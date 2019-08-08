@@ -1,8 +1,7 @@
 <template>
-  <div class="py-3">
+  <div class="v-card theme--light detailPadding">
     <v-layout>
-      <v-flex xs10>
-        <h1 class="text_font">Portfolio Update</h1>
+      <v-flex>
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-container>
             <v-flex px10 py10>
@@ -12,11 +11,13 @@
                 :rules="titleRules"
                 label="제목"
                 required
+                color="orange"
+                class="body_font titleFontSize"
               >
               </v-text-field>
             </v-flex>
 
-            <v-flex px10 py10>
+            <v-flex>
               <MarkdownEditor
                 :body="body"
                 v-on:sendBody="getBody"
@@ -29,16 +30,26 @@
                   xs12
                   class="text-xs-center text-sm-center text-md-center text-lg-center"
                 >
-                  <!-- <img :src="imageUrl" height="150" v-if="imageUrl" /> -->
                   <insertWriter
                     :sendImg="sendImg"
                     v-on:FolioImgLink="FolioImgLink"
                   ></insertWriter>
                 </v-flex>
               </v-container>
+              <v-divider></v-divider>
             </v-flex>
-            <v-flex px10 py10>
-              <v-btn color="warning" dark @click.stop="submit()">Submit</v-btn>
+
+            <v-flex px10 py10 class="text-sm-right text-xs-center text_font">
+              <v-btn
+                color="warning"
+                class="ImgBtnSize"
+                dark
+                @click.stop="submit()"
+                >수정완료</v-btn
+              >
+              <v-btn color="warning" class="ImgBtnSize" to="portfolio" dark
+                >수정취소</v-btn
+              >
             </v-flex>
           </v-container>
         </v-form>
@@ -54,7 +65,7 @@ import PortfolioService from "../services/PortfolioService";
 import SwalAlert from "../services/SwalAlert";
 
 export default {
-  name: "PortfolioUpdate",
+  name: "portfolioEdit",
   components: {
     MarkdownEditor,
     insertWriter
