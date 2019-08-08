@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.ass.dao.CalendarsMapper">
 
-	<select id="searchAllCalen" resultType="calen">
-		SELECT * FROM calendars;
+	<select id="searchAllCalen" resultType="calen"  parameterType="java.lang.String">
+		SELECT * FROM calendars WHERE user_email=#{user_email};
 	</select>
 	<select id="searchOnceCalen" parameterType="int" resultType="calen">
 		SELECT * FROM calendars WHERE idx=#{idx};
@@ -15,6 +15,6 @@
 		UPDATE calendars SET title = #{title}, body = #{body}, created_at = #{created_at} WHERE idx=#{idx}; 
 	</update>
 	<insert id="insertCalen" parameterType="calen">
-		INSERT INTO calendars  values (0, #{title}, #{body}, created_at = #{created_at}, ,#{email});
+		INSERT INTO calendars  values (0, #{title}, #{body}, created_at = #{created_at}, #{email});
 	</insert>
 </mapper>

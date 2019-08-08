@@ -23,9 +23,10 @@ public class CalendarsController {
 	private CalendarsService calendarsService;
 	
 	@RequestMapping(value= "/calenAll", method=RequestMethod.GET)
-	public List<CalendarsDto> calenAll() throws Exception{
-		System.out.println("Calendars목록 : " + calendarsService.searchAllCalen());
-		return calendarsService.searchAllCalen();
+	public List<CalendarsDto> calenAll(@RequestParam String user_email) throws Exception{
+		System.out.println(user_email + "   :  calen test");
+		System.out.println("Calendars목록 : " + calendarsService.searchAllCalen(user_email));
+		return calendarsService.searchAllCalen(user_email);
 	}
 	
 	@RequestMapping(value="/calenOnce", method=RequestMethod.GET)
@@ -60,6 +61,7 @@ public class CalendarsController {
 	@RequestMapping(value="calenInsert", method= RequestMethod.POST)
 	public HashMap<String, Object> insertCalen(@RequestBody CalendarsDto calen)throws Exception{
 		int res = calendarsService.insertCalen(calen);
+		
 		HashMap<String, Object> result = new HashMap<>();
 		if(res>0) {
 			result.put("state", "1");
