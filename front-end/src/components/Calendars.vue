@@ -10,7 +10,38 @@
     <v-flex sm4 xs12 class="text-sm-right text-xs-right">
       <h1>Calendar</h1>
     </v-flex>
-
+          <v-spacer></v-spacer>
+    <!-- modal -->
+    <v-dialog v-model="dialog" persistent max-width="400px">
+      <template v-slot:activator="{ on }">
+          <v-btn fab text icon small @click="writing">
+              <v-icon small>arrow_back_ios</v-icon>
+        </v-btn>
+      </template>
+      <v-card>
+        <v-card-title>
+          <span class="headline">Calendars</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container grid-list-md>
+            <v-layout wrap>
+              <v-flex xs12 sm6 md4>
+                <v-text-field label="Title*" required></v-text-field>
+              </v-flex>
+              <v-flex xs12>
+                <v-text-field label="Contents*" required></v-text-field>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="amber accent-4" text @click="dialog = false">Close</v-btn>
+           <v-btn color="amber accent-4" text @click="dialog = false">Save</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!-- modal end -->
     <v-flex xs12 class="mb-3">
       <v-sheet height="500">
         <!-- v-model="start" -->
@@ -78,31 +109,23 @@
 
 <script>
 import CalendarsService from "../services/CalendarsService";
+import { eventBus } from "../main.js";
 
 export default {
   data: () => ({
+    dialog: false,
     today: "",
     focus: "",
     type: "month",
     start: null,
     end: null,
     typeOptions: [{ text: "Month", value: "month" }],
-    events: [
-      {
-        title: "Vacation",
-        body: "Going to the beach!sdfsdfsdf!!!!!!!!!!!",
-        date: "2019-08-08",
-        open: false
-      },
-      {
-        title: "Vacations",
-        body: "Going to the beach!",
-        date: "2019-08-09",
-        open: false
-      }
-    ]
+    calens: [],
+    events: [],
+    user_email: ""
   }),
   created() {
+    this.getId();
     let newday = new Date();
     let month = newday.getMonth() + 1;
     let date = newday.getDate();
@@ -115,6 +138,14 @@ export default {
       date = "0" + date.toString();
     }
     this.today = year + "-" + month + "-" + date;
+
+    console.log("노잼선열");
+
+
+  },
+  mounted() {
+    console.log(this.user_email+"3")
+
   },
   computed: {
     // convert the list of events into a map of lists keyed by date
@@ -125,6 +156,30 @@ export default {
     }
   },
   methods: {
+    async getId(){
+      await eventBus.$on("getUserId", userId => {
+            console.log(userId);
+        this.user_email = userId;
+      });
+    },
+    async getcalendar(){
+      console.log(this.user_email+"2")
+      this.calens = await CalendarsService.getList(this.user_email);
+      console.log(this.calens+" calens")
+      console.log(this.calens[0].title+" calen.title")
+      for (var i = 0; i < this.calens.length; i++) {
+        let c_temp = { title: "", body: "", date: "", idx: "",open: false };
+
+        var yymmdd = this.calens[i].created_at;
+        yymmdd = yymmdd.substring(0, 10);
+        console.log(this.calens[i].idx);
+        c_temp.date = yymmdd;
+        c_temp.title = this.calens[i].title;
+        c_temp.body = this.calens[i].body;
+        c_temp.idx = this.calens[i].idx;
+        this.events.push(c_temp);
+      }
+    },
     open(event) {
       alert(event.title);
     },
@@ -137,6 +192,12 @@ export default {
     next() {
       this.$refs.calendar.next();
     }
+  },
+  watch: {
+    user_email: function(){
+      this.getcalendar();
+    }
+
   }
 };
 </script>
