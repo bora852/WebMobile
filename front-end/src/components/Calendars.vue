@@ -10,13 +10,11 @@
     <v-flex sm4 xs12 class="text-sm-right text-xs-right">
       <h1>Calendar</h1>
     </v-flex>
-          <v-spacer></v-spacer>
+    <v-spacer></v-spacer>
     <!-- modal -->
     <v-dialog v-model="dialog" persistent max-width="400px">
       <template v-slot:activator="{ on }">
-          <v-btn fab text icon small @click="writing">
-              <v-icon small>arrow_back_ios</v-icon>
-        </v-btn>
+        <v-btn fab text icon v-on="on">add<v-icon small>create</v-icon> </v-btn>
       </template>
       <v-card>
         <v-card-title>
@@ -31,13 +29,20 @@
               <v-flex xs12>
                 <v-text-field label="Contents*" required></v-text-field>
               </v-flex>
+              <v-flex xs12>
+                <v-text-field label="date*" required></v-text-field>
+              </v-flex>
             </v-layout>
           </v-container>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="amber accent-4" text @click="dialog = false">Close</v-btn>
-           <v-btn color="amber accent-4" text @click="dialog = false">Save</v-btn>
+          <v-btn color="amber accent-4" text @click="submit()">
+            Save
+          </v-btn>
+          <v-btn color="amber accent-4" text @click="dialog = false">
+            Close
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -109,6 +114,7 @@
 
 <script>
 import CalendarsService from "../services/CalendarsService";
+import SwalAlert from "../services/SwalAlert";
 import { eventBus } from "../main.js";
 
 export default {
@@ -138,15 +144,8 @@ export default {
       date = "0" + date.toString();
     }
     this.today = year + "-" + month + "-" + date;
-
-    console.log("노잼선열");
-
-
   },
-  mounted() {
-    console.log(this.user_email+"3")
-
-  },
+  mounted() {},
   computed: {
     // convert the list of events into a map of lists keyed by date
     eventsMap() {
@@ -156,28 +155,46 @@ export default {
     }
   },
   methods: {
-    async getId(){
+    async getId() {
       await eventBus.$on("getUserId", userId => {
-            console.log(userId);
         this.user_email = userId;
       });
     },
-    async getcalendar(){
-      console.log(this.user_email+"2")
+    async getcalendar() {
       this.calens = await CalendarsService.getList(this.user_email);
-      console.log(this.calens+" calens")
-      console.log(this.calens[0].title+" calen.title")
       for (var i = 0; i < this.calens.length; i++) {
-        let c_temp = { title: "", body: "", date: "", idx: "",open: false };
+        let c_temp = { title: "", body: "", date: "", idx: "", open: false };
 
         var yymmdd = this.calens[i].created_at;
         yymmdd = yymmdd.substring(0, 10);
-        console.log(this.calens[i].idx);
+
         c_temp.date = yymmdd;
         c_temp.title = this.calens[i].title;
         c_temp.body = this.calens[i].body;
         c_temp.idx = this.calens[i].idx;
         this.events.push(c_temp);
+      }
+    },
+    async submit() {
+      if (this.title == "") {
+        SwalAlert.swatAlert("Error!", "제목을 입력해주세요!", "error", "Ok!");
+      } else if (this.body == "") {
+        SwalAlert.swatAlert("Error!", "내용을 입력해주세요!", "error", "Ok!");
+      } else if(this.date ==""){
+        SwalAlert.swatAlert("Error!", "날짜를 선택해주세요!", "error", "Ok!");
+      }
+      else {
+        console.log("user",this.$store.state.user);
+        var isCalen = await CalendarsService.CalendarsInsert(
+          this.title,
+          this.body,
+          this.date,
+          this.$store.state.user
+        );
+        // console.log(isPost);
+        if (isCalen == "success") {
+          this.$router.push("post");
+        }
       }
     },
     open(event) {
@@ -194,10 +211,9 @@ export default {
     }
   },
   watch: {
-    user_email: function(){
+    user_email: function() {
       this.getcalendar();
     }
-
   }
 };
 </script>
@@ -208,9 +224,9 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
   border-radius: 2px;
-  background-color: #FFD600;
+  background-color: #ffd600;
   color: #ffffff;
-  border: 1px solid #FFD600;
+  border: 1px solid #ffd600;
   width: 100%;
   font-size: 12px;
   padding: 2.5px;
