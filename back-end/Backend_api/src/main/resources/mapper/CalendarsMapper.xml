@@ -15,6 +15,6 @@
 		UPDATE calendars SET title = #{title}, body = #{body}, created_at = #{created_at} WHERE idx=#{idx}; 
 	</update>
 	<insert id="insertCalen" parameterType="calen">
-		INSERT INTO calendars  values (0, #{title}, #{body}, created_at = #{created_at}, #{email});
+		INSERT INTO calendars  values (0, #{title}, #{body}, #{created_at}, #{user_email});
 	</insert>
 </mapper>
