@@ -1,39 +1,42 @@
 <template>
-  <div class="v-card theme--light detailPadding">
-    <div class="text_font titleFontSize">{{ portfolio.title }}</div>
-    <div class="text-md-right">
-      <v-icon class="mr-0 iconSize">date_range</v-icon>
-      {{ formatedDate }} <v-icon class="mr-0 iconSize">person</v-icon>
-      {{ portfolio.email }}
-    </div>
-    <hr />
-    <div class="ImgPadding">
-      <v-img :src="portfolio.img" aspect-ratio="3" contain></v-img>
-      <Viewer :value="portfolio.body" class="body_font" />
-    </div>
-    <hr />
-    <div class="text-sm-right text-xs-center my-2">
-      <v-btn
-        v-show="isAuthor()"
-        color="warning"
-        @click="portfolioEdit()"
-        dark
-        class="text_font"
-      >
-        <v-icon size="20" class="mr-2">create</v-icon> 수정
-      </v-btn>
-      <v-btn
-        v-show="isAuthor()"
-        color="warning"
-        @click="portfolioDelete()"
-        dark
-        class="text_font"
-      >
-        <v-icon size="20" class="mr-2">delete</v-icon> 삭제
-      </v-btn>
-    </div>
-    <div class="cmtPadding">
-      <Comments category="port"></Comments>
+  <div>
+    <div class="text_font subFontSize">📰포트폴리오</div>
+    <div class="v-card theme--light detailPadding">
+      <div class="text_font titleFontSize">{{ portfolio.title }}</div>
+      <div class="text-md-right">
+        <v-icon class="mr-0 iconSize">date_range</v-icon>
+        {{ formatedDate }} <v-icon class="mr-0 iconSize">person</v-icon>
+        {{ portfolio.email }}
+      </div>
+      <hr />
+      <div class="ImgPadding">
+        <v-img :src="portfolio.img" aspect-ratio="3" contain></v-img>
+        <Viewer :value="portfolio.body" class="body_font" />
+      </div>
+      <hr />
+      <div class="text-sm-right text-xs-center my-2">
+        <v-btn
+          v-show="isAuthor()"
+          color="warning"
+          @click="portfolioEdit()"
+          dark
+          class="text_font"
+        >
+          <v-icon size="20" class="mr-2">create</v-icon> 수정
+        </v-btn>
+        <v-btn
+          v-show="isAuthor()"
+          color="warning"
+          @click="portfolioDelete()"
+          dark
+          class="text_font"
+        >
+          <v-icon size="20" class="mr-2">delete</v-icon> 삭제
+        </v-btn>
+      </div>
+      <div class="cmtPadding">
+        <Comments category="port"></Comments>
+      </div>
     </div>
   </div>
 </template>

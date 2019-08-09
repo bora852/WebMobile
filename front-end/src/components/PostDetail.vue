@@ -1,47 +1,50 @@
 <template>
-  <div class="v-card theme--light detailPadding">
-    <v-layout py-4 h-100>
-      <v-flex row>
-        <div class="text_font titleFontSize">
-          {{ post.title }}
-        </div>
-        <div class="text-md-right">
-          <v-icon class="mr-0 iconSize">date_range</v-icon>
-          {{ formatedDate }} <v-icon class="mr-0 iconSize">person</v-icon>
-          {{ post.email }}
-        </div>
-        <hr />
-        <br />
-        <div>
-          <p class="body_font">
-            {{ post.body }}
-          </p>
-        </div>
-      </v-flex>
-    </v-layout>
-    <hr />
-    <div class="text-sm-right text-xs-center my-2">
-      <v-btn
-        v-show="isAuthor()"
-        color="warning"
-        @click="postEdit()"
-        dark
-        class="text_font"
-      >
-        <v-icon size="20" class="mr-2">create</v-icon> 수정
-      </v-btn>
-      <v-btn
-        v-show="isAuthor()"
-        color="warning"
-        @click="postDelete()"
-        dark
-        class="text_font"
-      >
-        <v-icon size="20" class="mr-2">delete</v-icon> 삭제
-      </v-btn>
-    </div>
-    <div class="cmtPadding">
-      <Comments category="post"></Comments>
+  <div>
+    <div class="text_font subFontSize">📑포스트</div>
+    <div class="v-card theme--light detailPadding">
+      <v-layout py-4 h-100>
+        <v-flex row>
+          <div class="text_font titleFontSize">
+            {{ post.title }}
+          </div>
+          <div class="text-md-right">
+            <v-icon class="mr-0 iconSize">date_range</v-icon>
+            {{ formatedDate }} <v-icon class="mr-0 iconSize">person</v-icon>
+            {{ post.email }}
+          </div>
+          <hr />
+          <br />
+          <div>
+            <p class="body_font">
+              {{ post.body }}
+            </p>
+          </div>
+        </v-flex>
+      </v-layout>
+      <hr />
+      <div class="text-sm-right text-xs-center my-2">
+        <v-btn
+          v-show="isAuthor()"
+          color="warning"
+          @click="postEdit()"
+          dark
+          class="text_font"
+        >
+          <v-icon size="20" class="mr-2">create</v-icon> 수정
+        </v-btn>
+        <v-btn
+          v-show="isAuthor()"
+          color="warning"
+          @click="postDelete()"
+          dark
+          class="text_font"
+        >
+          <v-icon size="20" class="mr-2">delete</v-icon> 삭제
+        </v-btn>
+      </div>
+      <div class="cmtPadding">
+        <Comments category="post"></Comments>
+      </div>
     </div>
   </div>
 </template>

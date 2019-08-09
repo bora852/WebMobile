@@ -1,60 +1,63 @@
 <template>
-  <div class="v-card theme--light detailPadding">
-    <v-layout>
-      <v-flex>
-        <v-form ref="form" v-model="valid" lazy-validation>
-          <v-container>
-            <v-flex px10 py10>
-              <v-text-field
-                v-model="portfolio.title"
-                :counter="30"
-                :rules="titleRules"
-                label="제목"
-                required
-                color="orange"
-                class="body_font titleFontSize"
-              >
-              </v-text-field>
-            </v-flex>
-
-            <v-flex>
-              <MarkdownEditor
-                :body="body"
-                v-on:sendBody="getBody"
-              ></MarkdownEditor>
-            </v-flex>
-
-            <v-flex>
-              <v-container fluid>
-                <v-flex
-                  xs12
-                  class="text-xs-center text-sm-center text-md-center text-lg-center"
+  <div>
+    <div class="text_font subFontSize">📝포트폴리오 수정</div>
+    <div class="v-card theme--light detailPadding">
+      <v-layout>
+        <v-flex>
+          <v-form ref="form" v-model="valid" lazy-validation>
+            <v-container>
+              <v-flex px10 py10>
+                <v-text-field
+                  v-model="portfolio.title"
+                  :counter="30"
+                  :rules="titleRules"
+                  label="제목"
+                  required
+                  color="orange"
+                  class="body_font titleFontSize"
                 >
-                  <insertWriter
-                    :sendImg="sendImg"
-                    v-on:FolioImgLink="FolioImgLink"
-                  ></insertWriter>
-                </v-flex>
-              </v-container>
-              <v-divider></v-divider>
-            </v-flex>
+                </v-text-field>
+              </v-flex>
 
-            <v-flex px10 py10 class="text-sm-right text-xs-center text_font">
-              <v-btn
-                color="warning"
-                class="ImgBtnSize"
-                dark
-                @click.stop="submit()"
-                >수정완료</v-btn
-              >
-              <v-btn color="warning" class="ImgBtnSize" to="portfolio" dark
-                >수정취소</v-btn
-              >
-            </v-flex>
-          </v-container>
-        </v-form>
-      </v-flex>
-    </v-layout>
+              <v-flex>
+                <MarkdownEditor
+                  :body="body"
+                  v-on:sendBody="getBody"
+                ></MarkdownEditor>
+              </v-flex>
+
+              <v-flex>
+                <v-container fluid>
+                  <v-flex
+                    xs12
+                    class="text-xs-center text-sm-center text-md-center text-lg-center"
+                  >
+                    <insertWriter
+                      :sendImg="sendImg"
+                      v-on:FolioImgLink="FolioImgLink"
+                    ></insertWriter>
+                  </v-flex>
+                </v-container>
+                <v-divider></v-divider>
+              </v-flex>
+
+              <v-flex px10 py10 class="text-sm-right text-xs-center text_font">
+                <v-btn
+                  color="warning"
+                  class="ImgBtnSize"
+                  dark
+                  @click.stop="submit()"
+                  >수정완료</v-btn
+                >
+                <v-btn color="warning" class="ImgBtnSize" to="portfolio" dark
+                  >수정취소</v-btn
+                >
+              </v-flex>
+            </v-container>
+          </v-form>
+        </v-flex>
+      </v-layout>
+    </div>
   </div>
 </template>
 
@@ -142,3 +145,9 @@ export default {
   }
 };
 </script>
+
+<style>
+.subFontSize {
+  font-size: 2.2em;
+}
+</style>
