@@ -49,10 +49,10 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="amber accent-4" text @click.stop="submit()">
+          <v-btn color="amber accent-4" text @click="submit(); reset(); dialog = false ">
             Save
           </v-btn>
-          <v-btn color="amber accent-4" text @click="dialog = false">
+          <v-btn color="amber accent-4" text @click="dialog = false; reset();">
             Close
           </v-btn>
         </v-card-actions>
