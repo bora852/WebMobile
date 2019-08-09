@@ -12,7 +12,7 @@
     </v-flex>
     <v-spacer></v-spacer>
     <!-- modal -->
-    <v-dialog v-model="dialog" persistent max-width="400px">
+    <v-dialog ref="form" v-model="dialog" persistent max-width="400px">
       <template v-slot:activator="{ on }">
         <v-btn fab text icon v-on="on">add<v-icon small>create</v-icon> </v-btn>
       </template>
@@ -24,20 +24,32 @@
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex xs12 sm6 md4>
-                <v-text-field label="Title*" required></v-text-field>
+                <v-text-field
+                  v-model="title"
+                  label="Title*"
+                  required
+                ></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field label="Contents*" required></v-text-field>
+                <v-text-field
+                  v-model="body"
+                  label="Contents"
+                  required
+                ></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field label="date*" required></v-text-field>
+                <v-text-field
+                  v-model="date"
+                  label="date*"
+                  required
+                ></v-text-field>
               </v-flex>
             </v-layout>
           </v-container>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="amber accent-4" text @click="submit()">
+          <v-btn color="amber accent-4" text @click.stop="submit()">
             Save
           </v-btn>
           <v-btn color="amber accent-4" text @click="dialog = false">
@@ -68,6 +80,7 @@
                 full-width
                 offset-x
               >
+
                 <!-- daily event box open -->
                 <template v-slot:activator="{ on }">
                   <div
@@ -81,23 +94,27 @@
                 <!-- box open!! -->
                 <v-card color="grey lighten-4" min-width="350px" flat>
                   <v-toolbar color="amber accent-4" dark>
-                    <v-btn icon>
+                    <!-- <v-btn icon>
                       <v-icon>edit</v-icon>
-                    </v-btn>
+                    </v-btn> -->
                     <v-toolbar-title v-html="event.title"></v-toolbar-title>
                     <v-spacer></v-spacer>
                     <!-- <v-btn icon>
                       <v-icon>favorite</v-icon>
+                    </v-btn> -->
+                    <v-btn icon @click="DeleteCalendars(event)">
+                      <v-icon>delete</v-icon>
                     </v-btn>
-                    <v-btn icon>
-                      <v-icon>more_vert</v-icon> -->
-                    <!-- </v-btn> -->
                   </v-toolbar>
                   <v-card-title primary-title>
                     <span v-html="event.body"></span>
                   </v-card-title>
                   <!-- box cancel -->
                   <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn flat color="secondary" @click="modify_btn(event)">
+                      Modify
+                    </v-btn>
                     <v-btn flat color="secondary">
                       Cancel
                     </v-btn>
@@ -128,7 +145,10 @@ export default {
     typeOptions: [{ text: "Month", value: "month" }],
     calens: [],
     events: [],
-    user_email: ""
+    user_email: "",
+    title: "",
+    body: "",
+    date: ""
   }),
   created() {
     this.getId();
@@ -155,6 +175,13 @@ export default {
     }
   },
   methods: {
+    modify_btn(data){
+      this.dialog = true;
+      this.title = data.title;
+      this.body = data.body;
+      this.date = data.date;
+      this.idx = data.idx;
+    },
     async getId() {
       await eventBus.$on("getUserId", userId => {
         this.user_email = userId;
@@ -178,24 +205,26 @@ export default {
     async submit() {
       if (this.title == "") {
         SwalAlert.swatAlert("Error!", "제목을 입력해주세요!", "error", "Ok!");
-      } else if (this.body == "") {
-        SwalAlert.swatAlert("Error!", "내용을 입력해주세요!", "error", "Ok!");
-      } else if(this.date ==""){
+      } else if (this.date == "") {
         SwalAlert.swatAlert("Error!", "날짜를 선택해주세요!", "error", "Ok!");
-      }
-      else {
-        console.log("user",this.$store.state.user);
+      } else {
+        let created_at = this.date + " 15:00:00";
         var isCalen = await CalendarsService.CalendarsInsert(
+          this.idx,
           this.title,
           this.body,
-          this.date,
+          created_at,
           this.$store.state.user
         );
-        // console.log(isPost);
         if (isCalen == "success") {
-          this.$router.push("post");
+          this.$router.push("calendars");
         }
       }
+      this.getcalendar();
+    },
+    async DeleteCalendars(event) {
+      await CalendarsService.Calendarsdelete(event.idx);
+      this.$router.replace("/calendars");
     },
     open(event) {
       alert(event.title);
@@ -208,6 +237,12 @@ export default {
     },
     next() {
       this.$refs.calendar.next();
+    },
+    reset() {
+      this.$refs.form.reset();
+    },
+    resetValidation() {
+      this.$refs.form.resetValidation();
     }
   },
   watch: {

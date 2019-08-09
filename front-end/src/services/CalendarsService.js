@@ -18,22 +18,18 @@ export default {
       });
   },
   //insertCalendars
-  CalendarsInsert(title, body, user_email, date) {
+  CalendarsInsert(idx,title, body, created_at, user_email) {
     return axios
       .post(URL + "ass/api/calenInsert", {
+        idx: idx,
         title: title,
         body: body,
-        user_email: user_email,
-        date: date
+        created_at: created_at,
+        user_email: user_email
       })
       .then(response => {
         if (response.data.state == 1) {
-          SwalAlert.swatAlert(
-            "Success!",
-            "포스트가 등록되었습니다!",
-            "success",
-            "Ok!"
-          );
+          SwalAlert.swatAlert("Success!", "일정 등록 완료", "success", "Ok!");
           return "success";
         } else {
           SwalAlert.swatAlert(
@@ -47,13 +43,19 @@ export default {
           return "fail";
         }
       })
-      .catch(error => {
-        SwalAlert.swatAlert(
-          "Error!",
-          "알수없는 에러가 발생했습니다! (" + error + ")",
-          "error",
-          "Ok!"
-        );
+      .catch(function(error) {
+      console.log(error);
+      });
+  },
+  Calendarsdelete(idx) {
+    return axios
+      .delete(URL + "ass/api/calenDelete", {
+        params: {
+          idx: idx
+        }
+      })
+      .then(response => {
+        return response.data;
       });
   }
 };
