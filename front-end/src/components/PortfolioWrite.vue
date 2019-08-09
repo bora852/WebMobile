@@ -1,55 +1,67 @@
 <template>
-  <div class="py-3">
-    <v-layout>
-      <v-flex xs10>
-        <h1 class="text_font">Portfolio Write</h1>
-        <v-form ref="form" v-model="valid" lazy-validation>
-          <v-container>
-            <v-flex px10 py10>
-              <v-text-field
-                v-model="title"
-                :counter="30"
-                :rules="titleRules"
-                label="제목"
-                required
-              >
-              </v-text-field>
-            </v-flex>
-
-            <v-flex px10 py10>
-              <MarkdownEditor v-on:sendBody="getBody"></MarkdownEditor>
-            </v-flex>
-
-            <v-flex>
-              <v-container fluid>
-                <v-flex
-                  xs12
-                  class="text-xs-center text-sm-center text-md-center text-lg-center"
+  <div>
+    <div class="text_font subFontSize">📝포트폴리오 작성</div>
+    <div class="v-card theme--light detailPadding">
+      <v-layout>
+        <v-flex>
+          <v-form ref="form" v-model="valid" lazy-validation>
+            <v-container>
+              <v-flex px10 py10>
+                <v-text-field
+                  v-model="title"
+                  :counter="30"
+                  :rules="titleRules"
+                  label="제목"
+                  required
+                  color="orange"
+                  class="body_font titleFontSize"
                 >
-                  <img :src="imageUrl" height="150" v-if="imageUrl" />
-                  <insertWriter v-on:FolioImgLink="FolioImgLink"></insertWriter>
-                </v-flex>
-              </v-container>
-            </v-flex>
-            <v-flex px10 py10>
-              <v-btn color="warning" dark @click.stop="submit()">Submit</v-btn>
-            </v-flex>
-          </v-container>
-        </v-form>
-      </v-flex>
-    </v-layout>
+                </v-text-field>
+              </v-flex>
+
+              <v-flex px10 py10>
+                <MarkdownEditor v-on:sendBody="getBody"></MarkdownEditor>
+              </v-flex>
+
+              <v-flex>
+                <v-container fluid>
+                  <v-flex
+                    xs12
+                    class="text-xs-center text-sm-center text-md-center text-lg-center"
+                  >
+                    <img :src="imageUrl" height="150" v-if="imageUrl" />
+                    <insertWriter v-on:FolioImgLink="FolioImgLink"></insertWriter>
+                  </v-flex>
+                </v-container>
+              </v-flex>
+              <v-flex px10 py10 class="text-sm-right text-xs-center text_font">
+                <v-btn
+                  color="warning"
+                  class="ImgBtnSize"
+                  dark
+                  @click.stop="submit()"
+                  >작성</v-btn
+                >
+                <v-btn color="warning" class="ImgBtnSize" dark to="portfolio"
+                  >취소</v-btn
+                >
+              </v-flex>
+            </v-container>
+          </v-form>
+        </v-flex>
+      </v-layout>
+    </div>
   </div>
 </template>
 
 <script>
 import insertWriter from "./insertWriter";
 import MarkdownEditor from "../components/MarkdownEditor";
-// import FirebaseService from "@/services/FirebaseService";
 import PortfolioService from "../services/PortfolioService";
 import SwalAlert from "../services/SwalAlert";
 
 export default {
-  name: "writePortfolio",
+  name: "PortfolioWrite",
   components: {
     MarkdownEditor,
     insertWriter

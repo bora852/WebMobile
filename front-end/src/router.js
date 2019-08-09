@@ -4,14 +4,14 @@ import HomePage from "./views/HomePage.vue";
 import PostPage from "./views/PostPage.vue";
 import PortfolioPage from "./views/PortfolioPage.vue";
 import LoginPage from "./views/LoginPage.vue";
-import WritePortfolio from "./views/WritePortfolioPage.vue";
+import PortfolioWrite from "./views/PortfolioWritePage.vue";
 import Repository from "./views/RepositoryPage.vue";
 import SignUpPage from "./views/SignUpPage.vue";
 import ChatPage from "./views/ChatPage.vue";
 import AdminPage from "./views/AdminPage.vue";
 import PostWritePage from "./views/PostWritePage.vue";
 import PortfolioDetailPage from "./views/PortfolioDetailPage.vue";
-import PortfolioUpdatePage from "./views/PortfolioUpdatePage.vue";
+import PortfolioEditPage from "./views/PortfolioEditPage.vue";
 import PostDetailPage from "./views/PostDetailPage.vue";
 import PostEditPage from "./views/PostEditPage.vue";
 import CalendarsPage from "./views/CalendarsPage.vue";
@@ -25,14 +25,14 @@ export default new Router({
     PostPage,
     PortfolioPage,
     LoginPage,
-    WritePortfolio,
+    PortfolioWrite,
     SignUpPage,
     ChatPage,
     Repository,
     AdminPage,
     PostWritePage,
     PortfolioDetailPage,
-    PortfolioUpdatePage,
+    PortfolioEditPage,
     PostDetailPage,
     PostEditPage,
     CalendarsPage
@@ -66,9 +66,9 @@ export default new Router({
       component: LoginPage
     },
     {
-      path: "/writePortfolio",
-      name: "writePortfolio",
-      component: WritePortfolio
+      path: "/portfolioWrite",
+      name: "portfolioWrite",
+      component: PortfolioWrite
     },
     {
       path: "/repository",
@@ -91,14 +91,14 @@ export default new Router({
       component: AdminPage
     },
     {
-      path: "/writePost",
-      name: "writePost",
+      path: "/postWrite",
+      name: "postWrite",
       component: PostWritePage
     },
     {
-      path: "/portfolioUpdate",
-      name: "portfolioUpdate",
-      component: PortfolioUpdatePage
+      path: "/portfolioEdit",
+      name: "portfolioEdit",
+      component: PortfolioEditPage
     },
     {
       path: "/postdetail",

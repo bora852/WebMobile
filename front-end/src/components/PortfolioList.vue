@@ -9,7 +9,7 @@
     >
       <Portfolio
         class="ma-2"
-        :date="portfolios[i - 1].created_at.toString()"
+        :date="dateFormating(portfolios[i - 1].created_at)"
         :title="portfolios[i - 1].title"
         :body="portfolios[i - 1].body"
         :imgSrc="portfolios[i - 1].img"
@@ -21,8 +21,8 @@
       <v-btn color="warning" dark v-on:click="loadMorePortfolios">
         <v-icon size="25" class="mr-2">fa-plus</v-icon> View more
       </v-btn>
-      <v-btn color="warning" dark to="writePortfolio" v-show="isWriter">
-        <v-icon size="25" class="mr-2">fa-edit</v-icon> writePortfolio
+      <v-btn color="warning" dark to="portfolioWrite" v-show="isWriter">
+        <v-icon size="25" class="mr-2">fa-edit</v-icon> write Portfolio
       </v-btn>
     </v-flex>
   </v-layout>
@@ -66,6 +66,21 @@ export default {
   computed: {
     watch_auth() {
       return this.$store.state.userAuth;
+    },
+    dateFormating() {
+      return postDate => {
+        var curDate = new Date(postDate);
+        var year = curDate.getFullYear();
+        var month = curDate.getMonth() + 1;
+        var day = curDate.getDate();
+        if (day < 10) {
+          day = "0" + day;
+        }
+        if (month < 10) {
+          month = "0" + month;
+        }
+        return year + "/" + month + "/" + day;
+      };
     }
   },
   methods: {

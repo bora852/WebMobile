@@ -21,6 +21,10 @@ import Alert from "./components/BrowserAlert";
 import BannerImg from "./components/BannerImgSetup";
 import ChatBot from "./components/ChatBot"
 
+$(document).ready(function(){
+$(".fas").addClass("fa");
+});
+
 export default {
   name: "App",
   components: {

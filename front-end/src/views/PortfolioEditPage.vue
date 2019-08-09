@@ -3,7 +3,7 @@
     <v-container>
       <v-layout>
         <v-flex xs12 data-aos="fade-right">
-          <WritePortfolio></WritePortfolio>
+          <PortfolioEdit></PortfolioEdit>
         </v-flex>
       </v-layout>
     </v-container>
@@ -11,15 +11,16 @@
 </template>
 
 <script>
-import WritePortfolio from "../components/WritePortfolio";
+import PortfolioEdit from "../components/PortfolioEdit";
 import { eventBus } from "../main.js";
+
 export default {
-  name: "PortfolioPage",
+  name: "PortfolioEditPage",
   components: {
-    WritePortfolio
+    PortfolioEdit
   },
   created() {
-    eventBus.$emit("sendTitle", "WritePortfolio");
+    eventBus.$emit("sendTitle", "Portfolio Edit");
   }
 };
 </script>

@@ -3,10 +3,13 @@
     <v-img :src="imgSrc" height="200px"> </v-img>
     <v-card-title>
       <div>
+        <div class="caption">{{ date }}</div>
         <div class="headline">
           <p class=" text_font port_body_overflow">{{ thisTitle }}</p>
         </div>
-        <span class="grey--text port_body_overflow text_font">{{ thisBody }}</span>
+        <span class="grey--text port_body_overflow text_font">{{
+          thisBody
+        }}</span>
       </div>
     </v-card-title>
   </v-card>
@@ -48,7 +51,7 @@ export default {
   },
   methods: {
     sendPortfolioData: function() {
-      this.$router.push("/portfolioDetail?idx=" + this.idx);
+      this.$router.push("/portfolioDetail?num=" + this.idx);
     }
   },
   created() {

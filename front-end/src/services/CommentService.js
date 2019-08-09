@@ -31,7 +31,6 @@ export default {
       .child(key)
       .once("value")
       .then(data => {
-        console.log(data);
         return data;
       });
   },
@@ -41,9 +40,8 @@ export default {
       .child(category)
       .child(num)
       .on("child_added", data => {
-        console.log("data key :", data.key);
-        console.log("data value : ", data.val());
         result = data;
+        eventBus.$emit("commentData", result);
       });
     return result;
   },
@@ -66,5 +64,11 @@ export default {
       .child(num)
       .child(key)
       .remove();
+  },
+  closeComment(category, num) {
+    ref
+      .child(category)
+      .child(num)
+      .off();
   }
-}
+};

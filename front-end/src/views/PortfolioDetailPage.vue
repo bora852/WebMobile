@@ -21,7 +21,7 @@ export default {
     PortfolioDetail
   },
   created() {
-    eventBus.$emit("sendTitle", "PortfolioDetail");
+    eventBus.$emit("sendTitle", "Portfolio Detail");
   }
 };
 </script>
