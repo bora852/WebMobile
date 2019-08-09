@@ -145,10 +145,12 @@ export default {
     typeOptions: [{ text: "Month", value: "month" }],
     calens: [],
     events: [],
+    isnull:[],
     user_email: "",
     title: "",
     body: "",
-    date: ""
+    date: "",
+    count: 0
   }),
   created() {
     this.getId();
@@ -188,7 +190,9 @@ export default {
       });
     },
     async getcalendar() {
+      this.events = [];
       this.calens = await CalendarsService.getList(this.user_email);
+
       for (var i = 0; i < this.calens.length; i++) {
         let c_temp = { title: "", body: "", date: "", idx: "", open: false };
 
@@ -199,6 +203,7 @@ export default {
         c_temp.title = this.calens[i].title;
         c_temp.body = this.calens[i].body;
         c_temp.idx = this.calens[i].idx;
+
         this.events.push(c_temp);
       }
     },
@@ -217,14 +222,13 @@ export default {
           this.$store.state.user
         );
         if (isCalen == "success") {
-          this.$router.push("calendars");
+          this.getcalendar();
         }
       }
-      this.getcalendar();
     },
     async DeleteCalendars(event) {
       await CalendarsService.Calendarsdelete(event.idx);
-      this.$router.replace("/calendars");
+      this.getcalendar();
     },
     open(event) {
       alert(event.title);
