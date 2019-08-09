@@ -36,7 +36,7 @@ export default {
         return response.data.token;
       });
   },
-  sendPushPortfolio(idx) {
+  sendPush(idx, category) {
     axios
       .get(URL + "ass/api/portSelect", {
         params: {
@@ -54,29 +54,7 @@ export default {
           .then(response => {
             var token = response.data.token;
             var pushFunction = firebase.functions().httpsCallable("sendPush");
-            pushFunction({ token: token, category: "portfolio", num: "idx" });
-          });
-      });
-  },
-  sendPushPost(idx) {
-    axios
-      .get(URL + "ass/api/postSelect", {
-        params: {
-          idx: idx
-        }
-      })
-      .then(response => {
-        var email = response.data.email;
-        axios
-          .get(URL + "ass/api/tokenSelect", {
-            params: {
-              email: email
-            }
-          })
-          .then(response => {
-            var token = response.data.token;
-            var pushFunction = firebase.functions().httpsCallable("sendPush");
-            pushFunction({ token: token, category: "post", num: "idx" });
+            pushFunction({ token: token, category: category, num: "idx" });
           });
       });
   }
