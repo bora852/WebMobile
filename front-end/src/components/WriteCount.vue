@@ -1,9 +1,6 @@
 <template>
-  <div class="chart text-align">
-    <span class="chart-label title_font">게시글 수</span>
-    <CountChart :chart-data="chartData" :options="options" ref="count_chart">
-    </CountChart>
-  </div>
+  <CountChart :chart-data="chartData" :options="options" ref="count_chart">
+  </CountChart>
 </template>
 
 <script>

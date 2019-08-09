@@ -1,7 +1,6 @@
 <template>
   <div>
     <UserList></UserList>
-    <WriteCount></WriteCount>
     <Analytics></Analytics>
   </div>
 </template>
@@ -9,7 +8,6 @@
 <script>
 import Analytics from "../components/Analytics";
 import UserList from "../components/UserList";
-import WriteCount from "../components/WriteCount";
 import { eventBus } from "../main.js";
 import AuthService from "../services/AuthService";
 import SwalAlert from "../services/SwalAlert";
@@ -18,7 +16,6 @@ export default {
   name: "adminpage",
   components: {
     UserList,
-    WriteCount,
     Analytics
   },
   created: async function() {

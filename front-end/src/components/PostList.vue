@@ -8,10 +8,8 @@
       xs12
       :key="i"
     >
-    <!-- :class="'xs' + 12 / column" -->
       <Post
         class="ma-2"
-
         :date="dateFormating(posts[i - 1].created_at)"
         :title="posts[i - 1].title"
         :body="posts[i - 1].body"

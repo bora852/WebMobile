@@ -6,7 +6,6 @@
 
 <script>
 import { Bar } from "vue-chartjs";
-//Exporting this so it can be used in other components
 export default {
   props: {
     visited: null
@@ -15,7 +14,6 @@ export default {
   data() {
     return {
       datacollection: {
-        //Data to be represented on x-axis
         labels: [],
         datasets: [
           {
@@ -24,12 +22,10 @@ export default {
             pointBackgroundColor: "white",
             borderWidth: 1,
             pointBorderColor: "#249EBF",
-            //Data to be represented on y-axis
             data: []
           }
         ]
       },
-      //Chart.js options that controls the appearance of the chart
       options: {
         scales: {
           yAxes: [
