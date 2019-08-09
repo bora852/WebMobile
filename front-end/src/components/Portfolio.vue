@@ -1,6 +1,16 @@
 <template>
   <v-card @click="sendPortfolioData" hover>
-    <v-img :src="imgSrc" height="200px"> </v-img>
+    <v-img :src="imgSrc" height="200px">
+      <v-expand-transition>
+        <div
+          v-if="hover"
+          class="d-flex transition-fast-in-fast-out orange darken-2 v-card--reveal display-3 white--text"
+          style="height: 100%;"
+        >
+          된당
+        </div>
+      </v-expand-transition>
+    </v-img>
     <v-card-title>
       <div>
         <div class="caption">{{ date }}</div>
@@ -83,15 +93,14 @@ export default {
 </script>
 
 <style>
-/* .port_title_overflow {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  -o-text-overflow: ellipsis;
-  -ms-text-overflow: ellipsis;
-  -moz-text-overflow: ellipsis;
-  word-break: break-all;
-} */
+.v-card--reveal {
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  opacity: 0.5;
+  position: absolute;
+  width: 100%;
+}
 
 .port_body_overflow {
   overflow: hidden;
