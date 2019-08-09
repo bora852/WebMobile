@@ -9,7 +9,6 @@
     <div v-show="!listLoding">
       <div class="searchInput">
         <v-text-field
-          class="orange"
           v-model="searchEmail"
           flat
           hide-details
@@ -22,14 +21,12 @@
         <thead>
           <tr>
             <th>E-mail</th>
-            <th>가입일</th>
             <th>권한</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="item in showList" :key="item.email">
             <td>{{ item.email }}</td>
-            <td>{{ item.date }}</td>
             <td>
               <v-select
                 ref="select"

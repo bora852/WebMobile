@@ -33,7 +33,6 @@ Vue.use(Vuetify, {
 Vue.use(VueSimplemde);
 Vue.use(VueResource);
 
-
 new Vue({
   router,
   store,

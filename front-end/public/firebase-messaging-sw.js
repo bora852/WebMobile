@@ -11,8 +11,6 @@ const config = {
 };
 firebase.initializeApp(config);
 
-console.log("message ws")
-
 const messaging = firebase.messaging();
 
 self.addEventListener("push", function(event) {
