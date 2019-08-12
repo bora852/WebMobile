@@ -212,10 +212,7 @@ export default {
       return result;
     },
     rePermission() {
-      if (
-        this.$store.state.userAuth == "admin" ||
-        this.$store.state.userAuth == "team"
-      ) {
+      if (this.$store.state.userAuth != "") {
         this.isWriter = false;
         this.label = "댓글 작성";
       }
@@ -228,7 +225,7 @@ export default {
   },
   watch: {
     watch_auto(auth) {
-      if (auth == "admin" || auth == "team") {
+      if (auth != "") {
         this.isWriter = false;
         this.label = "댓글 작성";
       } else {

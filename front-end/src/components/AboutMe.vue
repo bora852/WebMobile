@@ -1,35 +1,337 @@
 <template>
   <v-container>
-    <v-carousel show-arrows-on-hover>
-      <v-carousel-item v-for="(item, i) in items" :key="i" :src="item.src">
-        <v-layout align-center fill-height justify-center>
-          <div class="mb-3 mobile_center opacity text-shadow font-weight-light">
-            <p class="name_font common_font text_font">{{ item.name }}</p>
-            <br /><br />
-            <p class="info_font common_font text_font">{{ item.mobile }}</p>
-            <br />
-            <p class="info_font common_font text_font">{{ item.address }}</p>
-            <br />
-            <p class="info_font common_font text_font">{{ item.Skill }}</p>
-            <br />
-            <p class="info_font common_font text_font">{{ item.Aspiration }}</p>
+    <carousel-3d
+      :controls-visible="true"
+      :controls-prev-html="'&#9001;'"
+      :controls-next-html="'&#9002;'"
+      :controls-width="30"
+      :controls-height="60"
+      :clickable="false"
+      :autoplay="true"
+      dir="ltr"
+      :autoplay-timeout="10000"
+      :display="3"
+      :perspective="0"
+      :height="400"
+      :border="0"
+    >
+      <slide :index="0">
+        <v-card
+          color="indigo darken-3 white--text"
+          class="mx-auto"
+          style="height:400px"
+        >
+          <div>
+            <v-btn @click.stop="dialog1 = true" small>
+              MY PROFILE
+            </v-btn>
+            <v-divider color="white"></v-divider>
           </div>
-          <br /><br /><br />
-        </v-layout>
-      </v-carousel-item>
-    </v-carousel>
+
+          <div style="padding:10px" class="my-5 text-xs-center text_font">
+            <div>
+              <v-avatar>
+                <img
+                  src="https://cdn.vuetifyjs.com/images/john.jpg"
+                  style="width:100px; height:100px"
+                />
+              </v-avatar>
+            </div>
+
+            <v-card-text class="my-4">
+              <div style="font-size:1.6em">정선열</div>
+              <div class="my-3" style="font-size:1.3em">
+                농담을 좋아하는 개발자입니다.
+              </div>
+              <v-divider color="white"></v-divider>
+              <div>
+                <v-btn
+                  icon
+                  title="MyProfile"
+                  style="color:white"
+                  @click.stop="dialog1 = true"
+                >
+                  <v-icon>person</v-icon>
+                </v-btn>
+
+                <v-btn icon title="MyProfile" style="color:white">
+                  <router-link to="" tag="span">
+                    <v-icon>email</v-icon>
+                  </router-link>
+                </v-btn>
+
+                <v-btn icon title="MyProfile" style="color:white">
+                  <router-link to="" tag="div">
+                    <v-icon>phone</v-icon>
+                  </router-link>
+                </v-btn>
+              </div>
+            </v-card-text>
+          </div>
+        </v-card>
+      </slide>
+
+      <slide :index="1">
+        <v-card
+          color="red lighten-1 white--text"
+          class="mx-auto"
+          style="height:400px"
+        >
+          <div>
+            <v-chip class="ma-2" color="white" label text-color="navy">
+              USER PROFILE
+            </v-chip>
+            <v-divider color="white"></v-divider>
+          </div>
+
+          <div style="padding:10px" class="my-5 text-xs-center text_font">
+            <div>
+              <v-avatar>
+                <img
+                  src="https://cdn.vuetifyjs.com/images/john.jpg"
+                  style="width:100px; height:100px"
+                />
+              </v-avatar>
+            </div>
+
+            <v-card-text class="my-4">
+              <div style="font-size:1.6em">정선열</div>
+              <div class="my-3" style="font-size:1.3em">
+                농담을 좋아하는 개발자입니다.
+              </div>
+
+              <div>
+                <v-btn icon title="MyProfile" style="color:white">
+                  <router-link to="signup" tag="span">
+                    <v-icon>person</v-icon>
+                  </router-link>
+                </v-btn>
+
+                <v-btn icon title="MyProfile" style="color:white">
+                  <router-link to="" tag="span">
+                    <v-icon>email</v-icon>
+                  </router-link>
+                </v-btn>
+
+                <v-btn icon title="MyProfile" style="color:white">
+                  <router-link to="" tag="span">
+                    <v-icon>phone</v-icon>
+                  </router-link>
+                </v-btn>
+              </div>
+            </v-card-text>
+          </div>
+        </v-card>
+      </slide>
+
+      <slide :index="2">
+        <v-card
+          color="amber accent-2 white--text"
+          class="mx-auto"
+          style="height:400px"
+        >
+          <div>
+            <v-chip class="ma-2" color="white" label text-color="navy">
+              MY PROFILE
+            </v-chip>
+            <v-divider color="white"></v-divider>
+          </div>
+
+          <div style="padding:10px" class="my-5 text-xs-center text_font">
+            <div>
+              <v-avatar>
+                <img
+                  src="https://cdn.vuetifyjs.com/images/john.jpg"
+                  style="width:100px; height:100px"
+                />
+              </v-avatar>
+            </div>
+
+            <v-card-text class="my-4">
+              <div style="font-size:1.6em">정선열</div>
+              <div class="my-3" style="font-size:1.3em">
+                농담을 좋아하는 개발자입니다.
+              </div>
+
+              <div>
+                <v-btn icon title="MyProfile" style="color:white">
+                  <router-link to="signup" tag="span">
+                    <v-icon>person</v-icon>
+                  </router-link>
+                </v-btn>
+
+                <v-btn icon title="MyProfile" style="color:white">
+                  <router-link to="" tag="span">
+                    <v-icon>email</v-icon>
+                  </router-link>
+                </v-btn>
+
+                <v-btn icon title="MyProfile" style="color:white">
+                  <router-link to="" tag="span">
+                    <v-icon>phone</v-icon>
+                  </router-link>
+                </v-btn>
+              </div>
+            </v-card-text>
+          </div>
+        </v-card>
+      </slide>
+
+      <slide :index="3">
+        <v-card
+          color="pink lighten-2 white--text"
+          class="mx-auto"
+          style="height:400px"
+        >
+          <div>
+            <v-chip class="ma-2" color="white" label text-color="navy">
+              USER PROFILE
+            </v-chip>
+            <v-divider color="white"></v-divider>
+          </div>
+
+          <div style="padding:10px" class="my-5 text-xs-center text_font">
+            <div>
+              <v-avatar>
+                <img
+                  src="https://cdn.vuetifyjs.com/images/john.jpg"
+                  style="width:100px; height:100px"
+                />
+              </v-avatar>
+            </div>
+
+            <v-card-text class="my-4">
+              <div style="font-size:1.6em">정선열</div>
+              <div class="my-3" style="font-size:1.3em">
+                농담을 좋아하는 개발자입니다.
+              </div>
+
+              <div>
+                <v-btn icon title="MyProfile" style="color:white">
+                  <router-link to="signup" tag="span">
+                    <v-icon>person</v-icon>
+                  </router-link>
+                </v-btn>
+
+                <v-btn icon title="MyProfile" style="color:white">
+                  <router-link to="" tag="span">
+                    <v-icon>email</v-icon>
+                  </router-link>
+                </v-btn>
+
+                <v-btn icon title="MyProfile" style="color:white">
+                  <router-link to="" tag="span">
+                    <v-icon>phone</v-icon>
+                  </router-link>
+                </v-btn>
+              </div>
+            </v-card-text>
+          </div>
+        </v-card>
+      </slide>
+    </carousel-3d>
+
+    <v-layout>
+      <v-dialog v-model="dialog1" max-width="400" max-height="800">
+        <v-card color="indigo darken-3 white--text ">
+          <v-card-title class="headline">
+            <v-icon color="white" large class="mx-1">account_circle</v-icon
+            >정선열
+          </v-card-title>
+          <v-divider color="white"></v-divider>
+          <v-card-text style="font-size:1.2em">
+            <div class="my-2">
+              <v-icon color="orange" class="mx-1">location_on</v-icon
+              ><span class="orange--text mx-2">LOCATION</span>
+              <div class="mx-4">대한민국 광주광역시</div>
+            </div>
+
+            <div class="my-2">
+              <v-icon color="orange" class="mx-1">email</v-icon
+              ><span class="orange--text mx-2">EMAIL</span>
+              <div class="mx-4">선열@google.com</div>
+            </div>
+
+            <div class="my-2">
+              <v-icon color="orange" class="mx-1">phone</v-icon
+              ><span class="orange--text mx-2">PHONE</span>
+              <div class="mx-4">010-1111-1111</div>
+            </div>
+
+            <div class="my-2">
+              <v-icon color="orange" class="mx-1">home</v-icon
+              ><span class="orange--text mx-2">MY GITLAB</span>
+              <div class="mx-4">
+                GO GITLAB<v-icon
+                  color="white"
+                  class="mx-1"
+                  style="font-size:1.0em"
+                  >mouse</v-icon
+                >
+              </div>
+            </div>
+
+            <div class="my-2">
+              <v-icon color="orange" class="mx-1">folder_special</v-icon
+              ><span class="orange--text mx-2">MY PROJECT</span>
+            </div>
+
+            <div class="mx-4">
+              - 바른먹거리 프로젝트<v-icon
+                color="white"
+                class="mx-1"
+                style="font-size:1.0em"
+                >mouse</v-icon
+              >
+            </div>
+
+            <div class="my-3">
+              <v-icon color="orange" class="mx-1">tune</v-icon>MY SKILLS
+            </div>
+
+            <div class="mx-4">
+              <v-progress-linear value="50" color="pink" height="20" reactive>
+                <strong text-center>Vue.js - 중</strong>
+              </v-progress-linear>
+
+              <v-progress-linear
+                value="50"
+                color="deep-purple accent-2"
+                height="20"
+              >
+                <strong text-center>JAVA - 중</strong>
+              </v-progress-linear>
+            </div>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              @click="dialog1 = false"
+              color="white"
+              flat
+              small
+              replace
+              slot="text"
+              class="text_font btn"
+              >확인</v-btn
+            >
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-layout>
   </v-container>
 </template>
 
 <script>
 import { eventBus } from "../main.js";
-
-$(document).ready(function(){
-$(".fas").addClass("fa");
-});
+// import { Carousel3d, Slide } from "vue-carousel-3d";
 
 export default {
-  components: {},
+  // components: {
+  //   "carousel-3d": Carousel3d,
+  //   slide: Slide
+  // },
   methods: {
     getImgUrl(img) {
       return require("../assets/" + img);
@@ -89,35 +391,7 @@ export default {
   },
   data() {
     return {
-      items: [{
-          src: "https://i.imgur.com/Kxb4Xpg.png",
-          name: "위영웅 😎",
-          mobile: "Mobile : 010 2726 2771",
-          address: "거주지 : 광주광역시",
-          Skill: "Skill : java, Vue.js, mySQL등"
-        },
-        {
-          src: "https://i.imgur.com/Kxb4Xpg.png",
-          name: "천보라 😊",
-          mobile: "Mobile : 010 6675 7924",
-          address: "거주지 : 목포시",
-          Skill: "Skill : java, Vue.js, mySQL등"
-        },
-        {
-          src: "https://i.imgur.com/Kxb4Xpg.png",
-          name: "김혜빈 🥰",
-          mobile: "Mobile : 010 4159 5400",
-          address: "거주지 : 광양시",
-          Skill: "Skill : java, Vue.js, mySQL등"
-        },
-        {
-          src: "https://i.imgur.com/Kxb4Xpg.png",
-          name: "정선열 😋",
-          mobile: "Mobile : 010 8989 5491",
-          address: "거주지 : 전주시",
-          Skill: "Skill : java, Vue.js, mySQL등"
-        }
-      ],
+      dialog1: false,
       fromLang: "ko",
       toLang: "en"
     };
@@ -125,18 +399,20 @@ export default {
 };
 </script>
 <style>
-.name_font {
-  font-size: 30px;
-  color: black;
-  font-weight: 700;
+.carousel-3d-container figure {
+  margin: 0;
 }
-.info_font {
-  font-size: 20px;
-  color: black;
-  font-weight: 550;
-}
-.opacity {
-  background: rgba(255, 255, 255, 0.5);
-  padding: 5px;
+
+.carousel-3d-container figcaption {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  bottom: 0;
+  position: absolute;
+  bottom: 0;
+  padding: 15px;
+  font-size: 12px;
+  min-width: 100%;
+  box-sizing: border-box;
 }
 </style>
