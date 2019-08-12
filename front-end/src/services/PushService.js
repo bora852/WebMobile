@@ -38,7 +38,7 @@ export default {
   },
   sendPush(idx, category) {
     axios
-      .get(URL + "ass/api/portSelect", {
+      .get(URL + "ass/api/" + category + "Select", {
         params: {
           idx: idx
         }
