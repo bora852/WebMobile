@@ -1,5 +1,9 @@
 <template>
+  <div style="text-align:center">
+  <h1>Calendar</h1>
+
   <v-layout wrap>
+
     <v-btn outlined class="mr-4" @click="setToday">Today</v-btn>
     <v-btn fab text icon small @click="prev">
       <v-icon small>arrow_back_ios</v-icon>
@@ -7,12 +11,13 @@
     <v-btn fab text icon small @click="next">
       <v-icon small>arrow_forward_ios</v-icon>
     </v-btn>
-    <v-flex sm4 xs12 class="text-sm-right text-xs-right">
-      <h1>Calendar</h1>
-    </v-flex>
-    <v-spacer></v-spacer>
+    <!-- <v-flex sm4 xs12 class="text-sm-center text-xs-center">
+
+    </v-flex> -->
+    <!-- <v-spacer></v-spacer> -->
     <!-- modal -->
-    <v-dialog ref="form" v-model="dialog" persistent max-width="400px">
+    <div class="modal">
+    <v-dialog ref="form" v-model="dialog" persistent max-width="400px" style="text-align:right">
       <template v-slot:activator="{ on }">
         <v-btn fab text icon v-on="on">add<v-icon small>create</v-icon> </v-btn>
       </template>
@@ -38,26 +43,38 @@
                 ></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field
-                  v-model="date"
-                  label="date*"
-                  required
-                ></v-text-field>
+                <v-flex xs12 sm6>
+                  Date*
+                  <datetime
+                    class="datetime"
+                    v-model="date"
+                    format="yyyy-MM-dd"
+                    width="300px"
+                  ></datetime>
+                </v-flex>
               </v-flex>
             </v-layout>
           </v-container>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="amber accent-4" text @click="submit(); reset(); dialog = false ">
+          <v-btn
+            color="amber accent-4"
+            text
+            @click="
+              submit();
+              clear();
+            "
+          >
             Save
           </v-btn>
-          <v-btn color="amber accent-4" text @click="dialog = false; reset();">
+          <v-btn color="amber accent-4" text @click="clear()">
             Close
           </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
+  </div>
     <!-- modal end -->
     <v-flex xs12 class="mb-3">
       <v-sheet height="500">
@@ -71,7 +88,7 @@
           :value="today"
           color="grey darken-3"
         >
-        <!-- daily events -->
+          <!-- daily events -->
           <template v-slot:day="{ date }">
             <template v-for="event in eventsMap[date]">
               <v-menu
@@ -80,7 +97,6 @@
                 full-width
                 offset-x
               >
-
                 <!-- daily event box open -->
                 <template v-slot:activator="{ on }">
                   <div
@@ -127,13 +143,16 @@
       </v-sheet>
     </v-flex>
   </v-layout>
+  </div>
 </template>
 
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/vuejs-datepicker"></script>
 <script>
 import CalendarsService from "../services/CalendarsService";
 import SwalAlert from "../services/SwalAlert";
 import { eventBus } from "../main.js";
-
+import datetime from "vuejs-datepicker";
 export default {
   data: () => ({
     dialog: false,
@@ -145,13 +164,17 @@ export default {
     typeOptions: [{ text: "Month", value: "month" }],
     calens: [],
     events: [],
-    isnull:[],
+    isnull: [],
     user_email: "",
     title: "",
     body: "",
     date: "",
-    count: 0
+    created_at:""
+    // ko: vdp_translation_ko.js
   }),
+  components: {
+    datetime: datetime
+  },
   created() {
     this.getId();
     let newday = new Date();
@@ -177,7 +200,7 @@ export default {
     }
   },
   methods: {
-    modify_btn(data){
+    modify_btn(data) {
       this.dialog = true;
       this.title = data.title;
       this.body = data.body;
@@ -203,7 +226,6 @@ export default {
         c_temp.title = this.calens[i].title;
         c_temp.body = this.calens[i].body;
         c_temp.idx = this.calens[i].idx;
-
         this.events.push(c_temp);
       }
     },
@@ -213,12 +235,11 @@ export default {
       } else if (this.date == "") {
         SwalAlert.swatAlert("Error!", "날짜를 선택해주세요!", "error", "Ok!");
       } else {
-        let created_at = this.date + " 15:00:00";
         var isCalen = await CalendarsService.CalendarsInsert(
           this.idx,
           this.title,
           this.body,
-          created_at,
+          this.formatDate(this.date),
           this.$store.state.user
         );
         if (isCalen == "success") {
@@ -242,11 +263,25 @@ export default {
     next() {
       this.$refs.calendar.next();
     },
-    reset() {
-      this.$refs.form.reset();
+    clear() {
+      this.title = "";
+      this.body = "";
+      this.date = null;
+      this.dialog = false;
     },
-    resetValidation() {
-      this.$refs.form.resetValidation();
+    formatDate(date) {
+      var yy = date.getFullYear();
+      var mm = date.getMonth() + 1;
+      var dd = date.getDate();
+
+      if (mm.toString().length == 1) {
+        mm = "0" + mm.toString();
+      }
+      if (dd.toString().length == 1) {
+        dd = "0" + dd.toString();
+      }
+
+      return yy + "-" + mm + "-" + dd;
     }
   },
   watch: {
@@ -271,5 +306,15 @@ export default {
   padding: 2.5px;
   cursor: pointer;
   margin-bottom: 1px;
+}
+.datetime {
+  border-color: #e9ecef;
+  border-style: solid;
+  margin: 0.5px 0;
+}
+.modal {
+  position: absolute;
+  top:10%;
+  left:83%;
 }
 </style>
