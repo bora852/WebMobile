@@ -2,7 +2,7 @@ import SwalAlert from "./SwalAlert";
 import axios from "axios";
 import OfflineService from "./OfflineService";
 
-const URL = "http://192.168.100.87:8082/";
+const URL = "https://13.209.77.238:443/";
 
 export default {
   getList() {
@@ -16,7 +16,7 @@ export default {
         SwalAlert.swatAlert(
           "Offline",
           "알수없는 에러가 발생했습니다!\
-          오프라인 데이터를 사용합니다.",
+          오프라인 데이터를 사용합니다. 일부 기능이 제한됩니다.",
           "error",
           "Ok!"
         );
@@ -38,29 +38,23 @@ export default {
             "success",
             "Ok!"
           );
-          return "success";
-        } else {
-          SwalAlert.swatAlert(
-            "Error!",
-            "알수없는 에러가 발생했습니다! (error code : " +
-              response.status +
-              ")",
-            "error",
-            "Ok!"
-          );
-          return "fail";
+          return true;
         }
       })
       .catch(error => {
-        SwalAlert.swatAlert(
-          "Error!",
-          "알수없는 에러가 발생했습니다! (" + error + ")",
-          "error",
-          "Ok!"
-        );
+        if (error.message.includes("Network Error")) {
+          SwalAlert.alertOffline();
+        } else {
+          SwalAlert.swatAlert(
+            "Error!",
+            "알수없는 에러가 발생했습니다! (" + error + ")",
+            "error",
+            "Ok!"
+          );
+        }
       });
   },
-  updatePost(title, body, idx){
+  updatePost(title, body, idx) {
     return axios
       .put(URL + "ass/api/postUpdate", {
         title: title,
@@ -69,6 +63,18 @@ export default {
       })
       .then(response => {
         return response.data;
+      })
+      .catch(error => {
+        if (error.message.includes("Network Error")) {
+          SwalAlert.alertOffline();
+        } else {
+          SwalAlert.swatAlert(
+            "Error!",
+            "알수없는 에러가 발생했습니다! (" + error + ")",
+            "error",
+            "Ok!"
+          );
+        }
       });
   },
   delete(idx) {
@@ -78,8 +84,20 @@ export default {
           idx: idx
         }
       })
-      .then(response => {
-        return response.data;
+      .then(() => {
+        return true;
+      })
+      .catch(error => {
+        if (error.message.includes("Network Error")) {
+          SwalAlert.alertOffline();
+        } else {
+          SwalAlert.swatAlert(
+            "Error!",
+            "알수없는 에러가 발생했습니다! (" + error + ")",
+            "error",
+            "Ok!"
+          );
+        }
       });
   },
   select(idx) {
@@ -91,6 +109,9 @@ export default {
       })
       .then(response => {
         return response.data;
+      })
+      .catch(() => {
+        return OfflineService.selectPostWithMemory(idx);
       });
   }
 };

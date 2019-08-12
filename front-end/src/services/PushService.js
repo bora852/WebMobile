@@ -5,7 +5,7 @@ import "firebase/functions";
 import axios from "axios";
 import store from "../store";
 
-const URL = "http://192.168.100.87:8082/";
+const URL = "https://13.209.77.238:443/";
 const messaging = firebase.messaging();
 
 export default {

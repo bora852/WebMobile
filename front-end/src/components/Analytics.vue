@@ -57,7 +57,7 @@ export default {
   data() {
     return {
       token:
-        "ya29.GlteB-uHJfwh8bkf-XSA3eq8NE0emNlo1rLIjzoymL4pcPLB7qYi7Fg9s16MsaogmKIuLxoBVOXXu6n7SUoDjRLkgvdNWqaegn5jdcG8_OyJtuL1O2B8i4TbIczN",
+        "ya29.GltiB7a0IM9reZxOiTXK3O87qxHCZE0IdKNhxVKtEbHDshtsXAAwtUlk8fEI-Vasw-JmA2zPBi8RpBYp7D-FKo2SA-hIieg0gghyf59nwhZk-176Q3lWff0baTZh",
       visited: null,
       day7Visited: null,
       pages: null,
@@ -74,10 +74,10 @@ export default {
         .post("https://accounts.google.com/o/oauth2/token", {
           grant_type: "refresh_token",
           refresh_token:
-            "1/XFfJz4iDbcqsOtvHVzaRXecwBFFnTW6XS2iJKW8CQyyHinT3qVh6omdT50hJ1aOv",
+            "1/cunTPCANU69HpF6lw4r45J26NlMiwcRj9LS3tL0KE2qihkOeIeibfChUU5qlM_Ww",
           client_id:
-            "417231299643-4mg15acni7fekpatt5ah2ofmqe34g3l8.apps.googleusercontent.com",
-          client_secret: "XRmKs8i0CfHUiJa8DcJiS96v"
+            "417231299643-lqd17mm8u7koa42av347qqoq9oa9h7nn.apps.googleusercontent.com",
+          client_secret: "LPLUgROGppLZxzM-gDDwsiFm"
         })
         .then(response => {
           this.token = response.data.access_token;
@@ -99,7 +99,7 @@ export default {
     requestVisited() {
       axios
         .get(
-          "https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A199746530&start-date=2019-08-08&end-date=today&metrics=ga%3Asessions&access_token=" +
+          "https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A199742885&start-date=2019-08-08&end-date=today&metrics=ga%3Ausers&access_token=" +
             this.token
         )
         .then(response => {
@@ -121,7 +121,7 @@ export default {
     request7Day() {
       axios
         .get(
-          "https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A199746530&start-date=7daysAgo&end-date=today&metrics=ga%3A7dayUsers&dimensions=ga%3Adate&access_token=" +
+          "https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A199742885&start-date=7daysAgo&end-date=today&metrics=ga%3A7dayUsers&dimensions=ga%3Adate&access_token=" +
             this.token
         )
         .then(response => {
@@ -131,7 +131,7 @@ export default {
     topBrowser() {
       axios
         .get(
-          "https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A199746530&start-date=2019-08-08&end-date=today&metrics=ga%3Apageviews&dimensions=ga%3Abrowser&sort=-ga%3Apageviews&max-results=5&access_token=" +
+          "https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A199742885&start-date=2019-08-01&end-date=today&metrics=ga%3Apageviews&dimensions=ga%3Abrowser&sort=-ga%3Apageviews&max-results=5&access_token=" +
             this.token
         )
         .then(response => {
@@ -141,7 +141,7 @@ export default {
     topPages() {
       axios
         .get(
-          "https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A199746530&start-date=2019-08-08&end-date=today&metrics=ga%3Apageviews&dimensions=ga%3ApagePathLevel1&sort=-ga%3Apageviews&filters=ga%3ApagePathLevel1!%3D%2F&max-results=7&access_token=" +
+          "https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A199742885&start-date=2019-08-08&end-date=today&metrics=ga%3Apageviews&dimensions=ga%3ApagePathLevel1&sort=-ga%3Apageviews&filters=ga%3ApagePathLevel1!%3D%2F&max-results=7&access_token=" +
             this.token
         )
         .then(response => {
@@ -151,7 +151,7 @@ export default {
     topNational() {
       axios
         .get(
-          "https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A199746530&start-date=2019-08-08&end-date=today&metrics=ga%3Asessions&dimensions=ga%3Acountry&sort=-ga%3Asessions&max-results=5&access_token=" +
+          "https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A199742885&start-date=2019-08-08&end-date=today&metrics=ga%3Asessions&dimensions=ga%3Acountry&sort=-ga%3Asessions&max-results=5&access_token=" +
             this.token
         )
         .then(response => {

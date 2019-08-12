@@ -2,7 +2,7 @@ import SwalAlert from "./SwalAlert";
 import axios from "axios";
 import OfflineService from "./OfflineService";
 
-const URL = "http://192.168.100.87:8082/";
+const URL = "https://13.209.77.238:443/";
 
 export default {
   getList() {
@@ -16,7 +16,7 @@ export default {
         SwalAlert.swatAlert(
           "Offline",
           "알수없는 에러가 발생했습니다!\
-          오프라인 데이터를 사용합니다.",
+          오프라인 데이터를 사용합니다. 일부 기능이 제한됩니다.",
           "error",
           "Ok!"
         );
@@ -32,6 +32,9 @@ export default {
       })
       .then(response => {
         return response.data;
+      })
+      .catch(() => {
+        return OfflineService.selectPortfolioWithMemory(idx);
       });
   },
   postPortfolio(title, body, email, img) {
@@ -44,6 +47,18 @@ export default {
       })
       .then(response => {
         return response.data.state;
+      })
+      .catch(error => {
+        if (error.message.includes("Network Error")) {
+          SwalAlert.alertOffline();
+        } else {
+          SwalAlert.swatAlert(
+            "Error!",
+            "알수없는 에러가 발생했습니다! (" + error + ")",
+            "error",
+            "Ok!"
+          );
+        }
       });
   },
   updatePortfolio(idx, title, body, img) {
@@ -56,13 +71,41 @@ export default {
       })
       .then(response => {
         return response.data.state;
+      })
+      .catch(error => {
+        if (error.message.includes("Network Error")) {
+          SwalAlert.alertOffline();
+        } else {
+          SwalAlert.swatAlert(
+            "Error!",
+            "알수없는 에러가 발생했습니다! (" + error + ")",
+            "error",
+            "Ok!"
+          );
+        }
       });
   },
   delete(idx) {
-    return axios.delete(URL + "ass/api/portDelect", {
-      params: {
-        idx: idx
-      }
-    });
+    return axios
+      .delete(URL + "ass/api/portDelect", {
+        params: {
+          idx: idx
+        }
+      })
+      .then(() => {
+        return true;
+      })
+      .catch(error => {
+        if (error.message.includes("Network Error")) {
+          SwalAlert.alertOffline();
+        } else {
+          SwalAlert.swatAlert(
+            "Error!",
+            "알수없는 에러가 발생했습니다! (" + error + ")",
+            "error",
+            "Ok!"
+          );
+        }
+      });
   }
 };
