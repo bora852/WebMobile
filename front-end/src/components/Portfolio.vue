@@ -1,18 +1,28 @@
 <template>
-  <v-card @click="sendPortfolioData" hover>
-    <v-img :src="imgSrc" height="200px"> </v-img>
-    <v-card-title>
-      <div>
-        <div class="caption">{{ date }}</div>
-        <div class="headline">
-          <p class=" text_font port_body_overflow">{{ thisTitle }}</p>
+  <v-hover v-slot:default="{ hover }">
+    <v-card @click="sendPortfolioData" hover>
+      <v-img :src="imgSrc" height="200px">
+        <v-expand-transition>
+          <div
+            v-if="hover"
+            class="d-flex transition-fast-in-fast-out white darken-2 v-card--reveal display-3 white--text"
+            style="height: 100%;"
+          ></div>
+        </v-expand-transition>
+      </v-img>
+      <v-card-title>
+        <div>
+          <div class="caption">{{ date }}</div>
+          <div class="headline">
+            <p class=" text_font port_body_overflow">{{ thisTitle }}</p>
+          </div>
+          <span class="grey--text port_body_overflow text_font">{{
+            thisBody
+          }}</span>
         </div>
-        <span class="grey--text port_body_overflow text_font">{{
-          thisBody
-        }}</span>
-      </div>
-    </v-card-title>
-  </v-card>
+      </v-card-title>
+    </v-card>
+  </v-hover>
 </template>
 
 <script>
@@ -83,15 +93,14 @@ export default {
 </script>
 
 <style>
-/* .port_title_overflow {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  -o-text-overflow: ellipsis;
-  -ms-text-overflow: ellipsis;
-  -moz-text-overflow: ellipsis;
-  word-break: break-all;
-} */
+.v-card--reveal {
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  opacity: 0.5;
+  position: absolute;
+  width: 100%;
+}
 
 .port_body_overflow {
   overflow: hidden;
