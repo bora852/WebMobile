@@ -37,6 +37,8 @@ export default {
       });
   },
   sendPush(idx, category) {
+    var pushFunction = firebase.functions().httpsCallable("sendPush");
+    var token = null;
     axios
       .get(URL + "ass/api/" + category + "Select", {
         params: {
@@ -52,10 +54,16 @@ export default {
             }
           })
           .then(response => {
-            var token = response.data.token;
-            var pushFunction = firebase.functions().httpsCallable("sendPush");
+            token = response.data.token;
             pushFunction({ token: token, category: category, num: "idx" });
           });
       });
+    axios.get(URL + "ass/api/adminSelect").then(response => {
+      response.data.forEach(element => {
+        if (token != element) {
+          pushFunction({ token: element, category: category, num: "idx" });
+        }
+      });
+    });
   }
 };
