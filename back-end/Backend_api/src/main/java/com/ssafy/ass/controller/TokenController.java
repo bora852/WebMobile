@@ -25,13 +25,11 @@ public class TokenController {
 
 	@RequestMapping(value = "/tokenAll", method = RequestMethod.GET)
 	public List<TokenDto> tokenAll() throws Exception {
-		System.out.println("token목록 : " + tokenService.searchAllToken());
 		return tokenService.searchAllToken();
 	}
 
 	@RequestMapping(value = "/tokenSelect", method = RequestMethod.GET)
 	public TokenDto postSelect(@RequestParam String email) throws Exception {
-		System.out.println("email Select : " + tokenService.searchOnceToken(email));
 		return tokenService.searchOnceToken(email);
 	}
 
@@ -80,7 +78,6 @@ public class TokenController {
 	@RequestMapping(value = "/tokenUpdate", method = RequestMethod.PUT)
 	public HashMap<String, Object> tokenUpdate(@RequestBody TokenDto token) throws Exception {
 		int res = tokenService.updateToken(token);
-		System.out.println(token);
 		HashMap<String, Object> result = new HashMap<>();
 		if (res > 0) {
 			result.put("state", "1");

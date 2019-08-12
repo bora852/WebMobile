@@ -24,8 +24,6 @@ public class CalendarsController {
 
 	@RequestMapping(value = "/calenAll", method = RequestMethod.GET)
 	public List<CalendarsDto> calenAll(@RequestParam String user_email) throws Exception {
-		System.out.println(user_email + "   :  calen test");
-		System.out.println("Calendars목록 : " + calendarsService.searchAllCalen(user_email));
 		return calendarsService.searchAllCalen(user_email);
 	}
 
@@ -60,7 +58,6 @@ public class CalendarsController {
 
 	@RequestMapping(value = "calenInsert", method = RequestMethod.POST)
 	public HashMap<String, Object> insertCalen(@RequestBody CalendarsDto calen) throws Exception {
-		System.out.println(calen);
 		HashMap<String, Object> result = new HashMap<>();
 		int res = 0;
 		if (calen.getIdx() != 0) {

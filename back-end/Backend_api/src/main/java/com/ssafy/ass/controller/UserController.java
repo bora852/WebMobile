@@ -24,7 +24,6 @@ public class UserController {
 
 	@RequestMapping(value = "/userAll", method = RequestMethod.GET)
 	public List<UserDto> userAll() throws Exception {
-
 		return userService.findAllUser();
 	}
 
@@ -35,7 +34,6 @@ public class UserController {
 
 	@RequestMapping(value = "/userDelete", method = RequestMethod.DELETE)
 	public HashMap<String, Object> userDelect(@RequestParam String email) throws Exception {
-		System.out.println("userdelete : " + email);
 		int res = userService.deleteUser(email);
 		HashMap<String, Object> result = new HashMap<>();
 		if (res > 0) {
@@ -48,13 +46,10 @@ public class UserController {
 
 	@RequestMapping(value = "/userUpdate", method = RequestMethod.PUT)
 	public HashMap<String, Object> userUpdate(@RequestBody UserDto user) throws Exception {
-		System.out.println("userupdate" + user);
 		String user_authority = userService.searchOnceUser(user.getEmail()).getAuthority();
-		System.out.println("2");
 		int res = -1;
 		HashMap<String, Object> result = new HashMap<>();
 		result.put("state", "-1");
-		System.out.println("3");
 		if (user_authority.equals("admin")) {
 			int admin_num = userService.countUserAdmin();
 			if (admin_num == 1) {
@@ -63,19 +58,16 @@ public class UserController {
 		}
 		user.setEmail(user.getEmail());
 		user.setAuthority(user.getAuthority());
-		System.out.println("4");
 		res = userService.updateUser(user);
 		if (res > 0) {
 			result.put("state", "1");
 		}
-		System.out.println("5");
 		return result;
 
 	}
 
 	@RequestMapping(value = "/userInsert", method = RequestMethod.POST)
 	public HashMap<String, Object> userInsert(@RequestBody UserDto user) throws Exception {
-		System.out.println("userinsert" + user);
 		int res = userService.insertUser(user);
 		HashMap<String, Object> result = new HashMap<>();
 		if (res > 0) {
