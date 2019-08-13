@@ -5,52 +5,59 @@
       indeterminate
       v-show="listLoding"
     ></v-progress-circular>
-
-    <div v-show="!listLoding">
-      <div class="searchInput">
-        <v-text-field
-          v-model="searchEmail"
-          flat
-          hide-details
-          label="아이디 검색"
-          prepend-inner-icon="search"
-          solo-inverted
-        ></v-text-field>
-      </div>
-      <table class="list-table text-align">
-        <thead>
-          <tr>
-            <th>E-mail</th>
-            <th>권한</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in showList" :key="item.email">
-            <td>{{ item.email }}</td>
-            <td>
-              <v-select
-                ref="select"
-                :items="authorities(item.authority)"
-                :value="item.authority"
-                class="fa"
-                @change="authChange(item.email, $event)"
-              >
-              </v-select>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="text-align" v-show="!listLoding">
-      <div max-width="300">
-        <v-pagination
-          v-model="page"
-          class="my-4"
-          :length="pageMax"
-          :total-visible="5"
-        ></v-pagination>
-      </div>
-    </div>
+    <v-container>
+      <v-layout mw-700>
+        <v-flex xs12 md12 sm12 class="text-align">
+          <v-card class="px-5 py-2">
+            <div v-show="!listLoding">
+              <div class="searchInput">
+                <v-text-field
+                  v-model="searchEmail"
+                  flat
+                  hide-details
+                  label="아이디 검색"
+                  prepend-inner-icon="search"
+                  solo-inverted
+                ></v-text-field>
+              </div>
+              <table class="list-table text-align">
+                <thead>
+                  <tr>
+                    <th>E-mail</th>
+                    <th>권한</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="item in showList" :key="item.email">
+                    <td>{{ item.email }}</td>
+                    <td>
+                      <v-select
+                        ref="select"
+                        :items="authorities(item.authority)"
+                        :value="item.authority"
+                        class="fa"
+                        @change="authChange(item.email, $event)"
+                      >
+                      </v-select>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="text-align" v-show="!listLoding">
+              <div max-width="300">
+                <v-pagination
+                  v-model="page"
+                  class="my-4"
+                  :length="pageMax"
+                  :total-visible="5"
+                ></v-pagination>
+              </div>
+            </div>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
   </div>
 </template>
 
@@ -143,11 +150,6 @@ export default {
 </script>
 
 <style>
-@media screen and (min-width: 768px) {
-  table.list-table {
-    width: 700px;
-  }
-}
 .text-align {
   text-align: center;
 }

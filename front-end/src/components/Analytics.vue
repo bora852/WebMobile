@@ -3,37 +3,47 @@
     <v-container>
       <v-layout row wrap mw-700>
         <v-flex md12 sm12 xs12 class="chart text-align">
-          <span class="chart-label title_font">방문자 수</span>
-          <WriteVisited :visited="day7Visited"></WriteVisited>
+          <v-card class="px-3 py-3">
+            <span class="chart-label title_font">방문자 수</span>
+            <WriteVisited :visited="day7Visited"></WriteVisited>
+          </v-card>
         </v-flex>
 
         <v-flex px-2 md6 sm6 xs12 class="chart text-align">
-          <span class="chart-label title_font">게시글 수</span>
-          <WriteCount></WriteCount>
+          <v-card class="px-4 py-2">
+            <span class="chart-label title_font">게시글 수</span>
+            <WriteCount></WriteCount>
+          </v-card>
         </v-flex>
 
         <v-flex px-2 md6 sm6 xs12 class="chart text-align">
-          <span class="chart-label title_font">접속 브라우져</span>
-          <WritePieChart
-            label="접속 브라우져"
-            :originData="browser"
-          ></WritePieChart>
+          <v-card class="px-4 py-2">
+            <span class="chart-label title_font">접속 브라우져</span>
+            <WritePieChart
+              label="접속 브라우져"
+              :originData="browser"
+            ></WritePieChart>
+          </v-card>
         </v-flex>
 
-        <v-flex md6 sm6 xs12 class="chart text-align">
-          <span class="chart-label title_font">접속 페이지</span>
-          <WritePieChart
-            label="접속 페이지"
-            :originData="pages"
-          ></WritePieChart>
+        <v-flex px-2 md6 sm6 xs12 class="chart text-align">
+          <v-card class="px-4 py-2">
+            <span class="chart-label title_font">접속 페이지</span>
+            <WritePieChart
+              label="접속 페이지"
+              :originData="pages"
+            ></WritePieChart>
+          </v-card>
         </v-flex>
 
-        <v-flex md6 sm6 xs12 class="chart text-align">
-          <span class="chart-label title_font">접속 국가</span>
-          <WritePieChart
-            label="접속 국가"
-            :originData="national"
-          ></WritePieChart>
+        <v-flex px-2 md6 sm6 xs12 class="chart text-align">
+          <v-card class="px-4 py-2">
+            <span class="chart-label title_font">접속 국가</span>
+            <WritePieChart
+              label="접속 국가"
+              :originData="national"
+            ></WritePieChart>
+          </v-card>
         </v-flex>
       </v-layout>
     </v-container>

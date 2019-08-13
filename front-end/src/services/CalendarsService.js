@@ -14,11 +14,16 @@ export default {
         return response.data;
       })
       .catch(function(error) {
-      console.log(error);
+        SwalAlert.swatAlert(
+          "Error!",
+          "알수없는 에러가 발생했습니다! (" + error + ")",
+          "error",
+          "Ok!"
+        );
       });
   },
   //insertCalendars
-  CalendarsInsert(idx,title, body, created_at, user_email) {
+  CalendarsInsert(idx, title, body, created_at, user_email) {
     return axios
       .post(URL + "ass/api/calenInsert", {
         idx: idx,
@@ -44,7 +49,12 @@ export default {
         }
       })
       .catch(function(error) {
-      console.log(error);
+        SwalAlert.swatAlert(
+          "Error!",
+          "알수없는 에러가 발생했습니다! (" + error + ")",
+          "error",
+          "Ok!"
+        );
       });
   },
   Calendarsdelete(idx) {
