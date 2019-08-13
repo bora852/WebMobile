@@ -78,7 +78,7 @@ export default {
           this.body,
           this.$store.state.user
         );
-        if (isPost == "success") {
+        if (isPost) {
           this.$router.push("post");
         }
       }

@@ -132,13 +132,6 @@ export default {
             "Ok!"
           );
           this.$router.push("portfolio");
-        } else {
-          SwalAlert.swatAlert(
-            "Error!",
-            "알수없는 에러가 발생했습니다! (error code : " + isPort + ")",
-            "error",
-            "Ok!"
-          );
         }
       }
     }

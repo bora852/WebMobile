@@ -1,7 +1,7 @@
 import SwalAlert from "./SwalAlert";
 import axios from "axios";
 
-const URL = "http://192.168.100.87:8082/";
+const URL = "https://donkey2.hibuz.com:443/";
 
 export default {
   //AllCalendars
