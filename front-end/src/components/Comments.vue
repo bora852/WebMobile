@@ -6,7 +6,6 @@
       color="orange"
       :label="label"
       class="body_font"
-      @keyup.enter="sendComment()"
       :disabled="isWriter"
     ></v-textarea>
     <div class="text-sm-center text-xs-center">

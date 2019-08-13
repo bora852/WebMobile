@@ -6,10 +6,8 @@ public class CalendarsDto {
 	int idx;
 	String title;
 	String body;
-	Date created_at;
-	String email;
-	
-	
+	String created_at;
+	String user_email;
 	public int getIdx() {
 		return idx;
 	}
@@ -28,23 +26,22 @@ public class CalendarsDto {
 	public void setBody(String body) {
 		this.body = body;
 	}
-	public Date getCreated_at() {
+	public String getCreated_at() {
 		return created_at;
 	}
-	public void setCreated_at(Date created_at) {
+	public void setCreated_at(String created_at) {
 		this.created_at = created_at;
 	}
-	public String getEmail() {
-		return email;
+	public String getUser_email() {
+		return user_email;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUser_email(String user_email) {
+		this.user_email = user_email;
 	}
-	
 	@Override
 	public String toString() {
 		return "CalendarsDto [idx=" + idx + ", title=" + title + ", body=" + body + ", created_at=" + created_at
-				+ ", email=" + email + "]";
+				+ ", user_email=" + user_email + "]";
 	}
 	
 	

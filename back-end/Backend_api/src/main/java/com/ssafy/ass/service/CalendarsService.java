@@ -15,8 +15,8 @@ public class CalendarsService {
 	private CalendarsMapper calendarsMapper;
 	
 	//CRUD
-	public List<CalendarsDto> searchAllCalen(){
-		return calendarsMapper.searchAllCalen();
+	public List<CalendarsDto> searchAllCalen(String user_email){
+		return calendarsMapper.searchAllCalen(user_email);
 	};
 	
 	public CalendarsDto searchOnceCalen(int idx){

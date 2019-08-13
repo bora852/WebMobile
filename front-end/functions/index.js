@@ -14,7 +14,10 @@ exports.sendPush = functions.https.onCall((data, context) => {
       icon: iconURL,
       body: "새 댓글이 등록되었습니다.",
       click_action:
-        "http://localhost:8080/" + data.category + "?num=" + data.num
+        "https://webmobileproject-2d658.firebaseapp.com/" +
+        data.category +
+        "?num=" +
+        data.num
     }
   };
 

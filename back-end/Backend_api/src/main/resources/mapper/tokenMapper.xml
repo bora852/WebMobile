@@ -5,6 +5,7 @@
 	<select id="searchAllToken" resultType="Token"> 
         SELECT *FROM f_token
     </select>
+    
 	<select id="searchOnceToken" parameterType="java.lang.String" resultType="Token">
 		select a.email, a.token, b.authority from f_token a, user b where a.email =  #{email} and a.email = b.email
 	</select>

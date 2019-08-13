@@ -55,6 +55,8 @@ import "tui-editor/dist/tui-editor.css";
 import "tui-editor/dist/tui-editor-contents.css";
 import "codemirror/lib/codemirror.css";
 import PostService from "@/services/PostService";
+import SwalAlert from "../services/SwalAlert";
+
 export default {
   name: "PostDetail",
   data() {
@@ -103,8 +105,15 @@ export default {
       this.$router.push("/postedit?num=" + this.post.idx);
     },
     async postDelete() {
-      await PostService.delete(this.post.idx);
-      this.$router.push("/post");
+      if (await PostService.delete(this.post.idx)) {
+        SwalAlert.swatAlert(
+          "Delete Success!",
+          "정상적으로 삭제되었습니다.",
+          "success",
+          "OK!"
+        );
+        this.$router.push("/post");
+      }
     }
   }
 };

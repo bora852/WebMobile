@@ -9,12 +9,11 @@
 		<typeAlias type="com.ssafy.ass.dto.TokenDto" alias="Token"/>
 		<typeAlias type="com.ssafy.ass.dto.CalendarsDto" alias="calen"/>
 	</typeAliases>
-	
 	<mappers>
 		<mapper resource="mapper/postMapper.xml" />
-		<mapper resource="mapper/portFoiloMapper.xml"/>
+		<mapper resource="mapper/portfoiloMapper.xml"/>
 		<mapper resource="mapper/userMapper.xml"/>
-		<mapper resource="mapper/TokenMapper.xml"/>
+		<mapper resource="mapper/tokenMapper.xml"/>
 		<mapper resource="mapper/CalendarsMapper.xml"/>
 	</mappers>
 </configuration>

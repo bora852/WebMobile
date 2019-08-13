@@ -5,7 +5,7 @@ import "firebase/functions";
 import axios from "axios";
 import store from "../store";
 
-const URL = "http://192.168.100.87:8082/";
+const URL = "https://donkey2.hibuz.com:443/";
 const messaging = firebase.messaging();
 
 export default {
@@ -36,9 +36,11 @@ export default {
         return response.data.token;
       });
   },
-  sendPushPortfolio(idx) {
+  sendPush(idx, category) {
+    var pushFunction = firebase.functions().httpsCallable("sendPush");
+    var token = null;
     axios
-      .get(URL + "ass/api/portSelect", {
+      .get(URL + "ass/api/" + category + "Select", {
         params: {
           idx: idx
         }
@@ -52,32 +54,16 @@ export default {
             }
           })
           .then(response => {
-            var token = response.data.token;
-            var pushFunction = firebase.functions().httpsCallable("sendPush");
-            pushFunction({ token: token, category: "portfolio", num: "idx" });
+            token = response.data.token;
+            pushFunction({ token: token, category: category, num: "idx" });
           });
       });
-  },
-  sendPushPost(idx) {
-    axios
-      .get(URL + "ass/api/postSelect", {
-        params: {
-          idx: idx
+    axios.get(URL + "ass/api/adminSelect").then(response => {
+      response.data.forEach(element => {
+        if (token != element) {
+          pushFunction({ token: element, category: category, num: "idx" });
         }
-      })
-      .then(response => {
-        var email = response.data.email;
-        axios
-          .get(URL + "ass/api/tokenSelect", {
-            params: {
-              email: email
-            }
-          })
-          .then(response => {
-            var token = response.data.token;
-            var pushFunction = firebase.functions().httpsCallable("sendPush");
-            pushFunction({ token: token, category: "post", num: "idx" });
-          });
       });
+    });
   }
 };
