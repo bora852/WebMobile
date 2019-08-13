@@ -1,5 +1,6 @@
 package com.ssafy.ass.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.ass.dto.PostDto;
 import com.ssafy.ass.dto.TokenDto;
+import com.ssafy.ass.dto.UserDto;
 import com.ssafy.ass.service.TokenService;
+import com.ssafy.ass.service.UserService;
 
 @CrossOrigin(origins = { "*" })
 @RestController
@@ -22,12 +25,26 @@ public class TokenController {
 
 	@Autowired
 	TokenService tokenService;
-
+	@Autowired
+	UserService userService;
+	
 	@RequestMapping(value = "/tokenAll", method = RequestMethod.GET)
 	public List<TokenDto> tokenAll() throws Exception {
 		return tokenService.searchAllToken();
 	}
-
+	@RequestMapping(value = "/adminSelect", method = RequestMethod.GET)
+	public List<String> adminSelect() throws Exception{
+		List<TokenDto> tokenlist = tokenService.searchAllToken();
+		List<String> adminList = new ArrayList<String>();
+		UserDto userTemp = new UserDto();
+		for(int token_num=0; token_num<tokenlist.size();token_num++) {
+			 userTemp = userService.searchOnceUser(tokenlist.get(token_num).getEmail());
+			if(userTemp.getAuthority().equals("admin")) {
+				adminList.add(tokenlist.get(token_num).getToken());
+			}
+		}
+		return adminList;
+	}
 	@RequestMapping(value = "/tokenSelect", method = RequestMethod.GET)
 	public TokenDto postSelect(@RequestParam String email) throws Exception {
 		return tokenService.searchOnceToken(email);

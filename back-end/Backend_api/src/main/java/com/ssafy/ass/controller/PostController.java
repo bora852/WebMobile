@@ -75,6 +75,7 @@ public class PostController {
 
 	@RequestMapping(value = "/postInsert", method = RequestMethod.POST)
 	public HashMap<String, Object> postAdd(@RequestBody PostDto post) throws Exception {
+		System.out.println("post : " + post);
 		int res = postService.addPost(post);
 		HashMap<String, Object> result = new HashMap<>();
 		if (res > 0) {
