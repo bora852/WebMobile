@@ -1,7 +1,7 @@
 import store from "../store";
 import axios from "axios";
 import SwalAlert from "./SwalAlert";
-const URL = "https://13.209.77.238:443/";
+const URL = "https://donkey2.hibuz.com:443/";
 
 export default {
   authChk(email) {
