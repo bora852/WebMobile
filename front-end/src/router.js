@@ -15,6 +15,7 @@ import PortfolioEditPage from "./views/PortfolioEditPage.vue";
 import PostDetailPage from "./views/PostDetailPage.vue";
 import PostEditPage from "./views/PostEditPage.vue";
 import CalendarsPage from "./views/CalendarsPage.vue";
+import IntroPage from "./views/IntroPage.vue";
 
 Vue.use(Router);
 export default new Router({
@@ -35,7 +36,8 @@ export default new Router({
     PortfolioEditPage,
     PostDetailPage,
     PostEditPage,
-    CalendarsPage
+    CalendarsPage,
+    IntroPage
   },
   mode: "history",
   base: process.env.BASE_URL,
@@ -114,6 +116,11 @@ export default new Router({
       path: "/calendars",
       name: "calendars",
       component: CalendarsPage
+    },
+    {
+      path: "/intro",
+      name: "intro",
+      component: IntroPage
     }
   ]
 });
