@@ -9,10 +9,7 @@
         scroll-off-screen
         scroll-target="#scrolling-techniques"
       >
-        <v-toolbar-side-icon
-          @click.stop="drawer = !drawer"
-          class="hidden-md-and-up"
-        >
+        <v-toolbar-side-icon @click.stop="drawer = !drawer">
           <v-icon>reorder</v-icon>
         </v-toolbar-side-icon>
         <router-link to="/" tag="span" style="cursor:pointer" title="home">
@@ -62,7 +59,7 @@
         <v-btn
           v-for="item in items"
           icon
-          class="hidden-sm-and-down"
+          class="hidden-screen-only"
           :title="item.title"
           :key="item.title"
         >
@@ -230,6 +227,11 @@ export default {
           title: "Chat",
           icon: "chat",
           router: "chat"
+        },
+        {
+          title: "Calendars",
+          icon: "calendar_today",
+          router: "calendars"
         }
       ]
     };
