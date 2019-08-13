@@ -5,8 +5,8 @@
         <div id="openweathermap-widget-23"></div>
         <!-- <v-spacer></v-spacer> -->
       </v-card-title>
-      <v-flex class="grey lighten-3 py-2 text-xs-center black--text xs12">
-        &copy; <strong>NobleTuna</strong> {{ new Date().getFullYear() }}
+      <v-flex class="blue-grey darken-1 py-2 text-xs-center white--text xs12">
+        &copy; <strong>당근당근</strong> {{ new Date().getFullYear() }}
       </v-flex>
     </v-card>
   </v-footer>
