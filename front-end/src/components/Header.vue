@@ -44,7 +44,7 @@
           <v-icon>account_circle</v-icon>
         </v-btn>
 
-        <v-btn icon class="hidden-sm-and-down" title="SignUp" v-show="!isLogin">
+        <v-btn icon class="hidden-screen-only" title="SignUp" v-show="!isLogin">
           <router-link to="signup" tag="span">
             <v-icon>assignment_ind</v-icon>
           </router-link>
@@ -127,6 +127,16 @@
                 </v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
+          </router-link>
+
+          <router-link to="/Calendars" class="hover-effect" tag="span">
+          <v-list-tile class="hover-effect" title="Calendars" v-show="isLogin">
+            <v-list-tile-action>
+                <v-icon>calendar_today</v-icon>
+
+            </v-list-tile-action>
+            <v-list-tile-content class="text_font"> Calendars </v-list-tile-content>
+          </v-list-tile>
           </router-link>
 
           <v-list-tile
@@ -227,11 +237,6 @@ export default {
           title: "Chat",
           icon: "chat",
           router: "chat"
-        },
-        {
-          title: "Calendars",
-          icon: "calendar_today",
-          router: "calendars"
         }
       ]
     };
