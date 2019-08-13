@@ -316,6 +316,6 @@ export default {
 .modal {
   position: absolute;
   top: 10%;
-  left: 83%;
+  left: 80%;
 }
 </style>
