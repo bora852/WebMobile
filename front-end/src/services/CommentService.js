@@ -16,11 +16,7 @@ export default {
         message: message
       })
       .then(() => {
-        if (category == "post") {
-          pushService.sendPushPost(num);
-        } else {
-          pushService.sendPush(num, category);
-        }
+        pushService.sendPush(num, category);
       });
   },
   getOneComment(category, num, key) {
