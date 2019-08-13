@@ -48,12 +48,12 @@ import "tui-editor/dist/tui-editor.css";
 import "tui-editor/dist/tui-editor-contents.css";
 import "codemirror/lib/codemirror.css";
 import { Viewer } from "@toast-ui/vue-editor";
+import SwalAlert from "../services/SwalAlert";
 
 export default {
   name: "PortfolioDetail",
   data() {
     return {
-      // categ
       portfolio: []
     };
   },
@@ -101,8 +101,15 @@ export default {
       this.$router.push("/portfolioEdit?num=" + this.$route.query.num);
     },
     async portfolioDelete() {
-      await PortfolioService.delete(this.$route.query.num);
-      this.$router.replace("/portfolio");
+      if (await PortfolioService.delete(this.$route.query.num)) {
+        SwalAlert.swatAlert(
+          "Delete Success!",
+          "정상적으로 삭제되었습니다.",
+          "success",
+          "OK!"
+        );
+        this.$router.replace("/portfolio");
+      }
     }
   }
 };
