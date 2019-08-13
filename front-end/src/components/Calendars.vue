@@ -178,6 +178,7 @@ export default {
   },
   created() {
     this.getId();
+    this.getcalendar();
     let newday = new Date();
     let month = newday.getMonth() + 1;
     let date = newday.getDate();
@@ -208,10 +209,8 @@ export default {
       this.date = data.date;
       this.idx = data.idx;
     },
-    async getId() {
-      await eventBus.$on("getUserId", userId => {
-        this.user_email = userId;
-      });
+    getId() {
+      this.user_email = this.$store.state.user;
     },
     async getcalendar() {
       this.events = [];
@@ -227,7 +226,7 @@ export default {
         c_temp.title = this.calens[i].title;
         c_temp.body = this.calens[i].body;
         c_temp.idx = this.calens[i].idx;
-        this.events.push(c_temp);
+        this.$set(this.events, i, c_temp);
       }
     },
     async submit() {
@@ -283,11 +282,6 @@ export default {
       }
 
       return yy + "-" + mm + "-" + dd;
-    }
-  },
-  watch: {
-    user_email: function() {
-      this.getcalendar();
     }
   }
 };
