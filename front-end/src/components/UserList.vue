@@ -8,7 +8,7 @@
     <v-container>
       <v-layout mw-700>
         <v-flex xs12 md12 sm12 class="text-align">
-          <v-card class="px-5 py-5">
+          <v-card class="px-5 py-2">
             <div v-show="!listLoding">
               <div class="searchInput">
                 <v-text-field
