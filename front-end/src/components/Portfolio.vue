@@ -84,8 +84,10 @@ export default {
           this.fromLang = "en";
           this.toLang = "ko";
         }
-        this.thisTitle = res.data.data.translations[0].translatedText;
-        this.thisBody = res.data.data.translations[1].translatedText;
+        if (res.data.data) {
+          this.thisTitle = res.data.data.translations[0].translatedText;
+          this.thisBody = res.data.data.translations[1].translatedText;
+        }
       });
     });
   }
