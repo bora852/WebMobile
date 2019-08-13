@@ -10,7 +10,7 @@ exports.sendPush = functions.https.onCall((data, context) => {
 
   const playload = {
     notification: {
-      title: "Tuna's blog",
+      title: "당근당근",
       icon: iconURL,
       body: "새 댓글이 등록되었습니다.",
       click_action:

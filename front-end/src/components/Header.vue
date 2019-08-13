@@ -13,7 +13,7 @@
           <v-icon>reorder</v-icon>
         </v-toolbar-side-icon>
         <router-link to="/" tag="span" style="cursor:pointer" title="home">
-          <v-toolbar-title class="text_font">donkey's Blog</v-toolbar-title>
+          <v-toolbar-title class="text_font">당근당근</v-toolbar-title>
         </router-link>
 
         <v-btn
