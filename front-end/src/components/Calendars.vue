@@ -1,6 +1,6 @@
 <template>
   <div style="text-align:center">
-    <h1>Calendar</h1>
+    <h1>{{ header_month }} 월</h1>
     <v-layout wrap>
       <v-btn outlined class="mr-4" @click="setToday">Today</v-btn>
       <v-btn fab text icon small @click="prev">
@@ -170,8 +170,8 @@ export default {
     title: "",
     body: "",
     date: "",
-    created_at: ""
-    // ko: vdp_translation_ko.js
+    created_at: "",
+    header_month: 0
   }),
   components: {
     datetime: datetime
@@ -183,7 +183,7 @@ export default {
     let month = newday.getMonth() + 1;
     let date = newday.getDate();
     const year = newday.getFullYear();
-
+    this.header_month = month;
     if (month.toString().length == 1) {
       month = "0" + month.toString();
     }
@@ -259,9 +259,17 @@ export default {
     },
     prev() {
       this.$refs.calendar.prev();
+      this.header_month -= 1;
+      if (this.header_month < 1) {
+        this.header_month = 12;
+      }
     },
     next() {
       this.$refs.calendar.next();
+      this.header_month += 1;
+      if (this.header_month > 12) {
+        this.header_month = 1;
+      }
     },
     clear() {
       this.title = "";
@@ -310,6 +318,13 @@ export default {
 .modal {
   position: absolute;
   top: 10%;
-  left: 80%;
+  left: 90%;
+}
+@media screen and (max-width: 550px) {
+  .modal {
+    position: absolute;
+    top: 10%;
+    left: 80%;
+  }
 }
 </style>

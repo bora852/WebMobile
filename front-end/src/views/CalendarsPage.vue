@@ -1,9 +1,10 @@
 <template>
-<Calendars></Calendars>
+  <Calendars></Calendars>
 </template>
 
 <script>
 import Calendars from "../components/Calendars";
+import { eventBus } from "../main.js";
 
 export default {
   name: "calendarsPage",
@@ -12,6 +13,9 @@ export default {
   },
   data() {
     return {};
+  },
+  created() {
+    eventBus.$emit("sendTitle", "Calendar");
   }
 };
 </script>
