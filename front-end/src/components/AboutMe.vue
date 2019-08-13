@@ -180,7 +180,7 @@
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
-                @click="openDialog(0)"
+                @click="openDialog(i)"
                 color="white"
                 flat
                 small
