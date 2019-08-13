@@ -22,7 +22,7 @@ public class SendMessageService {
 		
 		conn.setDoOutput(true); 
 
-		String input = "{\"notification\" : {\"title\" : \" Tuna's Blog \",\"icon\" : \""+iconURL+"\", \"body\" : \""+location+"에 새글이 등록되었습니다.\"}, \"to\":\""+token+"\"}";
+		String input = "{\"notification\" : {\"title\" : \" 당근당근 \",\"icon\" : \""+iconURL+"\", \"body\" : \""+location+"에 새글이 등록되었습니다.\"}, \"to\":\""+token+"\"}";
 
 		OutputStream os = conn.getOutputStream();
 
