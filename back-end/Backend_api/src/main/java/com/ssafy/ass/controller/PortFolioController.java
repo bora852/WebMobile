@@ -1,6 +1,5 @@
 package com.ssafy.ass.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -71,6 +70,8 @@ public class PortFolioController {
 
 	@RequestMapping(value = "/portInsert", method = RequestMethod.POST)
 	public HashMap<String, Object> portInsert(@RequestBody PortFolioDto port) throws Exception {
+		System.out.println("portfolio : " + port);
+		
 		int res = portfolioService.insertPort(port);
 		HashMap<String, Object> result = new HashMap<>();
 		if (res > 0) {
