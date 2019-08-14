@@ -36,8 +36,6 @@ export default {
     ImgLink(link) {
       this.imgUrl = link;
     }
-
-    // document.getElementById('imgsrc').children[0].children[1].style.backgroundImage =link;
   },
   created() {
     eventBus.$on("sendTitle", title => {

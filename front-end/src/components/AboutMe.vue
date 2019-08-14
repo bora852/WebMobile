@@ -72,7 +72,6 @@
       </div>
     </carousel-3d>
 
-    <!-- dialog -->
     <div v-for="(item, i) in items" :key="i">
       <v-layout>
         <v-dialog v-model="dialog[i]" max-width="400" max-height="800">

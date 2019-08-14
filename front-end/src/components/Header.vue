@@ -28,7 +28,9 @@
         <v-spacer></v-spacer>
 
         <div tag="span" class="mobile_login" v-show="isLogin">
-          <span>{{ userId }}님 환영합니다.</span>
+          <span class="text_font"
+            >{{ userId }}님 환영합니다. ( {{ curAuth }} )</span
+          >
           <v-btn icon title="Logout" @click="myLogOut()">
             <v-icon>power_off</v-icon>
           </v-btn>
@@ -130,13 +132,18 @@
           </router-link>
 
           <router-link to="/Calendars" class="hover-effect" tag="span">
-          <v-list-tile class="hover-effect" title="Calendars" v-show="isLogin">
-            <v-list-tile-action>
+            <v-list-tile
+              class="hover-effect"
+              title="Calendars"
+              v-show="isLogin"
+            >
+              <v-list-tile-action>
                 <v-icon>calendar_today</v-icon>
-
-            </v-list-tile-action>
-            <v-list-tile-content class="text_font"> Calendars </v-list-tile-content>
-          </v-list-tile>
+              </v-list-tile-action>
+              <v-list-tile-content class="text_font">
+                Calendars
+              </v-list-tile-content>
+            </v-list-tile>
           </router-link>
 
           <v-list-tile
@@ -184,7 +191,6 @@
 <script>
 import { eventBus } from "../main.js";
 import UserService from "@/services/UserService";
-import PushService from "@/services/PushService";
 import Login from "../components/Login.vue";
 import Swal from "sweetalert2";
 
@@ -195,6 +201,7 @@ export default {
   },
   data() {
     return {
+      curAuth: "",
       isAdmin: false,
       isTeam: false,
       dialog: false,
@@ -290,7 +297,6 @@ export default {
   },
   created() {
     UserService.loginChk();
-    // PushService.listenPush();
     eventBus.$on("getUserId", userId => {
       this.isLogin = true;
       this.userId = userId;
@@ -309,12 +315,15 @@ export default {
   watch: {
     watch_auth(auth) {
       if (auth == "admin") {
+        this.curAuth = "관리자";
         this.isAdmin = true;
         this.isTeam = true;
       } else if (auth == "team") {
+        this.curAuth = "팀 멤버";
         this.isAdmin = false;
         this.isTeam = true;
       } else {
+        this.curAuth = "손님";
         this.isAdmin = false;
         this.isTeam = false;
       }
