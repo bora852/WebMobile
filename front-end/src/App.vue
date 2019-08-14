@@ -1,5 +1,7 @@
 <template>
   <v-app>
+    <Intro v-if="router_check"/>
+    <template v-if="!router_check">
     <go-top right="22px" :size="60"/>
     <ChatBot />
     <Header />
@@ -9,6 +11,7 @@
       <router-view />
     </v-content>
     <Footer />
+  </template>
   </v-app>
 </template>
 
@@ -20,6 +23,7 @@ import GoTop from "@inotom/vue-go-top";
 import Alert from "./components/BrowserAlert";
 import BannerImg from "./components/BannerImgSetup";
 import ChatBot from "./components/ChatBot"
+import Intro from "./components/Intro"
 
 $(document).ready(function(){
 $(".fas").addClass("fa");
@@ -33,12 +37,20 @@ export default {
     GoTop,
     Alert,
     BannerImg,
-    ChatBot
+    ChatBot,
+    Intro
   },
   store,
   data() {
     return {};
-  }
+  },
+  computed : {
+    router_check(){
+
+      return this.$router.history.current.path=="/";
+    }
+  },
+
 };
 </script>
 

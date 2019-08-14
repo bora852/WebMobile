@@ -118,7 +118,7 @@ export default new Router({
       component: CalendarsPage
     },
     {
-      path: "/intro",
+      path: "/",
       name: "intro",
       component: IntroPage
     }
