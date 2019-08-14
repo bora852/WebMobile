@@ -93,7 +93,7 @@
             <template v-slot:day="{ date }">
               <template v-for="event in eventsMap[date]">
                 <v-menu
-                  :key="event.title"
+                  :key="event.idx"
                   v-model="event.open"
                   full-width
                   offset-x
@@ -154,6 +154,7 @@ import CalendarsService from "../services/CalendarsService";
 import SwalAlert from "../services/SwalAlert";
 import { eventBus } from "../main.js";
 import datetime from "vuejs-datepicker";
+
 export default {
   data: () => ({
     dialog: false,
@@ -194,7 +195,6 @@ export default {
   },
   mounted() {},
   computed: {
-    // convert the list of events into a map of lists keyed by date
     eventsMap() {
       const map = {};
       this.events.forEach(e => (map[e.date] = map[e.date] || []).push(e));
@@ -278,18 +278,21 @@ export default {
       this.dialog = false;
     },
     formatDate(date) {
-      var yy = date.getFullYear();
-      var mm = date.getMonth() + 1;
-      var dd = date.getDate();
+      if (typeof date != "string") {
+        var yy = date.getFullYear();
+        var mm = date.getMonth() + 1;
+        var dd = date.getDate();
 
-      if (mm.toString().length == 1) {
-        mm = "0" + mm.toString();
+        if (mm.toString().length == 1) {
+          mm = "0" + mm.toString();
+        }
+        if (dd.toString().length == 1) {
+          dd = "0" + dd.toString();
+        }
+        return yy + "-" + mm + "-" + dd;
+      } else {
+        return date;
       }
-      if (dd.toString().length == 1) {
-        dd = "0" + dd.toString();
-      }
-
-      return yy + "-" + mm + "-" + dd;
     }
   }
 };
