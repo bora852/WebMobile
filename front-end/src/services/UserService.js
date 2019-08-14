@@ -130,7 +130,6 @@ export default {
       });
   },
   async signUp(email, password) {
-    // 디비에 권한먼저 등록
     var DBConnect = await AuthService.userAuthInsert(email);
     if (DBConnect != null && DBConnect.data.state == 1) {
       return firebase
@@ -149,7 +148,6 @@ export default {
           return true;
         })
         .catch(async function(error) {
-          // 파이어베이스 계정 등록 실패시 DB에서 권한삭제
           var errorCode = error.code;
           if (errorCode == "auth/weak-password") {
             await AuthService.userDelete(email);

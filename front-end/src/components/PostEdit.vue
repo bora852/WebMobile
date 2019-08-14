@@ -48,7 +48,6 @@
 </template>
 
 <script>
-import { eventBus } from "../main.js";
 import PostService from "@/services/PostService";
 import SwalAlert from "../services/SwalAlert";
 

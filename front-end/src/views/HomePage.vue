@@ -1,9 +1,7 @@
 <template>
   <div style="overflow-x: hidden; overflow-y: hidden;">
-    <!--<AttachImg></AttachImg>img components -->
     <v-container>
       <AboutMe data-aos="fade-right"></AboutMe>
-      <!-- Portfolio -->
       <v-layout my-5 data-aos="fade-left">
         <v-flex xs12>
           <h2 class="headline my-5 text-xs-center">
@@ -71,7 +69,6 @@ import PostList from "../components/PostList";
 import AboutMe from "../components/AboutMe";
 import { eventBus } from "../main.js";
 import RepositoryList from "../components/RepositoryList";
-import PushService from "../services/PushService";
 
 export default {
   name: "HomePage",

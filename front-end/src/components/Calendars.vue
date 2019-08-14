@@ -76,10 +76,8 @@
           </v-card>
         </v-dialog>
       </div>
-      <!-- modal end -->
       <v-flex xs12 class="mb-3">
         <v-sheet height="500">
-          <!-- v-model="start" -->
           <v-calendar
             ref="calendar"
             v-model="focus"
@@ -89,16 +87,14 @@
             :value="today"
             color="grey darken-3"
           >
-            <!-- daily events -->
             <template v-slot:day="{ date }">
               <template v-for="event in eventsMap[date]">
                 <v-menu
-                  :key="event.title"
+                  :key="event.idx"
                   v-model="event.open"
                   full-width
                   offset-x
                 >
-                  <!-- daily event box open -->
                   <template v-slot:activator="{ on }">
                     <div
                       v-if="!event.time"
@@ -108,17 +104,10 @@
                       v-html="event.title"
                     ></div>
                   </template>
-                  <!-- box open!! -->
                   <v-card color="grey lighten-4" min-width="350px" flat>
                     <v-toolbar color="amber accent-4" dark>
-                      <!-- <v-btn icon>
-                        <v-icon>edit</v-icon>
-                      </v-btn> -->
                       <v-toolbar-title v-html="event.title"></v-toolbar-title>
                       <v-spacer></v-spacer>
-                      <!-- <v-btn icon>
-                        <v-icon>favorite</v-icon>
-                      </v-btn> -->
                       <v-btn icon @click="DeleteCalendars(event)">
                         <v-icon>delete</v-icon>
                       </v-btn>
@@ -126,7 +115,6 @@
                     <v-card-title primary-title>
                       <span v-html="event.body"></span>
                     </v-card-title>
-                    <!-- box cancel -->
                     <v-card-actions>
                       <v-spacer></v-spacer>
                       <v-btn flat color="secondary" @click="modify_btn(event)">
@@ -154,6 +142,7 @@ import CalendarsService from "../services/CalendarsService";
 import SwalAlert from "../services/SwalAlert";
 import { eventBus } from "../main.js";
 import datetime from "vuejs-datepicker";
+
 export default {
   data: () => ({
     dialog: false,
@@ -194,7 +183,6 @@ export default {
   },
   mounted() {},
   computed: {
-    // convert the list of events into a map of lists keyed by date
     eventsMap() {
       const map = {};
       this.events.forEach(e => (map[e.date] = map[e.date] || []).push(e));
@@ -278,18 +266,21 @@ export default {
       this.dialog = false;
     },
     formatDate(date) {
-      var yy = date.getFullYear();
-      var mm = date.getMonth() + 1;
-      var dd = date.getDate();
+      if (typeof date != "string") {
+        var yy = date.getFullYear();
+        var mm = date.getMonth() + 1;
+        var dd = date.getDate();
 
-      if (mm.toString().length == 1) {
-        mm = "0" + mm.toString();
+        if (mm.toString().length == 1) {
+          mm = "0" + mm.toString();
+        }
+        if (dd.toString().length == 1) {
+          dd = "0" + dd.toString();
+        }
+        return yy + "-" + mm + "-" + dd;
+      } else {
+        return date;
       }
-      if (dd.toString().length == 1) {
-        dd = "0" + dd.toString();
-      }
-
-      return yy + "-" + mm + "-" + dd;
     }
   }
 };
