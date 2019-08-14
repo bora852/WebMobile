@@ -1,7 +1,6 @@
 <template>
   <div>
     <v-container>
-      <!-- PortfolioDetail -->
       <v-layout>
         <v-flex xs12 data-aos="fade-right">
           <PortfolioDetail></PortfolioDetail>

@@ -1,11 +1,8 @@
 <template>
   <div>
     <v-container>
-      <!-- Portfolio -->
       <v-layout>
         <v-flex xs12 data-aos="fade-right">
-          <!-- <div id="gitgraph"></div>
-          <RepositoryGraph></RepositoryGraph> -->
           <PortfolioList :limits="6" :load-more="true"></PortfolioList>
         </v-flex>
       </v-layout>

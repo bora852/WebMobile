@@ -4,7 +4,6 @@ import axios from "axios";
 const URL = "https://donkey2.hibuz.com:443/";
 
 export default {
-  //AllCalendars
   getList(user_email) {
     return axios
       .get(URL + "ass/api/calenAll", {
@@ -22,7 +21,6 @@ export default {
         );
       });
   },
-  //insertCalendars
   CalendarsInsert(idx, title, body, created_at, user_email) {
     return axios
       .post(URL + "ass/api/calenInsert", {

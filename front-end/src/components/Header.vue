@@ -132,13 +132,18 @@
           </router-link>
 
           <router-link to="/Calendars" class="hover-effect" tag="span">
-          <v-list-tile class="hover-effect" title="Calendars" v-show="isLogin">
-            <v-list-tile-action>
+            <v-list-tile
+              class="hover-effect"
+              title="Calendars"
+              v-show="isLogin"
+            >
+              <v-list-tile-action>
                 <v-icon>calendar_today</v-icon>
-
-            </v-list-tile-action>
-            <v-list-tile-content class="text_font"> Calendars </v-list-tile-content>
-          </v-list-tile>
+              </v-list-tile-action>
+              <v-list-tile-content class="text_font">
+                Calendars
+              </v-list-tile-content>
+            </v-list-tile>
           </router-link>
 
           <v-list-tile
@@ -186,7 +191,6 @@
 <script>
 import { eventBus } from "../main.js";
 import UserService from "@/services/UserService";
-import PushService from "@/services/PushService";
 import Login from "../components/Login.vue";
 import Swal from "sweetalert2";
 
@@ -293,7 +297,6 @@ export default {
   },
   created() {
     UserService.loginChk();
-    // PushService.listenPush();
     eventBus.$on("getUserId", userId => {
       this.isLogin = true;
       this.userId = userId;

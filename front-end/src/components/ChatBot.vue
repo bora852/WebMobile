@@ -19,7 +19,7 @@
   js.id = id;
   js.src = "https://danbee.ai/js/plugins/frogue-embed/frogue-embed.min.js";
   fjs.parentNode.insertBefore(js, fjs);
-}(document, "script", "frogue-embed"));
+})(document, "script", "frogue-embed");
 </script>
 
 <style>

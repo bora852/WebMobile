@@ -61,7 +61,6 @@ export default {
       translateUrl += "&target=" + this.toLang;
       translateUrl += "&q=" + encodeURI(this.thisTitle);
       translateUrl += "&q=" + encodeURI(this.thisBody);
-      // console.log(translateUrl)
       axios({
         methods: "GET",
         url: translateUrl

@@ -30,7 +30,9 @@
                     class="text-xs-center text-sm-center text-md-center text-lg-center"
                   >
                     <img :src="imageUrl" height="150" v-if="imageUrl" />
-                    <insertWriter v-on:FolioImgLink="FolioImgLink"></insertWriter>
+                    <insertWriter
+                      v-on:FolioImgLink="FolioImgLink"
+                    ></insertWriter>
                   </v-flex>
                 </v-container>
               </v-flex>

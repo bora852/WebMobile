@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <go-top right="22px" :size="60"/>
+    <go-top right="22px" :size="60" />
     <ChatBot />
     <Header />
     <Alert />
@@ -19,7 +19,7 @@ import Footer from "./components/Footer";
 import GoTop from "@inotom/vue-go-top";
 import Alert from "./components/BrowserAlert";
 import BannerImg from "./components/BannerImgSetup";
-import ChatBot from "./components/ChatBot"
+import ChatBot from "./components/ChatBot";
 
 $(document).ready(function(){
 $(".fas").addClass("fa");

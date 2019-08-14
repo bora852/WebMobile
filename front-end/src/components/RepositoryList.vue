@@ -168,7 +168,7 @@ export default {
 </script>
 
 <style>
-.thin{
+.thin {
   font-weight: 100;
 }
 </style>

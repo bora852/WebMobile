@@ -79,13 +79,13 @@ export default {
       var customBranchLabels = templateExtend(TemplateName.Metro, {
         colors: ["#fa6638", "blue", "green", "yellow", "magenta"],
         branch: {
-          lineWidth: 7, // 선 두께
-          spacing: 50 // 점과 메세지 간격
+          lineWidth: 7,
+          spacing: 50
         },
         commit: {
-          spacing: 50, // 상하 간격
+          spacing: 50,
           dot: {
-            size: 14 // 커밋 점 크기
+            size: 14
           },
           message: {
             font: "normal 10pt Arial",
