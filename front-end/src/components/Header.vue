@@ -28,7 +28,9 @@
         <v-spacer></v-spacer>
 
         <div tag="span" class="mobile_login" v-show="isLogin">
-          <span>{{ userId }}님 환영합니다.</span>
+          <span class="text_font"
+            >{{ userId }}님 환영합니다. ( {{ curAuth }} )</span
+          >
           <v-btn icon title="Logout" @click="myLogOut()">
             <v-icon>power_off</v-icon>
           </v-btn>
@@ -195,6 +197,7 @@ export default {
   },
   data() {
     return {
+      curAuth: "",
       isAdmin: false,
       isTeam: false,
       dialog: false,
@@ -309,12 +312,15 @@ export default {
   watch: {
     watch_auth(auth) {
       if (auth == "admin") {
+        this.curAuth = "관리자";
         this.isAdmin = true;
         this.isTeam = true;
       } else if (auth == "team") {
+        this.curAuth = "팀 멤버";
         this.isAdmin = false;
         this.isTeam = true;
       } else {
+        this.curAuth = "손님";
         this.isAdmin = false;
         this.isTeam = false;
       }
