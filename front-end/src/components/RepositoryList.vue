@@ -28,7 +28,11 @@
         </v-card-title>
 
         <v-card-actions>
-          <v-btn flat color="#fa6638" @click="goToUrl(item[0].pjt_url)" class="text_font"
+          <v-btn
+            flat
+            color="#fa6638"
+            @click="goToUrl(item[0].gitlab_url)"
+            class="text_font"
             ><v-icon>home</v-icon>My GitLab
           </v-btn>
           <v-btn flat color="#fa6638" class="text_font"
@@ -164,7 +168,7 @@ export default {
 </script>
 
 <style>
-.thin{
+.thin {
   font-weight: 100;
 }
 </style>

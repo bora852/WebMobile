@@ -1,7 +1,6 @@
 <template>
   <div>
     <v-container>
-      <!-- PortfolioDetail -->
       <v-layout>
         <v-flex xs12 data-aos="fade-right">
           <Postdetail></Postdetail>
@@ -21,7 +20,7 @@ export default {
     Postdetail
   },
   created() {
-    eventBus.$emit("sendTitle", "PostDetail");
+    eventBus.$emit("sendTitle", "Post Detail");
   }
 };
 </script>

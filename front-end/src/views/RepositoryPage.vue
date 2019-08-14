@@ -1,7 +1,6 @@
 <template>
   <div>
     <v-container>
-      <!-- 각 팀원의 최근 프로젝트 목록 -->
       <v-layout my-5 data-aos="fade-left">
         <v-flex xs12>
           <h1 my-3 class="sub_title">Projects</h1>
@@ -9,7 +8,6 @@
         </v-flex>
       </v-layout>
 
-      <!-- Git Repository -->
       <v-flex row my-5 class="hidden-sm-and-down" data-aos="fade-right">
         <h1 my-3 class="sub_title">Git Flow</h1>
       </v-flex>

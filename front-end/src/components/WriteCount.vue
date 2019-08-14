@@ -1,9 +1,6 @@
 <template>
-  <div class="chart text-align">
-    <span class="chart-label title_font">게시글 수</span>
-    <CountChart :chart-data="chartData" :options="options" ref="count_chart">
-    </CountChart>
-  </div>
+  <CountChart :chart-data="chartData" :options="options" ref="count_chart">
+  </CountChart>
 </template>
 
 <script>
@@ -41,7 +38,7 @@ export default {
         labels: ["Portfolio", "Post"],
         datasets: [
           {
-            backgroundColor: ["yellow", "orange"],
+            backgroundColor: ["rgba(255, 206, 86, 0.2)", "orange"],
             data: []
           }
         ]

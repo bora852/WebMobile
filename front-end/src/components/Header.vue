@@ -9,14 +9,11 @@
         scroll-off-screen
         scroll-target="#scrolling-techniques"
       >
-        <v-toolbar-side-icon
-          @click.stop="drawer = !drawer"
-          class="hidden-md-and-up"
-        >
+        <v-toolbar-side-icon @click.stop="drawer = !drawer">
           <v-icon>reorder</v-icon>
         </v-toolbar-side-icon>
         <router-link to="/" tag="span" style="cursor:pointer" title="home">
-          <v-toolbar-title class="text_font">Tuna's Blog</v-toolbar-title>
+          <v-toolbar-title class="text_font">당근당근</v-toolbar-title>
         </router-link>
 
         <v-btn
@@ -31,7 +28,9 @@
         <v-spacer></v-spacer>
 
         <div tag="span" class="mobile_login" v-show="isLogin">
-          <span>{{ userId }}님 환영합니다.</span>
+          <span class="text_font"
+            >{{ userId }}님 환영합니다. ( {{ curAuth }} )</span
+          >
           <v-btn icon title="Logout" @click="myLogOut()">
             <v-icon>power_off</v-icon>
           </v-btn>
@@ -47,7 +46,7 @@
           <v-icon>account_circle</v-icon>
         </v-btn>
 
-        <v-btn icon class="hidden-sm-and-down" title="SignUp" v-show="!isLogin">
+        <v-btn icon class="hidden-screen-only" title="SignUp" v-show="!isLogin">
           <router-link to="signup" tag="span">
             <v-icon>assignment_ind</v-icon>
           </router-link>
@@ -62,7 +61,7 @@
         <v-btn
           v-for="item in items"
           icon
-          class="hidden-sm-and-down"
+          class="hidden-screen-only"
           :title="item.title"
           :key="item.title"
         >
@@ -132,6 +131,21 @@
             </v-list-tile>
           </router-link>
 
+          <router-link to="/Calendars" class="hover-effect" tag="span">
+            <v-list-tile
+              class="hover-effect"
+              title="Calendars"
+              v-show="isLogin"
+            >
+              <v-list-tile-action>
+                <v-icon>calendar_today</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content class="text_font">
+                Calendars
+              </v-list-tile-content>
+            </v-list-tile>
+          </router-link>
+
           <v-list-tile
             class="hover-effect"
             title="LogIn"
@@ -187,6 +201,7 @@ export default {
   },
   data() {
     return {
+      curAuth: "",
       isAdmin: false,
       isTeam: false,
       dialog: false,
@@ -282,7 +297,6 @@ export default {
   },
   created() {
     UserService.loginChk();
-
     eventBus.$on("getUserId", userId => {
       this.isLogin = true;
       this.userId = userId;
@@ -301,12 +315,15 @@ export default {
   watch: {
     watch_auth(auth) {
       if (auth == "admin") {
+        this.curAuth = "관리자";
         this.isAdmin = true;
         this.isTeam = true;
       } else if (auth == "team") {
+        this.curAuth = "팀 멤버";
         this.isAdmin = false;
         this.isTeam = true;
       } else {
+        this.curAuth = "손님";
         this.isAdmin = false;
         this.isTeam = false;
       }

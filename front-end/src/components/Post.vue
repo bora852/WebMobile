@@ -1,5 +1,10 @@
 <template>
-  <v-card style="cursor:pointer" @click="detailpost" hover>
+  <v-card
+    color="orange lighten-5"
+    style="cursor:pointer"
+    @click="detailpost"
+    hover
+  >
     <v-layout py-4 h-100>
       <v-flex row>
         <div class="postPadding">
@@ -56,13 +61,14 @@ export default {
       translateUrl += "&target=" + this.toLang;
       translateUrl += "&q=" + encodeURI(this.thisTitle);
       translateUrl += "&q=" + encodeURI(this.thisBody);
-      // console.log(translateUrl)
       axios({
         methods: "GET",
         url: translateUrl
       }).then(res => {
-        this.thisTitle = res.data.data.translations[0].translatedText;
-        this.thisBody = res.data.data.translations[1].translatedText;
+        if (res.data.data) {
+          this.thisTitle = res.data.data.translations[0].translatedText;
+          this.thisBody = res.data.data.translations[1].translatedText;
+        }
         if (this.fromLang == "en") {
           this.fromLang = "ko";
           this.toLang = "en";

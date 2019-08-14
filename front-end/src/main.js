@@ -14,6 +14,8 @@ import VueResource from "vue-resource";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+import Carousel3d from "vue-carousel-3d";
+
 AOS.init();
 
 export const eventBus = new Vue();
@@ -32,7 +34,7 @@ Vue.use(Vuetify, {
 });
 Vue.use(VueSimplemde);
 Vue.use(VueResource);
-
+Vue.use(Carousel3d);
 
 new Vue({
   router,

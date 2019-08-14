@@ -18,7 +18,7 @@ export default {
   name: "PostEditPage",
   components: { PostEdit },
   created() {
-    eventBus.$emit("sendTitle", "PostEdit");
+    eventBus.$emit("sendTitle", "Post Edit");
   }
 };
 </script>

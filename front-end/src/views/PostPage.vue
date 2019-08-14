@@ -1,7 +1,6 @@
 <template>
   <div>
     <v-container>
-      <!-- Post -->
       <v-layout>
         <v-flex xs12 data-aos="fade-right">
           <PostList :limits="6" :load-more="true"></PostList>
